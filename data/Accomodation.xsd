@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:include schemaLocation="Category_schema.xsd"/>
+    <xs:include id="type" schemaLocation="Accomodation_type_schema.xsd"/>
+    <xs:include schemaLocation="Accomodation_service_schema.xsd"/>
+    <xs:include schemaLocation="Agent.xsd"/>
+    <xs:element name="Accomodation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Location" type="TLocation"/>
+                <xs:element name="Name" type="xs:string"/>
+                <xs:element name="Description" type="xs:string"/>
+                <xs:element name="Num_Persons">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:int">
+                            <xs:minInclusive value="0"/>
+                            <xs:pattern value="[0-9]+"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="Category"/>
+                <xs:element ref="Accomodation_Type"/>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="Picture" type="xs:base64Binary"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element ref="Accomodation_Service"/>
+                </xs:sequence>
+                <xs:element name="Price_Plan">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="1" name="Price"
+                                type="TPrice"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="TLocation">
+        <xs:sequence>
+            <xs:element name="Street" type="xs:string"/>
+            <xs:element name="Number" type="xs:string"/>
+            <xs:element name="CIty" type="xs:string"/>
+            <xs:element name="Zip_Code" type="xs:string"/>
+            <xs:element name="Country" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TPrice">
+        <xs:sequence>
+            <xs:element name="Value" type="xs:float"/>
+            <xs:element name="Start_Date" type="xs:date"/>
+            <xs:element name="End_Date" type="xs:date"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

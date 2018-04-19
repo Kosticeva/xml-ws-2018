@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:include schemaLocation="Agent.xsd"/>
+    <xs:include schemaLocation="User.xsd"/>
+    <xs:element name="Message">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Agent"/>
+                <xs:element name="Content"/>
+                <xs:element ref="User"/>
+            </xs:sequence>
+            <xs:attribute default="false" name="Read" type="xs:boolean"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
