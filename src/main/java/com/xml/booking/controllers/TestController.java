@@ -13,7 +13,7 @@ public class TestController {
     @RequestMapping(value = "/hello",
             method = RequestMethod.GET)
     public ResponseEntity<String> showHomePage() {
-        return new ResponseEntity<>("cao iz test kontrolera, revizija", HttpStatus.OK);
+        return new ResponseEntity<>("cao iz test kontrolera, revizija 2", HttpStatus.OK);
     }
 
 }
