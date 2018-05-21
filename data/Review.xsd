@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:include schemaLocation="User.xsd"/>
+    <xs:include schemaLocation="Accomodation.xsd"/>
+    <xs:element name="Review">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Grade" type="xs:int"/>
+                <xs:element ref="Accomodation"/>
+                <xs:element ref="User"/>
+                <xs:element name="Comment" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="Allowed" type="xs:boolean"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
