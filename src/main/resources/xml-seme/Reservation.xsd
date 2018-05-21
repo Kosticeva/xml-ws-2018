@@ -3,23 +3,23 @@
 
     <xs:include id="acc" schemaLocation="Accomodation.xsd"/>
     <xs:include schemaLocation="User.xsd"/>
-    <xs:element name="Reservation">
+    <xs:element name="reservation">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="User"/>
-                <xs:element ref="Accomodation"/>
+                <xs:element ref="user"/>
+                <xs:element ref="accomodation"/>
             </xs:sequence>
-            <xs:attribute default="false" name="Confirmed" type="xs:boolean"/>
-            <xs:attribute name="Num_Persons">
+            <xs:attribute default="false" name="confirmed" type="xs:boolean"/>
+            <xs:attribute name="num-persons">
                 <xs:simpleType>
                     <xs:restriction base="xs:int">
                         <xs:minInclusive value="0"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="Final_Price" type="xs:float"/>
-            <xs:attribute name="Start_Date" type="xs:date"/>
-            <xs:attribute name="End_Date" type="xs:date"/>
+            <xs:attribute name="final-price" type="xs:float"/>
+            <xs:attribute name="start-date" type="xs:date"/>
+            <xs:attribute name="end-date" type="xs:date"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>

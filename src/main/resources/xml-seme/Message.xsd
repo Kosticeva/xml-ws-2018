@@ -3,14 +3,14 @@
 
     <xs:include schemaLocation="Agent.xsd"/>
     <xs:include schemaLocation="User.xsd"/>
-    <xs:element name="Message">
+    <xs:element name="message">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Agent"/>
-                <xs:element name="Content"/>
-                <xs:element ref="User"/>
+                <xs:element ref="agent"/>
+                <xs:element name="content"/>
+                <xs:element ref="user"/>
             </xs:sequence>
-            <xs:attribute default="false" name="Read" type="xs:boolean"/>
+            <xs:attribute default="false" name="read" type="xs:boolean"/>
         </xs:complexType>
     </xs:element>
 </xs:schema>
