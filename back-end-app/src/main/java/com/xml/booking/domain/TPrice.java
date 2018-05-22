@@ -8,12 +8,15 @@
 
 package com.xml.booking.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 
 
 /**
@@ -43,15 +46,20 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "startDate",
     "endDate"
 })
+@Entity
 public class TPrice {
 
+    @Id
+    protected String id;
+    public String getId() {return id;}
+    public void setId(String id) {this.id = id;}
     protected float value;
     @XmlElement(name = "start-date", required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar startDate;
+    protected Date startDate;
     @XmlElement(name = "end-date", required = true)
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar endDate;
+    protected Date endDate;
 
     /**
      * Gets the value of the value property.
@@ -74,10 +82,10 @@ public class TPrice {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -86,10 +94,10 @@ public class TPrice {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setStartDate(XMLGregorianCalendar value) {
+    public void setStartDate(Date value) {
         this.startDate = value;
     }
 
@@ -98,10 +106,10 @@ public class TPrice {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -110,10 +118,10 @@ public class TPrice {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setEndDate(XMLGregorianCalendar value) {
+    public void setEndDate(Date value) {
         this.endDate = value;
     }
 

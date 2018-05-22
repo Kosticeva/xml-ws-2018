@@ -8,6 +8,9 @@
 
 package com.xml.booking.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -46,19 +49,23 @@ import javax.xml.bind.annotation.XmlType;
     "user",
     "messageId"
 })
+@Entity
 @XmlRootElement(name = "message")
 public class Message {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected Agent agent;
     @XmlElement(required = true)
     protected String content;
+    @ManyToOne
     @XmlElement(required = true)
     protected User user;
+    @Id
     @XmlElement(name = "message-id")
     protected int messageId;
     @XmlAttribute(name = "read")
-    protected Boolean read;
+    protected Boolean readed; //mysql baca error za read field
 
     /**
      * Gets the value of the agent property.
@@ -149,31 +156,31 @@ public class Message {
     }
 
     /**
-     * Gets the value of the read property.
+     * Gets the value of the readed property.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public boolean isRead() {
-        if (read == null) {
+    public boolean isReaded() {
+        if (readed == null) {
             return false;
         } else {
-            return read;
+            return readed;
         }
     }
 
     /**
-     * Sets the value of the read property.
+     * Sets the value of the readed property.
      * 
      * @param value
      *     allowed object is
      *     {@link Boolean }
      *     
      */
-    public void setRead(Boolean value) {
-        this.read = value;
+    public void setReaded(Boolean value) {
+        this.readed = value;
     }
 
 }

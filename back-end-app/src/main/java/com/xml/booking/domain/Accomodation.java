@@ -10,6 +10,10 @@ package com.xml.booking.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -81,12 +85,15 @@ import javax.xml.bind.annotation.XmlType;
     "pricePlan",
     "accommodationId"
 })
+@Entity
 @XmlRootElement(name = "accomodation")
 public class Accomodation {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected Agent agent;
     @XmlElement(required = true)
+    @ManyToOne
     protected TLocation location;
     @XmlElement(required = true)
     protected String name;
@@ -95,15 +102,21 @@ public class Accomodation {
     @XmlElement(name = "max-persons")
     protected int maxPersons;
     @XmlElement(required = true)
+    @ManyToOne
     protected Category category;
     @XmlElement(name = "accomodation-type", required = true)
+    @ManyToOne
     protected AccomodationType accomodationType;
     @XmlElement(required = true)
+    @Transient //TODO: temp solution
     protected List<byte[]> picture;
     @XmlElement(name = "accomodation-service", required = true)
+    @ManyToOne
     protected AccomodationService accomodationService;
     @XmlElement(name = "price-plan", required = true)
+    @Transient //TODO: temp solution
     protected PricePlan pricePlan;
+    @Id
     @XmlElement(name = "accommodation-id")
     protected int accommodationId;
 

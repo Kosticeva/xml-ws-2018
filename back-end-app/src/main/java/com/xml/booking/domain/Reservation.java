@@ -8,6 +8,9 @@
 
 package com.xml.booking.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -16,6 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Date;
 
 
 /**
@@ -56,14 +60,18 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "accomodation",
     "reservationId"
 })
+@Entity
 @XmlRootElement(name = "reservation")
 public class Reservation {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected User user;
     @XmlElement(required = true)
+    @ManyToOne
     protected Accomodation accomodation;
     @XmlElement(name = "reservation-id")
+    @Id
     protected int reservationId;
     @XmlAttribute(name = "confirmed")
     protected Boolean confirmed;
@@ -73,10 +81,10 @@ public class Reservation {
     protected Float finalPrice;
     @XmlAttribute(name = "start-date")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar startDate;
+    protected Date startDate; //umesto XMLGregorianCalendar
     @XmlAttribute(name = "end-date")
     @XmlSchemaType(name = "date")
-    protected XMLGregorianCalendar endDate;
+    protected Date endDate;
 
     /**
      * Gets the value of the user property.
@@ -223,10 +231,10 @@ public class Reservation {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
@@ -235,10 +243,10 @@ public class Reservation {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setStartDate(XMLGregorianCalendar value) {
+    public void setStartDate(Date value) {
         this.startDate = value;
     }
 
@@ -247,10 +255,10 @@ public class Reservation {
      * 
      * @return
      *     possible object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public XMLGregorianCalendar getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
@@ -259,10 +267,10 @@ public class Reservation {
      * 
      * @param value
      *     allowed object is
-     *     {@link XMLGregorianCalendar }
+     *     {@link Date }
      *     
      */
-    public void setEndDate(XMLGregorianCalendar value) {
+    public void setEndDate(Date value) {
         this.endDate = value;
     }
 
