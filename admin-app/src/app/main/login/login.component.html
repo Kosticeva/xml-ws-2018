@@ -1,0 +1,18 @@
+<script src="https://use.typekit.net/ayg4pcz.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+
+<div class="container">
+  <h1 class="welcome text-center">Welcome to <br> Ice Code</h1>
+  <div class="card card-container">
+    <h2 class='login_title text-center'>Login</h2>
+    <hr>
+
+    <form class="form-signin" (ngSubmit)="onSubmit(f.value)" #f="ngForm" id="regForm">
+      <p class="input_title">Username</p>
+      <input ngModel type="text" id="username" name="username" class="form-control login_box"  placeholder="Username" required autofocus>
+      <p class="input_title">Password</p>
+      <input ngModel type="password" id="password" name="password" class="form-control login_box" placeholder="Password" required>
+      <button class="btn btn-lg btn-primary" type="submit">Login</button>
+    </form><!-- /form -->
+  </div><!-- /card-container -->
+</div><!-- /container -->

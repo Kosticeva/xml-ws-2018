@@ -1,0 +1,17 @@
+<div class="container" style="margin-top: 2%;">
+  <form class="form-agent" (ngSubmit)="onSubmit(f.value)" #f="ngForm" id="regForm">
+    <h1 align="center">Add Accomodation Type</h1>
+    <hr><br>
+    <div class="form-group">
+      <label for="typeId">Type ID</label>
+      <input ngModel type="text" class="form-control" id="typeID" name="typeID" placeholder="Type ID">
+    </div>
+
+    <div class="form-group">
+      <label for="typeName">Type Name</label>
+      <input ngModel type="text" class="form-control" id="typeName" name="typeName" placeholder="Type Name">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" style="width: 30%;margin-left: 33%;">Add type</button>
+  </form>
+</div>

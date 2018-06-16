@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <br>
+  <div class="row" style="display: flex;flex-direction: row">
+      <h2 style="margin-left: 10%;">Accomodation Services</h2><a style="margin-left: 2%;color: white;" [routerLink]="'/home/add-service'" class="btn btn-primary">Add service</a>
+      <h2 style="margin-left: 20%;">Accomodation Types</h2><a style="margin-left: 2%;color: white;" [routerLink]="'/home/add-type'" class="btn btn-primary">Add type</a>
+    <hr>
+  </div>
+
+  <hr>
+  <br>
+  <div style="display: flex; flex-direction: row">
+    <div class="row" style="width: 40%;">
+      <div class="row" style="margin-top: 20px; width: 100%;" >
+        <div class="col-md-12" style="margin-left: 20%;" *ngFor="let s of services">
+          <div class="list-group-item" style="width: 100%;">
+            <div class="thumbnail" style="width: 100%;">
+              <div class="row" style="width: 100%;">
+                <div class="col-sm-12">
+                  <div class="panel panel-default" style="width: 100%;">
+                    <div >
+                      <div class="panel-heading">
+                        Service ID: {{s?.serviceID}}
+                      </div>
+                      <div class="panel-body">Service name: {{s?.serviceName}}</div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 5%; margin-left: -3%;">
+                      <button class="btn btn-danger" (click)="deleteService(s)">Delete</button>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="width: 40%; margin-left: 10%;">
+      <div class="row" style="margin-top: 20px; width: 100%;" >
+        <div class="col-md-12" style="margin-left: 20%;" *ngFor="let t of types">
+          <div class="list-group-item" style="width: 100%;">
+            <div class="thumbnail" style="width: 100%;">
+              <div class="row" style="width: 100%;">
+                <div class="col-sm-12">
+                  <div class="panel panel-default" style="width: 100%;">
+                    <div >
+                      <div class="panel-heading">
+                        Type ID: {{t?.typeID}}
+                      </div>
+                      <div class="panel-body">Type name: {{t?.typeName}}</div>
+                    </div>
+                    <div class="col-md-6" style="margin-top: 5%; margin-left: -3%;">
+                      <button class="btn btn-danger" (click)="deleteType(t)">Delete</button>
+                    </div>
+                    <br>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
