@@ -8,6 +8,14 @@
       </nav>
     </div>
   </div>
+	<div class='row' >
+		<div class='col-12'>
+			<div style='text-align:right; padding:5px 10px;'>
+				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Login</button>
+				<button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Logout</button>
+			</div>
+		<div>
+	</div>
   <div class="row">
     <div class="col-3">
       <app-filter class="sticky-top"></app-filter>

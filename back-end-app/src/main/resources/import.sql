@@ -1,0 +1,4 @@
+insert into user (username, password, activated, e_mail, first_name, last_name) values ('pera', '$2a$04$6i.cSc1Y1H7BZx.iJQV3GuW0kVyV4xlYEj4jARSk4Qfh747DRMsaC', '1', 'pera@gmail.com', 'Petar', 'Petrovic');
+insert into user (username, password, activated, e_mail, first_name, last_name) values ('mika', '$2a$04$R1JZVD.uIJA4gtYtGX/yXemH9IMq0KORtpmRgDpvyt5zGlrQsOvnm', '1', 'mika@gmail.com', 'Mika', 'Mikic');
+insert into user (username, password, activated, e_mail, first_name, last_name) values ('djoka', '$2a$04$.3rBrwxJBSv2TH68bo6wpusIRSoI6SeEhoHcSJ2swjKmBleeFjqc6', '1', 'djoka@gmail.com', 'Djordje', 'Djordjevic');
+insert into user (username, password, activated, e_mail, first_name, last_name) values ('vlada', '$2a$04$NH4u5f43ADEKgYPClzg4zuB/bOu.oQYmDXiFfHlx8y/EVAKEGsu4W', '1', 'vlada@gmail.com', 'Vladimir', 'Vladimirovic');
