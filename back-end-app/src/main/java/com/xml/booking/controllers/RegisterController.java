@@ -22,7 +22,7 @@ public class RegisterController {
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> register(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<UserDTO> register(@RequestBody UserDTO userDTO) {
         User user = new User();
         user.setUsername(userDTO.getUsername());
         user.setPassword(userDTO.getPassword());
@@ -31,6 +31,6 @@ public class RegisterController {
         user.setLastName(userDTO.getLastName());
         user.setActivated("PENDING");
         userService.createUser(user);
-        return new ResponseEntity<String>("Created!", HttpStatus.CREATED);
+        return new ResponseEntity<UserDTO>(userDTO, HttpStatus.OK);
     }
 }
