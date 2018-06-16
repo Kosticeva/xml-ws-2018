@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:include id="acc" schemaLocation="Accomodation.xsd"/>
+    <xs:include schemaLocation="User.xsd"/>
+    <xs:element name="reservation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="user"/>
+                <xs:element ref="accomodation"/>
+                <xs:element name="reservation-id" type="xs:int"/>
+            </xs:sequence>
+            <xs:attribute default="false" name="confirmed" type="xs:boolean"/>
+            <xs:attribute name="num-persons">
+                <xs:simpleType>
+                    <xs:restriction base="xs:int">
+                        <xs:minInclusive value="0"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="final-price" type="xs:float"/>
+            <xs:attribute name="start-date" type="xs:date"/>
+            <xs:attribute name="end-date" type="xs:date"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

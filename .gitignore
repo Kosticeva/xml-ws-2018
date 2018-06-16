@@ -25,3 +25,4 @@
 /.nb-gradle/
 
 client-app/node_modules/
+admin-app/node_modules/

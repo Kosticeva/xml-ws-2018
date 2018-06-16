@@ -3,10 +3,9 @@ package com.xml.booking.web.rest;
 import com.xml.booking.domain.Review;
 import com.xml.booking.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,11 +14,23 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@Path("/reviews")
+@RequestMapping("/reviews")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class ReviewResource {
 
     @Autowired
     ReviewService reviewService;
+
+    @GetMapping("/not-allowed")
+    public ResponseEntity<List<Review>> getNotAllowedReviews(){
+        return new ResponseEntity<List<Review>>(this.reviewService.getReviewsByAllowed(false), HttpStatus.OK);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<Review>> getAll() {
+        return new ResponseEntity<List<Review>>(this.reviewService.getAll(), HttpStatus.OK);
+    }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

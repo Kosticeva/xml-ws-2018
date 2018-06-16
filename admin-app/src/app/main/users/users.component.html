@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <br>
+  <div class="row">
+    <div class="col-md-4 offset-md-4" style="margin-left: 40%;">
+      <h2>Registrations</h2>
+    </div>
+    <hr>
+  </div>
+  <hr>
+  <br>
+  <div class="row" style="margin-left:20%;width: 40%;">
+    <div class="row" style="margin-top: 20px; width: 100%;" >
+      <div class="col-md-12" style="margin-left: 20%;" *ngFor="let u of users">
+        <div class="list-group-item" style="width: 100%;">
+          <div class="thumbnail" style="width: 100%;">
+            <div class="row" style="width: 100%;">
+              <div class="col-sm-12">
+                <div class="panel panel-default" style="width: 100%;">
+                  <div >
+                    <div class="panel-heading">
+                      Username: {{u?.username}}
+                    </div>
+                    <div class="panel-body">Name: {{u?.firstName}}</div>
+                    <div class="panel-footer">Last name: {{u?.lastName}}</div>
+                    <div class="panel-footer">Email: {{u?.lastName}}</div>
+                  </div>
+                  <div class="col-md-6" style="margin-top: 5%; margin-left: -3%;">
+                    <button class="btn btn-success" (click)="approve(u)">Approve</button>
+                    <button class="btn btn-danger" (click)="decline(u)">Decline</button>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

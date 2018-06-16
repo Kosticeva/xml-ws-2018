@@ -4,9 +4,11 @@ import com.xml.booking.domain.Agent;
 import com.xml.booking.domain.User;
 import com.xml.booking.repository.AgentRepository;
 import com.xml.booking.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class AdminServiceImpl implements AdminService {
 
     private AgentRepository agentRepository;

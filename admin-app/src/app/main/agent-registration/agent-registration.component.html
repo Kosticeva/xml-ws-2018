@@ -1,0 +1,34 @@
+<div class="container" style="margin-top: 2%;">
+  <form class="form-agent" (ngSubmit)="onSubmit(f.value)" #f="ngForm" id="regForm">
+    <h1 align="center">Agent Registration</h1>
+    <hr><br>
+    <div class="form-row">
+
+      <div class="form-group col-md-6">
+        <label for="username">Username</label>
+        <input ngModel type="text" class="form-control" id="username" name="username" placeholder="Username">
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="password">Password</label>
+        <input ngModel type="password" class="form-control" id="password" name="password" placeholder="Password">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="firstName">First name</label>
+      <input ngModel type="text" class="form-control" id="firstName" name="firstName" placeholder="First name">
+    </div>
+
+    <div class="form-group">
+      <label for="lastName">Last name</label>
+      <input ngModel type="text" class="form-control" id="lastName" name="lastName" placeholder="Last name">
+    </div>
+
+    <div class="form-group">
+      <label for="businessId">Business ID</label>
+      <input ngModel type="text" class="form-control" id="businessId" name="businessID" placeholder="Business ID">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block" style="width: 30%;margin-left: 33%;">Register</button>
+  </form>
+</div>
