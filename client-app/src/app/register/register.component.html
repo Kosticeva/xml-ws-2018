@@ -1,0 +1,45 @@
+<div style='padding-top:50px;'>
+<div class='row'>
+	<div class='col-4'></div>
+	<div class='col-4'>
+		<div class="alert alert-danger" [hidden]="!error">
+			Vec postoji korisnik sa tim imenom...
+		</div>
+		<div class="alert alert-danger" [hidden]="(user.password==passwordRepeat)||(user.password==null)||(passwordRepeat==null)">
+			Lozinke se ne poklapaju!
+		</div>
+		<div class="alert alert-danger" [hidden]="!missingFieldError">
+			Sva polja su obavezna!
+		</div>
+		<form role="form" (submit)="register()">
+			<div class="form-group">
+				<label for="username">Korisnicko ime:</label> <input type="text" required 
+					class="form-control" id="username" name="username" [(ngModel)]="user.username"/>
+			</div>
+			<div class="form-group">
+				<label for="password">Lozinka:</label> <input type="password" required 
+					class="form-control" id="password" name="password" [(ngModel)]="user.password"/>
+			</div>
+			<div class="form-group">
+				<label for="passwordRepeat">Ponovite lozinku:</label> <input type="password"
+					class="form-control" id="passwordRepeat" name="passwordRepeat" [(ngModel)]="passwordRepeat"/>
+			</div>
+			<div class="form-group">
+				<label for="firstName">Ime:</label> <input type="text"
+					class="form-control" id="firstName" name="firstName" [(ngModel)]="user.firstName"/>
+			</div>
+			<div class="form-group">
+				<label for="lastName">Prezime:</label> <input type="text"
+					class="form-control" id="lastName" name="lastName" [(ngModel)]="user.lastName"/>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label> <input type="text"
+					class="form-control" id="email" name="email" [(ngModel)]="user.email"/>
+			</div>
+			
+			<div style='text-align:right;'><button type="submit" class="btn btn-primary">Registruj se</button></div>
+		</form>
+	</div>
+	<div class='col-4'></div>
+</div>
+</div>

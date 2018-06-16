@@ -19,7 +19,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
 
         com.xml.booking.domain.User user = userRepository.findOneByUsername(username);
-        if (user == null) {
+        if (user == null || user.getActivated() == "PENDING") {
             throw new UsernameNotFoundException(String.format("User with username=%s was not found", username));
         }
 

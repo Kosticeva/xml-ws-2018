@@ -11,8 +11,9 @@
 	<div class='row' >
 		<div class='col-12'>
 			<div style='text-align:right; padding:5px 10px;'>
-				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Login</button>
-				<button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Logout</button>
+				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Uloguj se</button>
+				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/register" class='btn'>Registruj se</button>
+				<button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Izloguj se</button>
 			</div>
 		<div>
 	</div>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,9 +29,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .httpBasic()
         .and()
             .authorizeRequests()
-            .antMatchers("/index.html", "/", "/home", "/login/**").permitAll()
-            .anyRequest().authenticated();
-/*        .and()
+            .antMatchers(HttpMethod.POST, "/register/**").permitAll()
+            .antMatchers("/index.html", "/", "/home", "/login/**", "/register/**").permitAll()
+            .anyRequest().authenticated()
+        .and()
             .rememberMe()
         .and()
             .csrf().disable().exceptionHandling()
@@ -39,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-            .maximumSessions(1);*/
+            .maximumSessions(1);
     }
 
     @Override
