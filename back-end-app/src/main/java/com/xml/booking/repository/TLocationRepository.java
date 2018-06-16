@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TLocationRepository extends JpaRepository {
+public interface TLocationRepository extends JpaRepository<TLocation, String> {
 
     public List<TLocation> findByAddressAndCityAndCountry(String address, String city, String country);
     public List<TLocation> findByCityAndCountry(String city, String country);
