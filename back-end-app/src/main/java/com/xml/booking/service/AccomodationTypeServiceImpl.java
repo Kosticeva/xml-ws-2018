@@ -3,9 +3,11 @@ package com.xml.booking.service;
 import com.xml.booking.domain.AccomodationType;
 import com.xml.booking.repository.AccomodationTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AccomodationTypeServiceImpl implements AccomodationTypeService {
 
     @Autowired

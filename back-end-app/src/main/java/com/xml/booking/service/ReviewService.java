@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReviewService {
@@ -88,6 +89,23 @@ public class ReviewService {
         }
 
         return 0.0;
+    }
+
+
+    public Review allowReview(Review review, boolean allow) {
+        Optional<Review> optional = this.reviewRepository.findById(review.getReviewId());
+        if (!optional.isPresent()) return null;
+        Review r = optional.get();
+        r.setAllowed(allow);
+        return this.reviewRepository.save(r);
+    }
+
+    public List<Review> getReviewsByAllowed(boolean allowed) {
+        return this.reviewRepository.findByAllowed(allowed);
+    }
+
+    public List<Review> getAll(){
+        return this.reviewRepository.findAll();
     }
 
 }
