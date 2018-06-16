@@ -10,4 +10,6 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     public List<Review> findByAccomodation_AccommodationId(int accommodationId);
+    public List<Review> findByAllowed(boolean allowd);
+
 }
