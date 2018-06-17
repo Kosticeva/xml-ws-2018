@@ -8,15 +8,15 @@
 
 package com.xml.booking.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -62,10 +62,21 @@ public class Message {
     @XmlElement(required = true)
     protected User user;
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @XmlElement(name = "message-id")
     protected int messageId;
     @XmlAttribute(name = "read")
     protected Boolean readed; //mysql baca error za read field
+
+    //naknadno dodati
+    @XmlAttribute(name = "sender")
+    protected String sender; //values : 'AGENT', 'USER', TODO: koristi enum ovde
+    @XmlAttribute(name = "time")
+    protected Timestamp time;
+    public String getSender() {return  sender;}
+    public void setSender(String sender) {this.sender = sender;}
+    public Timestamp getTime() {return time;}
+    public void setTime(Timestamp time) {this.time = time;}
 
     /**
      * Gets the value of the agent property.
