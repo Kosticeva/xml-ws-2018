@@ -10,7 +10,8 @@
                 <xs:element ref="accomodation"/>
                 <xs:element name="reservation-id" type="xs:int"/>
             </xs:sequence>
-            <xs:attribute default="false" name="confirmed" type="xs:boolean"/>
+            <xs:attribute default="false" name="realized" type="xs:boolean"/>
+            <xs:attribute default="true" name="active" type="xs:boolean"/> <!--not canceled-->
             <xs:attribute name="num-persons">
                 <xs:simpleType>
                     <xs:restriction base="xs:int">

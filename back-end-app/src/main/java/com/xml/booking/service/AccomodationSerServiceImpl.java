@@ -34,4 +34,9 @@ public class AccomodationSerServiceImpl implements AccomodationSerService {
         return this.accomodationServiceRepository.findAll();
     }
 
+    @Override
+    public AccomodationService get(int id) {
+        return this.accomodationServiceRepository.findById(id).orElse(null);
+    }
+
 }

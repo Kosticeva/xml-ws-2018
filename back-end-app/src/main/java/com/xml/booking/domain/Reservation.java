@@ -8,9 +8,7 @@
 
 package com.xml.booking.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -72,9 +70,13 @@ public class Reservation {
     protected Accomodation accomodation;
     @XmlElement(name = "reservation-id")
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int reservationId;
-    @XmlAttribute(name = "confirmed")
-    protected Boolean confirmed;
+    @XmlAttribute(name = "realized")
+    protected Boolean realized;
+    @XmlAttribute(name = "active")
+    @Column(columnDefinition="tinyint(1) default 1")
+    protected Boolean active; //odnosno 'not canceled'
     @XmlAttribute(name = "num-persons")
     protected Integer numPersons;
     @XmlAttribute(name = "final-price")
@@ -151,31 +153,59 @@ public class Reservation {
     }
 
     /**
-     * Gets the value of the confirmed property.
+     * Gets the value of the realized property.
      * 
      * @return
      *     possible object is
      *     {@link Boolean }
      *     
      */
-    public boolean isConfirmed() {
-        if (confirmed == null) {
+    public boolean isRealized() {
+        if (realized == null) {
             return false;
         } else {
-            return confirmed;
+            return realized;
         }
     }
 
     /**
-     * Sets the value of the confirmed property.
-     * 
+     * Gets the value of the active property.
+     *
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *
+     */
+    public boolean isActive() {
+        if (active == null) {
+            return false;
+        } else {
+            return active;
+        }
+    }
+
+    /**
+     * Sets the value of the realized property.
+     *
      * @param value
      *     allowed object is
      *     {@link Boolean }
-     *     
+     *
      */
-    public void setConfirmed(Boolean value) {
-        this.confirmed = value;
+    public void setRealized(Boolean value) {
+        this.realized = value;
+    }
+
+    /**
+     * Sets the value of the active property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *
+     */
+    public void setActive(Boolean value) {
+        this.active = value;
     }
 
     /**
