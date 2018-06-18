@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AccommodationPageComponent } from './accommodation/accommodation-page.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import { MessagesComponent } from './messages/messages.component';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'messages',
+    component: MessagesComponent
   }
 ];
 

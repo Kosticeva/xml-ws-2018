@@ -1,0 +1,10 @@
+.usermessage {
+	background-color: #d8ecff;
+	border-radius: 6px;
+	text-align: right;
+}
+.agentmessage {
+	background-color: #396a96;
+	color: white;
+	text-align: left;
+}

@@ -115,6 +115,7 @@ public class Accomodation {
     protected List<TPrice> prices;
     @Id
     @XmlElement(name = "accommodation-id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int accommodationId;
 
     /**
