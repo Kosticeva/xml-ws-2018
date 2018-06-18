@@ -123,6 +123,7 @@ public class Accomodation {
     protected PricePlan pricePlan;
     @Id
     @XmlElement(name = "accommodation-id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int accommodationId;
 
     /**

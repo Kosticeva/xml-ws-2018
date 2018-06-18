@@ -1,0 +1,35 @@
+<div class='row'>
+	<div class='col-4' style='padding: 20px 30px;' >
+		<div style='background-color:#1e88e5; padding:4px 10px; color:white; border-radius:4px; margin-bottom:5px;'>Agenti</div>
+		<ul style='list-style:none; padding-left:0px;'>
+			<li *ngFor="let agent of agents" style='margin-bottom:5px;'>
+				<button class='btn' (click)="getMessages(agent)">{{agent.username}}</button>
+			</li>
+		</ul>
+	</div>
+	<div class='col-8' style='padding: 20px 30px;' *ngIf="selectedAgent">
+		<div>
+			<ul style='list-style:none; padding-left:0px;'>
+				<li
+					*ngFor="let message of messages"
+				>
+					<div
+						[class.usermessage]="message.sender==='USER'"
+						[class.agentmessage]="message.sender==='AGENT'"
+						style='padding: 5px 10px; border-radius: 6px; margin-bottom: 5px;'
+						>
+						<div *ngIf="message.sender==='USER'"  style='font-size:smaller; color:#396a96;'>{{message.userUsername}}</div>
+						<div *ngIf="message.sender==='AGENT'"  style='font-size:smaller; color:#d8ecff;'>{{message.agentUsername}}</div>
+						<div>{{message.content}}</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<textarea style='width:100%; resize: none; border-color:#396a96; border-radius:6px;' [(ngModel)]="message.content"></textarea>
+			<div style='text-align:right;'>
+				<button class='btn' (click)='sendMessage()'>Posalji</button>
+			</div>
+		</div>
+	</div>
+</div>

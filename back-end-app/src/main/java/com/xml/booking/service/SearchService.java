@@ -71,7 +71,7 @@ public class SearchService {
 
         for(TLocation tl: locations){
             accomodations.addAll(
-                    accomodationRepository.findByLocationAndCategoryInAndAccomodationServiceInAndAccomodationTypeIn(
+                    accomodationRepository.findByLocationAndCategoryInAndAccomodationServicesInAndAccomodationTypeIn(
                             tl, categories, services, types));
         }
 

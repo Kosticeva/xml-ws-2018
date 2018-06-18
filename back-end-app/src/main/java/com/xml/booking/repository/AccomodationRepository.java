@@ -11,7 +11,7 @@ public interface AccomodationRepository extends JpaRepository<Accomodation, Inte
 
     public List<Accomodation> findByLocation(TLocation location);
 
-    public List<Accomodation> findByLocationAndCategoryInAndAccomodationServiceInAndAccomodationTypeIn
+    public List<Accomodation> findByLocationAndCategoryInAndAccomodationServicesInAndAccomodationTypeIn
             (TLocation location, List<Category> categories, List<AccomodationService> accomodationServices,
              List<AccomodationType> accomodationTypes);
 }
