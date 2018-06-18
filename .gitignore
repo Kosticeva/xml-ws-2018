@@ -26,3 +26,4 @@
 
 client-app/node_modules/
 admin-app/node_modules/
+back-end-app/target/

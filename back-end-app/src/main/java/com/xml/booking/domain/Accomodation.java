@@ -10,10 +10,7 @@ package com.xml.booking.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -81,7 +78,7 @@ import javax.xml.bind.annotation.XmlType;
     "category",
     "accomodationType",
     "picture",
-    "accomodationService",
+    "accomodationServices",
     "pricePlan",
     "accommodationId"
 })
@@ -111,8 +108,16 @@ public class Accomodation {
     @Transient //TODO: temp solution
     protected List<byte[]> picture;
     @XmlElement(name = "accomodation-service", required = true)
-    @ManyToOne
-    protected AccomodationService accomodationService;
+    @ManyToMany
+    @JoinTable(
+            name="accommodation_accomservice",
+            joinColumns = @JoinColumn(
+                    name="accommodationId"),
+            inverseJoinColumns = @JoinColumn(
+                    name="serviceId"
+            )
+    )
+    protected List<AccomodationService> accomodationServices;
     @XmlElement(name = "price-plan", required = true)
     @Transient //TODO: temp solution
     protected PricePlan pricePlan;
@@ -316,8 +321,8 @@ public class Accomodation {
      *     {@link AccomodationService }
      *     
      */
-    public AccomodationService getAccomodationService() {
-        return accomodationService;
+    public List<AccomodationService> getAccomodationServices() {
+        return accomodationServices;
     }
 
     /**
@@ -328,8 +333,8 @@ public class Accomodation {
      *     {@link AccomodationService }
      *     
      */
-    public void setAccomodationService(AccomodationService value) {
-        this.accomodationService = value;
+    public void setAccomodationService(List<AccomodationService> value) {
+        this.accomodationServices = value;
     }
 
     /**
