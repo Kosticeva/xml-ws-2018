@@ -13,8 +13,8 @@ public interface TLocationRepository extends JpaRepository<TLocation, String> {
     public List<TLocation> findByCityAndCountry(String city, String country);
     public List<TLocation> findByAddressAndCity(String address, String city);
 
-    public List<TLocation> findByCityLike(String city);
-    public List<TLocation> findByAddressLike(String address);
-    public List<TLocation> findByCountryLike(String country);
+    public List<TLocation> findByCityStartingWith(String city);
+    public List<TLocation> findByAddressStartingWith(String address);
+    public List<TLocation> findByCountryStartingWith(String country);
 
 }

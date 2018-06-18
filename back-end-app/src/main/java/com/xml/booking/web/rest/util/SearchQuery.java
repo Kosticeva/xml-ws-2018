@@ -5,10 +5,11 @@ import com.xml.booking.domain.AccomodationType;
 import com.xml.booking.domain.Category;
 import com.xml.booking.domain.TLocation;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 
-public class SearchQuery {
+public class SearchQuery implements Serializable{
 
     //kako je reprezentovano na klijentu
     //ako ima 2 zareza, pune se sva 3
@@ -17,41 +18,31 @@ public class SearchQuery {
     //ako nema zarez i ima broj, adresa
     //ako nema zarez i nema broj, grad
 
-    public String address;
-    public String city;
-    public String country;
-    public Date dateOfArrival;
-    public Date dateOfReturn;
-    public Integer persons;
+    private String address;
+    private String country;
+    private String city;
+    private Date dateOfArrival;
+    private Date dateOfReturn;
+    private Integer persons;
 
-    public List<Integer> accomodationTypes;
-    public List<Integer> accomodationCategories;
-    public List<Integer> accomodationServices;
+    private List<Integer> accomodationTypes;
+    private List<Integer> accomodationCategories;
+    private List<Integer> accomodationServices;
 
     public SearchQuery() {}
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
+    public SearchQuery(String address, String country, String city, Date dateOfArrival, Date dateOfReturn,
+                       Integer persons, List<Integer> accomodationTypes, List<Integer> accomodationCategories,
+                       List<Integer> accomodationServices) {
         this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
         this.country = country;
+        this.city = city;
+        this.dateOfArrival = dateOfArrival;
+        this.dateOfReturn = dateOfReturn;
+        this.persons = persons;
+        this.accomodationTypes = accomodationTypes;
+        this.accomodationCategories = accomodationCategories;
+        this.accomodationServices = accomodationServices;
     }
 
     public Date getDateOfArrival() {
@@ -100,5 +91,64 @@ public class SearchQuery {
 
     public void setAccomodationServices(List<Integer> accomodationServices) {
         this.accomodationServices = accomodationServices;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    @Override
+    public String toString(){
+        String retVal = "\n-------------------------------------------------\n";
+        retVal += "SEARCH\n";
+
+        retVal += this.address+", "+this.city+", "+this.country;
+        retVal += "\n\tFROM "+this.dateOfArrival+" TO "+this.dateOfReturn;
+        retVal += "\n\tFOR "+this.persons;
+        retVal += "\n\nADVANCED\n";
+        retVal += "\tCATEGORIES: \n\t";
+
+        if(accomodationCategories != null){
+            for(int i=0; i<accomodationCategories.size(); i++){
+                retVal += accomodationCategories.get(i)+", ";
+            }
+        }
+
+        retVal += "\tTYPES: \n\t";
+        if(accomodationTypes != null){
+            for(int i=0; i<accomodationTypes.size(); i++){
+                retVal += accomodationTypes.get(i)+", ";
+            }
+        }
+
+        retVal += "\tSERVICES: \n\t";
+        if(accomodationServices != null) {
+            for (int i = 0; i < accomodationServices.size(); i++) {
+                retVal += accomodationServices.get(i) + ", ";
+            }
+        }
+
+        retVal += "\n-------------------------------------------------\n\n";
+        return retVal;
     }
 }
