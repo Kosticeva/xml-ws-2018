@@ -6,6 +6,7 @@ import com.xml.booking.domain.TLocation;
 import com.xml.booking.domain.AccomodationType;
 import com.xml.booking.domain.Category;
 import com.xml.booking.domain.Reservation;
+import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.repository.*;
 import com.xml.booking.web.rest.util.SearchQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,13 @@ public class SearchService {
     @Autowired
     CategoryRepository categoryRepository;
 
-    public List<Accomodation> doSimpleSearch(SearchQuery searchQuery){
+    @Autowired
+    PriceService priceService;
+
+    @Autowired
+    ReviewService reviewService;
+
+    public List<AccomodationDTO> doSimpleSearch(SearchQuery searchQuery){
         //how to calculate vacancies
         //find accomodations on wanted location
         //find all reservations that are lasting on that date
@@ -44,9 +51,6 @@ public class SearchService {
         //sort by grade?
 
         List<TLocation> locations = findAllLocations(searchQuery.getAddress(), searchQuery.getCity(), searchQuery.getCountry());
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(locations.get(i));
-        }
 
         List<Accomodation> accomodations = new ArrayList<>();
 
@@ -54,83 +58,83 @@ public class SearchService {
             accomodations.addAll(accomodationRepository.findByLocation(tl));
         }
 
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(accomodations.get(i));
-        }
-
-        List<Accomodation> finalAccomodations = new ArrayList<>();
-        for(Accomodation ac: accomodations){
-            if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
-                finalAccomodations.add(ac);
-            }
-        }
-
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(finalAccomodations.get(i));
-        }
-
-        return finalAccomodations;
+        return convertToDTOs(accomodations, searchQuery);
     }
 
-    public List<Accomodation> doAdvancedSearch(SearchQuery searchQuery){
+    public List<AccomodationDTO> doAdvancedSearch(SearchQuery searchQuery){
 
         List<TLocation> locations = findAllLocations(searchQuery.getAddress(), searchQuery.getCity(), searchQuery.getCountry());
         List<AccomodationType> types = accomodationTypeRepository.findByTypeIDIn(searchQuery.getAccomodationTypes());
         List<AccomodationService> services = accomodationServiceRepository.findByServiceIDIn(searchQuery.getAccomodationServices());
         List<Category> categories = categoryRepository.findByCategoryIDIn(searchQuery.getAccomodationCategories());
 
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(locations.get(i));
-        }
-        for(int i=0; i<types.size(); i++){
-            System.out.println(types.get(i));
-        }
-        for(int i=0; i<categories.size(); i++){
-            System.out.println(categories.get(i));
-        }
-
-        for(int i=0; i<services.size(); i++){
-            System.out.println(services.get(i));
-        }
-
-
         List<Accomodation> accomodations = new ArrayList<>();
 
         for(TLocation tl: locations){
-            accomodations.addAll(
-                    accomodationRepository.findByLocationAndCategoryInAndAccomodationServicesInAndAccomodationTypeIn(
-                            tl, categories, services, types));
-        }
 
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(accomodations.get(i));
-        }
-
-        List<Accomodation> finalAccomodations = new ArrayList<>();
-        for(Accomodation ac: accomodations){
-            if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
-                finalAccomodations.add(ac);
+            if(types.size() > 0 && categories.size() > 0 && services.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndCategoryInAndAccomodationServicesIn(
+                        tl, types, categories, services));
+            }else if(types.size() > 0 && categories.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndCategoryIn(tl, types, categories));
+            }else if(types.size() > 0 && services.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndAccomodationServicesIn(tl, types, services));
+            }else if(services.size() > 0 && categories.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndCategoryInAndAccomodationServicesIn(tl, categories, services));
+            }else if(types.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeIn(tl, types));
+            }else if(categories.size() > 0){
+                accomodations.addAll(accomodationRepository.findByLocationAndCategoryIn(tl, categories));
+            }else if(services.size() > 0) {
+                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationServicesIn(tl, services));
             }
         }
 
-        for(int i=0; i<locations.size(); i++){
-            System.out.println(finalAccomodations.get(i));
+        return convertToDTOs(accomodations, searchQuery);
+    }
+
+    private List<AccomodationDTO> convertToDTOs(List<Accomodation> accomodations, SearchQuery searchQuery){
+        List<AccomodationDTO> accomDTOs = new ArrayList<>();
+        for(Accomodation ac: accomodations){
+            if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
+                AccomodationDTO dto = new AccomodationDTO();
+
+                dto.setAccomodationId(ac.getAccommodationId());
+                dto.setAddress(ac.getLocation().getAddress());
+                dto.setCity(ac.getLocation().getCity());
+                dto.setCountry(ac.getLocation().getCountry());
+                dto.setAgentUsername(ac.getAgent().getUsername());
+                dto.setDescription(ac.getDescription());
+
+                dto.setName(ac.getName());
+                dto.setCategoryName(ac.getCategory().getCategoryName());
+                dto.setType(ac.getAccomodationType().getTypeName());
+
+                List<String> services = new ArrayList<>();
+                for(AccomodationService as: ac.getAccomodationServices()){
+                    services.add(as.getServiceName());
+                }
+
+                dto.setServices(services);
+
+                dto.setAverageGrade(reviewService.calculateAverageGrade(dto.getAccomodationId()));
+                dto.setPrice(priceService.calculateFullPrice(ac, searchQuery.getDateOfArrival(), searchQuery.getDateOfReturn(), searchQuery.getPersons()));
+
+                accomDTOs.add(dto);
+            }
         }
 
-        return finalAccomodations;
+        return accomDTOs;
     }
 
     private List<TLocation> findAllLocations(String address, String city, String country){
 
         List<TLocation> locations = new ArrayList<>();
         if(address != null && city != null && country != null){
-            System.out.println("SVA TRI");
             locations = tLocationRepository.findByAddressAndCityAndCountry(address, city, country);
         } else if(address != null && city != null){
-            System.out.println("SAMO GRAD I ADRESA");
             locations = tLocationRepository.findByAddressAndCity(address, city);
         } else if(city != null && country != null){
-            System.out.println("grad i drzava");
             locations = tLocationRepository.findByCityAndCountry(city, country);
         }
 
@@ -145,13 +149,10 @@ public class SearchService {
             sum += res.getNumPersons();
         }
 
-        System.out.println("BR OSOBA ZA DATUM JE "+sum);
         if(sum + searchQuery.getPersons() < ac.getMaxPersons()){
-            System.out.println("IMA MESTA");
             return true;
         }
 
-        System.out.println("NEMA MESTA");
         return false;
     }
 

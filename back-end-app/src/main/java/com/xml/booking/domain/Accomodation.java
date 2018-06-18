@@ -48,16 +48,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;sequence>
  *           &lt;element ref="{}accomodation-service"/>
  *         &lt;/sequence>
- *         &lt;element name="price-plan">
- *           &lt;complexType>
- *             &lt;complexContent>
- *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *                 &lt;sequence>
- *                   &lt;element name="price" type="{}TPrice" maxOccurs="unbounded"/>
- *                 &lt;/sequence>
- *               &lt;/restriction>
- *             &lt;/complexContent>
- *           &lt;/complexType>
+ *         &lt;sequence>
+*            &lt;element name="price" type="{}TPrice" maxOccurs="unbounded"/>
  *         &lt;/element>
  *         &lt;element name="accommodation-id" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *       &lt;/sequence>
@@ -79,7 +71,7 @@ import javax.xml.bind.annotation.XmlType;
     "accomodationType",
     "picture",
     "accomodationServices",
-    "pricePlan",
+    "prices",
     "accommodationId"
 })
 @Entity
@@ -119,8 +111,8 @@ public class Accomodation {
     )
     protected List<AccomodationService> accomodationServices;
     @XmlElement(name = "price-plan", required = true)
-    @Transient //TODO: temp solution
-    protected PricePlan pricePlan;
+    @OneToMany
+    protected List<TPrice> prices;
     @Id
     @XmlElement(name = "accommodation-id")
     protected int accommodationId;
@@ -342,11 +334,11 @@ public class Accomodation {
      * 
      * @return
      *     possible object is
-     *     {@link PricePlan }
+     *     {@link TPrice }
      *     
      */
-    public PricePlan getPricePlan() {
-        return pricePlan;
+    public List<TPrice> getPrices() {
+        return prices;
     }
 
     /**
@@ -354,11 +346,11 @@ public class Accomodation {
      * 
      * @param value
      *     allowed object is
-     *     {@link PricePlan }
+     *     {@link TPrice }
      *     
      */
-    public void setPricePlan(PricePlan value) {
-        this.pricePlan = value;
+    public void setPrices(List<TPrice> value) {
+        this.prices = value;
     }
 
     /**
@@ -377,64 +369,5 @@ public class Accomodation {
         this.accommodationId = value;
     }
 
-
-    /**
-     * <p>Java class for anonymous complex type.
-     * 
-     * <p>The following schema fragment specifies the expected content contained within this class.
-     * 
-     * <pre>
-     * &lt;complexType>
-     *   &lt;complexContent>
-     *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
-     *       &lt;sequence>
-     *         &lt;element name="price" type="{}TPrice" maxOccurs="unbounded"/>
-     *       &lt;/sequence>
-     *     &lt;/restriction>
-     *   &lt;/complexContent>
-     * &lt;/complexType>
-     * </pre>
-     * 
-     * 
-     */
-    @XmlAccessorType(XmlAccessType.FIELD)
-    @XmlType(name = "", propOrder = {
-        "price"
-    })
-    public static class PricePlan {
-
-        @XmlElement(required = true)
-        protected List<TPrice> price;
-
-        /**
-         * Gets the value of the price property.
-         * 
-         * <p>
-         * This accessor method returns a reference to the live list,
-         * not a snapshot. Therefore any modification you make to the
-         * returned list will be present inside the JAXB object.
-         * This is why there is not a <CODE>set</CODE> method for the price property.
-         * 
-         * <p>
-         * For example, to add a new item, do as follows:
-         * <pre>
-         *    getPrice().add(newItem);
-         * </pre>
-         * 
-         * 
-         * <p>
-         * Objects of the following type(s) are allowed in the list
-         * {@link TPrice }
-         * 
-         * 
-         */
-        public List<TPrice> getPrice() {
-            if (price == null) {
-                price = new ArrayList<TPrice>();
-            }
-            return this.price;
-        }
-
-    }
 
 }

@@ -2,6 +2,7 @@ package com.xml.booking.web.rest;
 
 import com.xml.booking.domain.Accomodation;
 import com.xml.booking.domain.TLocation;
+import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.service.SearchService;
 import com.xml.booking.web.rest.util.SearchQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class SearchResource {
     SearchService searchService;
 
     @RequestMapping(value = "/search", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public List<Accomodation> getAccomodationsSimpleSearch(@RequestBody SearchQuery query){
+    public List<AccomodationDTO> getAccomodationsSimpleSearch(@RequestBody SearchQuery query){
 
         System.out.println("Obicna pretraga");
         System.out.println(query);
@@ -43,7 +44,7 @@ public class SearchResource {
     }
 
     @RequestMapping(value = "/search/advanced", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public List<Accomodation> getAccomodationsAdvancedSearch(@RequestBody SearchQuery query){
+    public List<AccomodationDTO> getAccomodationsAdvancedSearch(@RequestBody SearchQuery query){
 
         System.out.println("Napredna pretraga");
         System.out.println(query);

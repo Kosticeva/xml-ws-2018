@@ -1,6 +1,8 @@
 package com.xml.booking.service;
 
+import com.xml.booking.domain.Accomodation;
 import com.xml.booking.domain.Review;
+import com.xml.booking.dto.ReviewDTO;
 import com.xml.booking.repository.AccomodationRepository;
 import com.xml.booking.repository.ReviewRepository;
 import com.xml.booking.repository.UserRepository;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,16 +27,16 @@ public class ReviewService {
     UserRepository userRepository;
 
     @Transactional
-    public Review createReview(Review review) {
+    public ReviewDTO createReview(ReviewDTO review) {
         if(review.getGrade() > 5 || review.getGrade() < 1){
             return null;
         }
 
-        if(accomodationRepository.getOne(review.getAccomodation().getAccommodationId()) == null){
+        if(accomodationRepository.getOne(review.getAccomodationId()) == null){
             return null;
         }
 
-        if(userRepository.getOne(review.getUser().getUsername()) == null){
+        if(userRepository.getOne(review.getUser()) == null){
             return null;
         }
 
@@ -41,19 +44,25 @@ public class ReviewService {
             return null;
         }
 
-        return reviewRepository.save(review);
+        List<ReviewDTO> dtos = new ArrayList<>();
+        dtos.add(review);
+        Review r = mapFromDTO(dtos).get(0);
+        r = reviewRepository.save(r);
+        List<Review> revs = new ArrayList<>();
+        revs.add(r);
+        return mapToDTO(revs).get(0);
     }
 
-    public Review editReview(Review review) {
+    public ReviewDTO editReview(ReviewDTO review) {
         if(review.getGrade() > 5 || review.getGrade() < 1){
             return null;
         }
 
-        if(accomodationRepository.getOne(review.getAccomodation().getAccommodationId()) == null){
+        if(accomodationRepository.getOne(review.getAccomodationId()) == null){
             return null;
         }
 
-        if(userRepository.getOne(review.getUser().getUsername()) == null){
+        if(userRepository.getOne(review.getUser()) == null){
             return null;
         }
 
@@ -61,34 +70,46 @@ public class ReviewService {
             return null;
         }
 
-        return reviewRepository.save(review);
+        List<ReviewDTO> dtos = new ArrayList<>();
+        dtos.add(review);
+        Review r = mapFromDTO(dtos).get(0);
+        r = reviewRepository.save(r);
+        List<Review> revs = new ArrayList<>();
+        revs.add(r);
+        return mapToDTO(revs).get(0);
     }
 
-    public Review getReview(int reviewId) {
-        return reviewRepository.getOne(reviewId);
+    public ReviewDTO getReview(int reviewId) {
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(reviewRepository.getOne(reviewId));
+        return mapToDTO(reviews).get(0);
     }
 
-    public List<Review> getAllReviewsForPlace(int accommodationId) {
-        return  reviewRepository.findByAccomodation_AccommodationId(accommodationId);
+    public List<ReviewDTO> getAllReviewsForPlace(int accommodationId) {
+        Optional<Accomodation> aa = accomodationRepository.findById(accommodationId);
+        if(aa.isPresent())
+            return  mapToDTO(reviewRepository.findByAccomodation(aa.get()));
+
+        return null;
     }
 
     public void deleteReview(int reviewId) {
         reviewRepository.deleteById(reviewId);
     }
 
-    public double calculateAverageGrade(int accommodationId) {
-        List<Review> reviews = getAllReviewsForPlace(accommodationId);
+    public float calculateAverageGrade(int accommodationId) {
+        List<ReviewDTO> reviews = getAllReviewsForPlace(accommodationId);
 
+        float sum = 0.0F;
         if(reviews.size() > 0) {
-            double sum = 0.0;
-            for (Review r : reviews) {
+            for (ReviewDTO r : reviews) {
                 sum += r.getGrade();
             }
 
             return sum / reviews.size();
         }
 
-        return 0.0;
+        return sum;
     }
 
 
@@ -100,12 +121,48 @@ public class ReviewService {
         return this.reviewRepository.save(r);
     }
 
-    public List<Review> getReviewsByAllowed(boolean allowed) {
-        return this.reviewRepository.findByAllowed(allowed);
+    public List<ReviewDTO> getReviewsByAllowed(boolean allowed) {
+       return mapToDTO(this.reviewRepository.findByAllowed(allowed));
     }
 
-    public List<Review> getAll(){
-        return this.reviewRepository.findAll();
+    public List<ReviewDTO> getAll(){
+        return mapToDTO(this.reviewRepository.findAll());
+
+    }
+
+    private List<ReviewDTO> mapToDTO(List<Review> reviews) {
+        List<ReviewDTO> dtos = new ArrayList<>();
+
+        for(Review r: reviews){
+            ReviewDTO dto = new ReviewDTO();
+            dto.setAccomodationId(r.getAccomodation().getAccommodationId());
+            dto.setComment(r.getComment());
+            dto.setGrade(r.getGrade());
+            dto.setAllowed(r.isAllowed());
+            dto.setUser(r.getUser().getUsername());
+            dto.setReviewId(r.getReviewId());
+            dtos.add(dto);
+        }
+
+        return dtos;
+    }
+
+    private List<Review> mapFromDTO(List<ReviewDTO> reviewDTOS){
+        List<Review> reviews = new ArrayList<>();
+
+        for(ReviewDTO dto: reviewDTOS){
+            Review r = new Review();
+            r.setAllowed(dto.isAllowed());
+            r.setAccomodation(accomodationRepository.findById(dto.getAccomodationId()).get());
+            r.setComment(dto.getComment());
+            r.setGrade(dto.getGrade());
+            r.setReviewId(dto.getReviewId());
+            r.setUser(userRepository.findOneByUsername(dto.getUser()));
+
+            reviews.add(r);
+        }
+
+        return reviews;
     }
 
 }

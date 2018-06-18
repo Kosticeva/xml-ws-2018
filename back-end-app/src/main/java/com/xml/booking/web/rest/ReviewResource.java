@@ -1,12 +1,15 @@
 package com.xml.booking.web.rest;
 
 import com.xml.booking.domain.Review;
+import com.xml.booking.dto.ReviewDTO;
+import com.xml.booking.repository.AccomodationRepository;
 import com.xml.booking.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.attribute.standard.Media;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.net.URI;
@@ -22,25 +25,22 @@ public class ReviewResource {
     ReviewService reviewService;
 
     @GetMapping("/not-allowed")
-    public ResponseEntity<List<Review>> getNotAllowedReviews(){
-        return new ResponseEntity<List<Review>>(this.reviewService.getReviewsByAllowed(false), HttpStatus.OK);
+    public ResponseEntity<List<ReviewDTO>> getNotAllowedReviews(){
+        return new ResponseEntity<List<ReviewDTO>>(this.reviewService.getReviewsByAllowed(false), HttpStatus.OK);
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<List<Review>> getAll() {
-        return new ResponseEntity<List<Review>>(this.reviewService.getAll(), HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<ReviewDTO>> getAll() {
+        return new ResponseEntity<List<ReviewDTO>>(this.reviewService.getAll(), HttpStatus.OK);
     }
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<Review> createReview(@RequestBody Review review) throws URISyntaxException{
+    @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO review) throws URISyntaxException{
         if(review.getReviewId() >= 0) {
             return null;
         }
 
-        Review retVal = reviewService.createReview(review);
+        ReviewDTO retVal = reviewService.createReview(review);
         if(retVal != null){
             return ResponseEntity.created(new
                     URI("/reviews/"+retVal.getReviewId()))
@@ -50,16 +50,13 @@ public class ReviewResource {
         return null;
     }
 
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Path("/{reviewId}")
-    public ResponseEntity<Review> editReview(@RequestBody Review review, @RequestParam int reviewId) {
+    @RequestMapping(value = "/{reviewId}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
+    public ResponseEntity<ReviewDTO> editReview(@RequestBody ReviewDTO review, @PathVariable("reviewId") int reviewId) {
         if(review.getReviewId() < 0 || review.getReviewId() != reviewId) {
             return null;
         }
 
-        Review retVal = reviewService.editReview(review);
+        ReviewDTO retVal = reviewService.editReview(review);
         if(retVal != null){
             return ResponseEntity.ok(retVal);
         }
@@ -67,23 +64,20 @@ public class ReviewResource {
         return null;
     }
 
-    @DELETE
-    @Path("/{reviewId}")
-    public void deleteReview(@RequestParam int reviewId){
+    @RequestMapping(value = "/{reviewId}", method = RequestMethod.DELETE)
+    public void deleteReview( @PathVariable("reviewId") int reviewId){
         reviewService.deleteReview(reviewId);
     }
 
-    @GET
-    @Path("/{reviewId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Review getOneReview(@RequestParam int reviewId){
+    @RequestMapping(value = "/{reviewId}", method = RequestMethod.GET)
+    public ReviewDTO getOneReview( @PathVariable("reviewId") int reviewId){
         return reviewService.getReview(reviewId);
     }
 
     @GET
     @Path("/accommodation/{accommodationId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Review> getAllReviewsForPlace(@RequestParam int accommodationId){
+    public List<ReviewDTO> getAllReviewsForPlace(@RequestParam int accommodationId){
         return reviewService.getAllReviewsForPlace(accommodationId);
     }
 
