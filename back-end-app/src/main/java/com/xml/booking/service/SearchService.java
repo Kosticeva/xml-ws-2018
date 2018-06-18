@@ -44,10 +44,18 @@ public class SearchService {
         //sort by grade?
 
         List<TLocation> locations = findAllLocations(searchQuery.getAddress(), searchQuery.getCity(), searchQuery.getCountry());
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(locations.get(i));
+        }
+
         List<Accomodation> accomodations = new ArrayList<>();
 
         for(TLocation tl: locations){
             accomodations.addAll(accomodationRepository.findByLocation(tl));
+        }
+
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(accomodations.get(i));
         }
 
         List<Accomodation> finalAccomodations = new ArrayList<>();
@@ -55,6 +63,10 @@ public class SearchService {
             if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
                 finalAccomodations.add(ac);
             }
+        }
+
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(finalAccomodations.get(i));
         }
 
         return finalAccomodations;
@@ -67,12 +79,31 @@ public class SearchService {
         List<AccomodationService> services = accomodationServiceRepository.findByServiceIDIn(searchQuery.getAccomodationServices());
         List<Category> categories = categoryRepository.findByCategoryIDIn(searchQuery.getAccomodationCategories());
 
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(locations.get(i));
+        }
+        for(int i=0; i<types.size(); i++){
+            System.out.println(types.get(i));
+        }
+        for(int i=0; i<categories.size(); i++){
+            System.out.println(categories.get(i));
+        }
+
+        for(int i=0; i<services.size(); i++){
+            System.out.println(services.get(i));
+        }
+
+
         List<Accomodation> accomodations = new ArrayList<>();
 
         for(TLocation tl: locations){
             accomodations.addAll(
                     accomodationRepository.findByLocationAndCategoryInAndAccomodationServicesInAndAccomodationTypeIn(
                             tl, categories, services, types));
+        }
+
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(accomodations.get(i));
         }
 
         List<Accomodation> finalAccomodations = new ArrayList<>();
@@ -82,6 +113,10 @@ public class SearchService {
             }
         }
 
+        for(int i=0; i<locations.size(); i++){
+            System.out.println(finalAccomodations.get(i));
+        }
+
         return finalAccomodations;
     }
 
@@ -89,10 +124,13 @@ public class SearchService {
 
         List<TLocation> locations = new ArrayList<>();
         if(address != null && city != null && country != null){
+            System.out.println("SVA TRI");
             locations = tLocationRepository.findByAddressAndCityAndCountry(address, city, country);
         } else if(address != null && city != null){
+            System.out.println("SAMO GRAD I ADRESA");
             locations = tLocationRepository.findByAddressAndCity(address, city);
         } else if(city != null && country != null){
+            System.out.println("grad i drzava");
             locations = tLocationRepository.findByCityAndCountry(city, country);
         }
 
@@ -107,10 +145,13 @@ public class SearchService {
             sum += res.getNumPersons();
         }
 
+        System.out.println("BR OSOBA ZA DATUM JE "+sum);
         if(sum + searchQuery.getPersons() < ac.getMaxPersons()){
+            System.out.println("IMA MESTA");
             return true;
         }
 
+        System.out.println("NEMA MESTA");
         return false;
     }
 
@@ -118,9 +159,9 @@ public class SearchService {
 
         List<TLocation> locations = new ArrayList<>();
 
-        locations.addAll(tLocationRepository.findByAddressLike(query));
-        locations.addAll(tLocationRepository.findByCityLike(query));
-        locations.addAll(tLocationRepository.findByCountryLike(query));
+        locations.addAll(tLocationRepository.findByAddressStartingWith(query));
+        locations.addAll(tLocationRepository.findByCityStartingWith(query));
+        locations.addAll(tLocationRepository.findByCountryStartingWith(query));
 
         return locations;
     }

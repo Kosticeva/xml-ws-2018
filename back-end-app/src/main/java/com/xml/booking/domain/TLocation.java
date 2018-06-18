@@ -132,4 +132,8 @@ public class TLocation {
         this.country = value;
     }
 
+    @Override
+    public String toString(){
+        return address+", "+city+", "+country;
+    }
 }
