@@ -8,6 +8,7 @@
 
 package com.xml.booking.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -47,6 +48,8 @@ import javax.xml.bind.annotation.XmlType;
 public class TLocation {
 
     @Id
+    @XmlElement(required =  true)
+    @Column(length = 200, nullable = false)
     protected String id;
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}

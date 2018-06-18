@@ -8,6 +8,7 @@
 
 package com.xml.booking.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -57,6 +58,7 @@ public class User {
 
     @Id
     @XmlElement(required = true)
+    @Column(length = 200, nullable = false)
     protected String username;
     @XmlElement(required = true)
     protected String password;
