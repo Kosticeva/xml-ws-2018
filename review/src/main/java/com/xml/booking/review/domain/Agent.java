@@ -11,11 +11,7 @@ package com.xml.booking.review.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -49,10 +45,13 @@ import javax.xml.bind.annotation.XmlType;
     "lastName",
     "businessID"
 })
+@Entity
 @XmlRootElement(name = "agent")
 public class Agent {
 
+    @Id
     @XmlElement(required = true)
+    @Column(length = 200, nullable = false)
     protected String username;
     @XmlElement(required = true)
     protected String password;

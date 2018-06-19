@@ -113,12 +113,14 @@ public class ReviewService {
     }
 
 
-    public Review allowReview(Review review, boolean allow) {
+    public ReviewDTO allowReview(ReviewDTO review, boolean allow) {
         Optional<Review> optional = this.reviewRepository.findById(review.getReviewId());
         if (!optional.isPresent()) return null;
         Review r = optional.get();
         r.setAllowed(allow);
-        return this.reviewRepository.save(r);
+        List<Review> dtos = new ArrayList<>();
+        dtos.add(this.reviewRepository.save(r));
+        return mapToDTO(dtos).get(0);
     }
 
     public List<ReviewDTO> getReviewsByAllowed(boolean allowed) {
@@ -140,7 +142,11 @@ public class ReviewService {
             dto.setGrade(r.getGrade());
             dto.setAllowed(r.isAllowed());
             dto.setUser(r.getUser().getUsername());
-            dto.setReviewId(r.getReviewId());
+            if(r.getReviewId() > 0)
+                dto.setReviewId(r.getReviewId());
+            else{
+                dto.setReviewId(null);
+            }
             dtos.add(dto);
         }
 
@@ -156,7 +162,11 @@ public class ReviewService {
             r.setAccomodation(accomodationRepository.findById(dto.getAccomodationId()).get());
             r.setComment(dto.getComment());
             r.setGrade(dto.getGrade());
-            r.setReviewId(dto.getReviewId());
+            if(dto.getReviewId() == null){
+                r.setReviewId(-1);
+            }else{
+                r.setReviewId(dto.getReviewId());
+            }
             r.setUser(userRepository.findOneByUsername(dto.getUser()));
 
             reviews.add(r);

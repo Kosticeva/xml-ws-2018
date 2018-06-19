@@ -44,14 +44,15 @@ import javax.xml.bind.annotation.XmlType;
     "city",
     "country"
 })
+@Entity
 public class TLocation {
 
+    @Id
     @XmlElement(required =  true)
+    @Column(length = 200, nullable = false)
     protected String id;
-
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}
-
     @XmlElement(required = true)
     protected String address;
     @XmlElement(required = true)

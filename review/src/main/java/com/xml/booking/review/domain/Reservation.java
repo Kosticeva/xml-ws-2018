@@ -9,14 +9,7 @@
 package com.xml.booking.review.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.bind.annotation.*;
 import java.util.Date;
 
 
@@ -58,18 +51,24 @@ import java.util.Date;
     "accomodation",
     "reservationId"
 })
+@Entity
 @XmlRootElement(name = "reservation")
 public class Reservation {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected User user;
     @XmlElement(required = true)
+    @ManyToOne
     protected Accomodation accomodation;
     @XmlElement(name = "reservation-id")
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected int reservationId;
     @XmlAttribute(name = "realized")
     protected Boolean realized;
     @XmlAttribute(name = "active")
+    @Column(columnDefinition="tinyint(1) default 1")
     protected Boolean active; //odnosno 'not canceled'
     @XmlAttribute(name = "num-persons")
     protected Integer numPersons;

@@ -11,12 +11,7 @@ package com.xml.booking.review.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlSchemaType;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.bind.annotation.*;
 import java.util.Date;
 
 
@@ -47,8 +42,11 @@ import java.util.Date;
     "startDate",
     "endDate"
 })
+@Entity
 public class TPrice {
 
+    @Id
+    @Column(length = 200, nullable = false)
     protected String id;
     public String getId() {return id;}
     public void setId(String id) {this.id = id;}

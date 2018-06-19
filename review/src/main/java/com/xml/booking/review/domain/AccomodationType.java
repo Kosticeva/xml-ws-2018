@@ -12,11 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 
 /**
@@ -44,9 +40,12 @@ import javax.xml.bind.annotation.XmlType;
     "typeID",
     "typeName"
 })
+@Entity
 @XmlRootElement(name = "accomodation-type")
 public class AccomodationType {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @XmlElement(name = "type-ID")
     protected int typeID;
     @XmlElement(name = "type-name", required = true)

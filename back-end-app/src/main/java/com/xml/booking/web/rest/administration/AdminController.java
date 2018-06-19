@@ -4,8 +4,11 @@ package com.xml.booking.web.rest.administration;
 import com.xml.booking.domain.Agent;
 import com.xml.booking.domain.Review;
 import com.xml.booking.domain.User;
+import com.xml.booking.dto.ReviewDTO;
+import com.xml.booking.service.AccomodationService;
 import com.xml.booking.service.AdminService;
-import com.xml.booking.service.ReviewService;
+import com.xml.booking.service.UserService;
+import com.xml.booking.web.rest.ReviewResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -23,11 +26,17 @@ public class AdminController {
 
     private AdminService adminService;
 
-    private ReviewService reviewService;
+    private UserService userService;
 
-    public AdminController(AdminService adminService, ReviewService reviewService) {
+    private AccomodationService accomodationService;
+
+    private ReviewResource reviewResource;
+
+    public AdminController(AdminService adminService, ReviewResource reviewResource, AccomodationService accomodationService, UserService userService) {
         this.adminService = adminService;
-        this.reviewService = reviewService;
+        this.reviewResource = reviewResource;
+        this.userService = userService;
+        this.accomodationService = accomodationService;
     }
 
     @PostMapping("/create-agent")
@@ -67,16 +76,36 @@ public class AdminController {
     @PutMapping("/allow-review")
     public ResponseEntity<Review> allowReview(@RequestBody Review review) {
         logger.debug("Allow reivew endpoint!");
-        Review r = this.reviewService.allowReview(review, true);
-        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
-        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
+        ReviewDTO r = this.reviewResource.allowReview(review);
+
+        if (r != null) {
+            Review rr = new Review();
+            rr.setReviewId(r.getReviewId());
+            rr.setGrade(r.getGrade());
+            rr.setAllowed(r.isAllowed());
+            rr.setComment(r.getComment());
+            rr.setUser(userService.findUser(r.getUser()));
+            rr.setAccomodation(accomodationService.get(r.getAccomodationId()));
+            return new ResponseEntity<>(rr, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Review(), HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/decline-review")
     public ResponseEntity<Review> declineReview(@RequestBody Review review) {
         logger.debug("Allow reivew endpoint!");
-        Review r = this.reviewService.allowReview(review, false);
-        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
-        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
+        ReviewDTO r = this.reviewResource.declineReview(review);
+
+        if (r != null) {
+            Review rr = new Review();
+            rr.setReviewId(r.getReviewId());
+            rr.setGrade(r.getGrade());
+            rr.setAllowed(r.isAllowed());
+            rr.setComment(r.getComment());
+            rr.setUser(userService.findUser(r.getUser()));
+            rr.setAccomodation(accomodationService.get(r.getAccomodationId()));
+            return new ResponseEntity<>(rr, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(new Review(), HttpStatus.BAD_REQUEST);
     }
 }

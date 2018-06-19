@@ -8,6 +8,7 @@ import com.xml.booking.domain.Category;
 import com.xml.booking.domain.Reservation;
 import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.repository.*;
+import com.xml.booking.web.rest.ReviewResource;
 import com.xml.booking.web.rest.util.SearchQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class SearchService {
     PriceService priceService;
 
     @Autowired
-    ReviewService reviewService;
+    ReviewResource reviewResource;
 
     public List<AccomodationDTO> doSimpleSearch(SearchQuery searchQuery){
         //how to calculate vacancies
@@ -51,6 +52,7 @@ public class SearchService {
         //sort by grade?
 
         List<TLocation> locations = findAllLocations(searchQuery.getAddress(), searchQuery.getCity(), searchQuery.getCountry());
+        System.out.println(locations.size());
 
         List<Accomodation> accomodations = new ArrayList<>();
 
@@ -58,6 +60,7 @@ public class SearchService {
             accomodations.addAll(accomodationRepository.findByLocation(tl));
         }
 
+        System.out.println(accomodations.size());
         return convertToDTOs(accomodations, searchQuery);
     }
 
@@ -96,10 +99,13 @@ public class SearchService {
     private List<AccomodationDTO> convertToDTOs(List<Accomodation> accomodations, SearchQuery searchQuery){
         List<AccomodationDTO> accomDTOs = new ArrayList<>();
         for(Accomodation ac: accomodations){
+            System.out.println(ac.getName());
             if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
+                System.out.println(ac.getName() + " ima mesta");
                 Float fullPrice = priceService.calculateFullPrice(ac, searchQuery.getDateOfArrival(), searchQuery.getDateOfReturn(), searchQuery.getPersons());
 
                 if(fullPrice == null){
+                    System.out.println(ac.getName() + " nema cene");
                     continue;
                 }
 
@@ -123,7 +129,7 @@ public class SearchService {
 
                 dto.setServices(services);
 
-                dto.setAverageGrade(reviewService.calculateAverageGrade(dto.getId()));
+                dto.setAverageGrade(reviewResource.calculateReview(dto.getId()));
                 dto.setPrice(fullPrice);
                 dto.setPersons(searchQuery.getPersons());
                 Long mills = (searchQuery.getDateOfReturn().getTime()-searchQuery.getDateOfArrival().getTime())/(1000*60*60*24L);

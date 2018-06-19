@@ -8,14 +8,10 @@
 
 package com.xml.booking.review.domain;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
 
 
 /**
@@ -74,12 +70,15 @@ import javax.xml.bind.annotation.XmlType;
     "prices",
     "accommodationId"
 })
+@Entity
 @XmlRootElement(name = "accomodation")
 public class Accomodation {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected Agent agent;
     @XmlElement(required = true)
+    @ManyToOne
     protected TLocation location;
     @XmlElement(required = true)
     protected String name;
@@ -88,17 +87,31 @@ public class Accomodation {
     @XmlElement(name = "max-persons")
     protected int maxPersons;
     @XmlElement(required = true)
+    @ManyToOne
     protected Category category;
     @XmlElement(name = "accomodation-type", required = true)
+    @ManyToOne
     protected AccomodationType accomodationType;
     @XmlElement(required = true)
     @Transient //TODO: temp solution
     protected List<byte[]> picture;
     @XmlElement(name = "accomodation-service", required = true)
+    @ManyToMany
+    @JoinTable(
+            name="accommodation_accomservice",
+            joinColumns = @JoinColumn(
+                    name="accommodationId"),
+            inverseJoinColumns = @JoinColumn(
+                    name="serviceId"
+            )
+    )
     protected List<AccomodationService> accomodationServices;
     @XmlElement(name = "price-plan", required = true)
+    @OneToMany
     protected List<TPrice> prices;
+    @Id
     @XmlElement(name = "accommodation-id")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     protected int accommodationId;
 
     /**

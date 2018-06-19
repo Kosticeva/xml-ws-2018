@@ -5,7 +5,7 @@ import com.xml.booking.domain.Accomodation;
 import com.xml.booking.domain.Review;
 import com.xml.booking.service.AccomodationService;
 import com.xml.booking.dto.AccomodationDTO;
-import com.xml.booking.service.ReviewService;
+import com.xml.booking.web.rest.ReviewResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,8 +22,9 @@ public class AccommodationController {
 
     @Autowired
     AccomodationService accomodationService;
+
     @Autowired
-    ReviewService reviewService;
+    ReviewResource reviewResource;
 
     @RequestMapping(
             value = "/get/{id}",
@@ -39,12 +40,8 @@ public class AccommodationController {
         accomodationDTO.setAgentUsername(accomodation.getAgent().getUsername());
 
         //average rating (jbg)
-        List<Review> reviews = reviewService.getAllReviewsForAccommodation(accommodationId);
-        float averageRating = 0;
-        for (Review r : reviews) {
-            averageRating += r.getGrade();
-        }
-        accomodationDTO.setAverageGrade(averageRating/reviews.size());
+        float grade = reviewResource.calculateReview(accommodationId);
+        accomodationDTO.setAverageGrade(grade);
 
         accomodationDTO.setCategoryName(accomodation.getCategory().getCategoryName());
         accomodationDTO.setCity(accomodation.getLocation().getCity());

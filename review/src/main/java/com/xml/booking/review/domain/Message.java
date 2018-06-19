@@ -9,14 +9,8 @@
 package com.xml.booking.review.domain;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 /**
@@ -49,15 +43,20 @@ import java.util.Date;
     "user",
     "messageId"
 })
+@Entity
 @XmlRootElement(name = "message")
 public class Message {
 
+    @ManyToOne
     @XmlElement(required = true)
     protected Agent agent;
     @XmlElement(required = true)
     protected String content;
+    @ManyToOne
     @XmlElement(required = true)
     protected User user;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     @XmlElement(name = "message-id")
     protected int messageId;
     @XmlAttribute(name = "read")

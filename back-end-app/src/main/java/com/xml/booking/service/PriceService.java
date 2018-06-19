@@ -26,6 +26,7 @@ public class PriceService {
         float priceForOne = 0.0F;
         for (LocalDate date = startLDate; date.isBefore(endLDate); date = date.plusDays(1))
         {
+            System.out.println("Cena za datum: "+date);
             Date dt = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
             List<TPrice> priceValidForDay = priceRepository.findByStartDateBeforeAndEndDateAfter(dt, dt);
             if(priceValidForDay.size() == 0){
@@ -48,10 +49,12 @@ public class PriceService {
                     }
                 }
             }else{
+                System.out.println("Nema cene za datum: "+date);
                 return null;
             }
         }
 
+        System.out.println("Cena za jednog "+priceForOne);
         return priceForOne * persons;
     }
 }
