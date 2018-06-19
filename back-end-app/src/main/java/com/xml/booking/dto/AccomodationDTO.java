@@ -24,11 +24,11 @@ public class AccomodationDTO implements Serializable {
     private Integer persons;
     private Long days;
 
-    private int accomodationId;
+    private int id;
 
     public AccomodationDTO() {}
 
-    public AccomodationDTO(String agentUsername, String address, String city, String country, String name, String description, Float averageGrade, String categoryName, String type, List<String> services, Float price, Integer persons, Long days, int accomodationId) {
+    public AccomodationDTO(String agentUsername, String address, String city, String country, String name, String description, Float averageGrade, String categoryName, String type, List<String> services, Float price, Integer persons, Long days, int id) {
         this.agentUsername = agentUsername;
         this.address = address;
         this.city = city;
@@ -42,7 +42,7 @@ public class AccomodationDTO implements Serializable {
         this.price = price;
         this.persons = persons;
         this.days = days;
-        this.accomodationId = accomodationId;
+        this.id = id;
     }
 
     public String getAgentUsername() {
@@ -149,11 +149,11 @@ public class AccomodationDTO implements Serializable {
         this.days = days;
     }
 
-    public int getAccomodationId() {
-        return accomodationId;
+    public int getId() {
+        return id;
     }
 
-    public void setAccomodationId(int accomodationId) {
-        this.accomodationId = accomodationId;
+    public void setId(int id) {
+        this.id = id;
     }
 }

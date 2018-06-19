@@ -40,7 +40,7 @@ export class AccommodationPageComponent implements OnInit {
 	
 	createReservation() {
 		let reservation = new Reservation();
-		reservation.accomodationId = this.accommodation.accomodationId;
+		reservation.accomodationId = this.accommodation.id;
 		reservation.numPersons = this.persons;
 		reservation.finalPrice = this.price;
 		reservation.startDate = this.dateStart;

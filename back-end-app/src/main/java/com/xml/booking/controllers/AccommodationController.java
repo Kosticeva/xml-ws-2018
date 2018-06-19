@@ -34,7 +34,7 @@ public class AccommodationController {
         Accomodation accomodation = accomodationService.get(accommodationId);
         AccomodationDTO accomodationDTO = new AccomodationDTO();
         accomodationDTO.setName(accomodation.getName());
-        accomodationDTO.setAccomodationId(accomodation.getAccommodationId());
+        accomodationDTO.setId(accomodation.getAccommodationId());
         accomodationDTO.setAddress(accomodation.getLocation().getAddress());
         accomodationDTO.setAgentUsername(accomodation.getAgent().getUsername());
 

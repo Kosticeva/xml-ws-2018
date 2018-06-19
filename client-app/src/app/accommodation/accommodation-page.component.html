@@ -1,23 +1,18 @@
-<div class="card container-fluid">
+<div class="card container-fluid" *ngIf="accommodation">
     <div class="card-header w-100 container">
         <div class="row">
             <div class="col-9">
-                <h3>Naziv objekta</h3>
-                <h5>Adresa objekta</h5>
+                <h3>{{accommodation.name}}</h3>
+                <h5>{{accommodation.address}}</h5>
             </div>
             <div class="col-3">
-                <span>Ocena: <em>avgOcena</em></span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <button class="btn btn-secondary w-75">Prikazi komentare</button>
+                <span>Ocena: <em>{{accommodation.averageGrade}}</em></span>
             </div>
         </div>
     </div>
     <div class="card-body">
         <div class="card-title">
-            <h4>Opis objekta</h4>
+            <h4>{{accommodation.description}}</h4>
         </div>
         <div class="card-text component">
             <div class="row">
@@ -38,12 +33,12 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                   <h5>Kategorija objekta</h5>
+                   <h5>{{accommodation.category}}</h5>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h5>Tip objekta</h5>
+                    <h5>{{accommodation.type}}</h5>
                 </div>
             </div>
             <div class="row">
@@ -54,13 +49,19 @@
             </div>
             <div class="row">
                 <div class="col-9">
-                    <span>Za odabrani period <b>pocetni datum - krajnji datum</b> cena je <em>cena smestaja</em></span>
+                    <span>Za odabrani period <b>{{dateStart | date}} - {{dateEnd | date}}</b> cena je <em style='color:#2c3;'>{{price}} rsd</em></span>
                 </div>
                 <div class="col-3">
-                    <button class="btn btn-lg btn-primary">Rezervisi</button>
+                    <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()">Rezervisi</button>
                 </div>
             </div>
-            <div class="row">
+			<hr>
+			<div class="row">
+				<div class="col-12">
+					<button class="btn btn-secondary w-75">Prikazi komentare</button>
+				</div>
+			</div>
+            <div class="row" style='padding:10px 0px;'>
                 <ul class="col-12 list-group">
                     <li class="card list-group-item">
                         <div class="card-header d-flex justify-content-between">

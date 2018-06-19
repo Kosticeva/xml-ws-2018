@@ -31,7 +31,7 @@
                 <h4>{{accomodation.name}}</h4>
                 <button
 					class="btn btn-lg btn-info"
-					[routerLink]="['/accommodation', accomodation.accomodationId]"
+					[routerLink]="['/accommodation', accomodation.id]"
 					[queryParams]="{datestart: getStartDate(), dateend: getEndDate(), persons: getPersons(), price: accomodation.price}" queryParamsHandling="merge"
 					>Pogledaj <b>></b></button>
               </div>
