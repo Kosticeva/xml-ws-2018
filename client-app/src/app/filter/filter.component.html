@@ -1,65 +1,54 @@
 <div class="card sticky-top">
   <div class="card-header">
-    <form class="form">
+    <div class="form">
       <div class="location form-group">
         <label for="locField">Lokacija</label>
-        <input type="text" id="locField" class="form-control form-control-sm" placeholder="Adresa, Grad, Drzava..." required/>
+        <input type="text" id="locField" class="form-control form-control-sm" placeholder="Adresa, Grad, Drzava..." name="query" [(ngModel)]="fullQuery" (keyup)="searchForLocations()" required/>
+      </div>
+      <div class="list-group">
+        <span class="list-group-item" [ngClass]="{'active': query.address==location.address && query.city==location.city && query.country==location.country}" *ngFor="let location of locations" (click)="chooseLocation(location)">{{location.address}}, {{location.city}}, {{location.country}}</span>
       </div>
       <div class="arrival form-group">
         <label for="arrField">Datum dolaska</label>
-        <input type="date" id="arrField" class="form-control form-control-sm" required/>
+        <input type="date" id="arrField" class="form-control form-control-sm" name="dateOfArrival" [(ngModel)]="query.dateOfArrival" max="query.dateOfReturn" required/>
       </div>
       <div class="departure form-group">
         <label for="depField">Datum odlaska</label>
-        <input type="date" id="depField" class="form-control form-control-sm" required/>
+        <input type="date" id="depField" class="form-control form-control-sm" name="dateOfReturn" [(ngModel)]="query.dateOfReturn" min="query.dateOfArrival" required/>
       </div>
       <div class="persons form-group">
         <label for="persNum">Broj osoba</label>
-        <input type="number" id="persNum" class="form-control form-control-sm" min="1" required />
+        <input type="number" id="persNum" class="form-control form-control-sm" min="1" required name="persons" [(ngModel)]="query.persons"/>
       </div>
-    </form>
-  </div>
-  <div class="container-fluid">
-    <button class="btn btn-primary w-100 m-1">
-      Pretrazi
-    </button>
+      <div class="container-fluid">
+        <button type="submit" role="button" class="btn btn-primary w-100 m-1" (click)="doSearchh()">Pretrazi</button>
+      </div>
+    </div>
   </div>
   <div class="card-body">
     <h5>Napredna pretraga</h5>
     <br />
-    <h6>Kategorija smestaja</h6>
-    <ul class="list-group">
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="kat1" class="form-check-label">Kategorija 1</label>
-        <input type="checkbox" class="form-check-input" id="kat1"/>
-      </li>
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="kat2" class="form-check-label">Kategorija 2</label>
-        <input type="checkbox" class="form-check-input" id="kat2"/>
+    <button class="btn btn-secondary w-100 m-1" (click)="openCategories()">Kategorija smestaja</button>
+    <ul class="list-group" *ngIf="categoriesOpen">
+      <li *ngFor="let category of allCategories" class="list-group-item form-check d-flex justify-content-between container-fluid">
+        <label for="{{category.idd}}" class="form-check-label">{{category.categoryName}}</label>
+        <input type="checkbox" class="form-check-input" id="category.idd}}" name="cat" [(ngModel)]="category.checked"/>
       </li>
     </ul>
     <hr />
-    <h6>Tip smestaja</h6>
-    <ul class="list-group">
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="tip1" class="form-check-label">Tip 1</label>
-        <input type="checkbox" class="form-check-input" id="tip1"/>
-      </li>
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="tip2" class="form-check-label">Tip 2</label>
-        <input type="checkbox" class="form-check-input" id="tip2"/>
+    <button class="btn btn-secondary w-100 m-1" (click)="openTypes()">Tip smestaja</button>
+    <ul class="list-group" *ngIf="typesOpen">
+      <li *ngFor="let type of allTypes" class="list-group-item form-check d-flex justify-content-between container-fluid">
+        <label for="{{type.idd}}" class="form-check-label">{{type.typeName}}</label>
+        <input type="checkbox" class="form-check-input" id="{{type.idd}}" name="typ" [(ngModel)]="type.checked"/>
       </li>
     </ul>
     <hr/>
-    <h6>Dodatne usluge</h6>
-    <ul class="list-group">
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="dod1" class="form-check-label">Dodatna usluga 1</label>
-        <input type="checkbox" class="form-check-input" id="dod1"/>
-      </li>
-      <li class="list-group-item form-check d-flex justify-content-between container-fluid">
-        <label for="dod2" class="form-check-label">Dodatna usluga 2</label>
-        <input type="checkbox" class="form-check-input" id="dod2"/>
+    <button class="btn btn-secondary w-100 m-1" (click)="openServices()">Dodatne usluge</button>
+    <ul class="list-group" *ngIf="servicesOpen">
+      <li *ngFor="let service of allServices" class="list-group-item form-check d-flex justify-content-between container-fluid">
+        <label for="{{service.idd}}" class="form-check-label">{{service.serviceName}}</label>
+        <input type="checkbox" class="form-check-input" id="{{service.idd}}" name="ser" [(ngModel)]="service.checked"/>
       </li>
     </ul>
   </div>

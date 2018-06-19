@@ -15,6 +15,7 @@ import { MenubarComponent } from './menubar/menubar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
+import { FilterService } from './filter/filter.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { MessagesComponent } from './messages/messages.component';
 	FormsModule,
 	HttpClientModule
   ],
-  providers: [],
+  providers: [FilterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,64 +1,19 @@
 <div class="container-fluid">
-  <ul class="list-group">
-    <li class="list-group-item card">
+  <div class="list-group">
+    <a *ngFor="let accomodation of accomodations" class="list-group-item card">
       <div class="card-header">
-        Naziv objekta
+        {{accomodation.name}}
       </div>
       <div class="card-body">
         <div class="card-title">
-          Adresa objekta
+          {{accomodation.address}}, {{accomodation.city}}, {{accomodation.country}}
         </div>
         <div class="card-text">
-          Opis objekta
-          <span><i>Cena objekta</i></span>
-          <span><b>Ocena objekta</b></span>
+          {{accomodation.description}} 
+          <span><i>{{accomodation.price}}</i></span>
+          <span><b>{{accomodation.averageGrade}}</b></span>
         </div>
       </div>
-    </li>
-    <li class="list-group-item card">
-        <div class="card-header">
-          Naziv objekta
-        </div>
-        <div class="card-body">
-          <div class="card-title">
-            Adresa objekta
-          </div>
-          <div class="card-text">
-            Opis objekta
-            <span><i>Cena objekta</i></span>
-            <span><b>Ocena objekta</b></span>
-          </div>
-        </div>
-      </li>
-    <li class="list-group-item card">
-        <div class="card-header">
-          Naziv objekta
-        </div>
-        <div class="card-body">
-          <div class="card-title">
-            Adresa objekta
-          </div>
-          <div class="card-text">
-            Opis objekta
-            <span><i>Cena objekta</i></span>
-            <span><b>Ocena objekta</b></span>
-          </div>
-        </div>
-      </li>
-    <li class="list-group-item card">
-        <div class="card-header">
-          Naziv objekta
-        </div>
-        <div class="card-body">
-          <div class="card-title">
-            Adresa objekta
-          </div>
-          <div class="card-text">
-            Opis objekta
-            <span><i>Cena objekta</i></span>
-            <span><b>Ocena objekta</b></span>
-          </div>
-        </div>
-      </li>
-  </ul>
+    </a>
+  </div>
 </div>

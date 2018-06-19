@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login/login.service'
 import { Router } from '@angular/router'
+import { Accomodation } from '../model/accomodation';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,12 @@ import { Router } from '@angular/router'
 })
 export class HomeComponent implements OnInit {
 
+	accomodations: Accomodation[];
+
   constructor(private login : LoginService, private router : Router) { }
 
 	ngOnInit() {
-		
+		this.accomodations = [];
 		this.login.authenticate(null, () => { /*nakon autentikacije*/ }, () => { /*ako ne uspe da autentfikije*/ });
 	}
   
