@@ -194,4 +194,16 @@ public class Message {
         this.readed = value;
     }
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "agent=" + agent +
+                ", content='" + content + '\'' +
+                ", user=" + user +
+                ", messageId=" + messageId +
+                ", readed=" + readed +
+                ", sender='" + sender + '\'' +
+                ", time=" + time +
+                '}';
+    }
 }
