@@ -5,7 +5,7 @@ import com.xml.booking.domain.Reservation;
 import java.util.Date;
 
 public class ReservationDTO {
-    int reservationId;
+    int id;
     int accomodationId;
     int numPersons;
     float finalPrice;
@@ -18,19 +18,19 @@ public class ReservationDTO {
     }
     public ReservationDTO(Reservation reservation) {
         this.accomodationId = reservation.getAccomodation().getAccommodationId();
-        this.reservationId = reservation.getReservationId();
+        this.id = reservation.getReservationId();
         this.numPersons = reservation.getNumPersons();
         this.finalPrice = reservation.getNumPersons();
         this.startDate = reservation.getStartDate();
         this.endDate = reservation.getEndDate();
     }
 
-    public int getReservationId() {
-        return reservationId;
+    public int getId() {
+        return id;
     }
 
-    public void setReservationId(int reservationId) {
-        this.reservationId = reservationId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getAccomodationId() {

@@ -1,0 +1,9 @@
+.main-header {
+	margin:5px 10px;
+	color:white;
+	cursor:pointer;
+	transition: color 0.1s linear;
+}
+.main-header:HOVER {
+	color: #aaf;
+}

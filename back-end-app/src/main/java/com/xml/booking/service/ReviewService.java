@@ -165,4 +165,8 @@ public class ReviewService {
         return reviews;
     }
 
+    public List<Review> getAllReviewsForAccommodation(int accommodationId) {
+        return reviewRepository.findByAccomodation(accomodationRepository.findById(accommodationId).orElse(null));
+    }
+
 }

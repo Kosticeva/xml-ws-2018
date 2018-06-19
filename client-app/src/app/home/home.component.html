@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="row">
+  <!--<div class="row">
     <div class="col-12">
       <nav class="bg-primary d-flex justify-content-between">
-        <h1 class="p-1">BookingApp</h1>
+        <h1 class="p-1" style='margin:5px 10px; color:white;'>BookingApp</h1>
       </nav>
     </div>
-  </div>
+  </div>-->
 	<div class='row' >
 		<div class='col-12'>
 			<div style='text-align:right; padding:5px 10px;'>
@@ -29,7 +29,11 @@
             <a *ngFor="let accomodation of accomodations" class="list-group-item card">
               <div class="card-header d-flex justify-content-between">
                 <h4>{{accomodation.name}}</h4>
-                <button class="btn btn-lg btn-info" routerLink="/accommodation/{{accomodation.id}}">Pogledaj <b>></b></button>
+                <button
+					class="btn btn-lg btn-info"
+					[routerLink]="['/accommodation', accomodation.accomodationId]"
+					[queryParams]="{datestart: getStartDate(), dateend: getEndDate(), persons: getPersons(), price: accomodation.price}" queryParamsHandling="merge"
+					>Pogledaj <b>></b></button>
               </div>
               <div class="card-body">
                 <div class="card-title">
