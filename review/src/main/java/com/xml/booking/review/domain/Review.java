@@ -6,9 +6,12 @@
 //
 
 
-package com.xml.booking.domain;
+package com.xml.booking.review.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -63,7 +66,6 @@ public class Review {
     @XmlElement(required = true)
     protected String comment;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @XmlElement(name = "review-id")
     protected int reviewId;
     @XmlAttribute(name = "allowed")

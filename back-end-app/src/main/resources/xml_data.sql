@@ -38,8 +38,8 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (1, 
 insert into accommodation_accomservice(accommodation_id, service_id) values (1, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (1, 3);
 insert into accommodation_accomservice(accommodation_id, service_id) values (1, 4);
-insert into tprice(id, start_date, end_date, value) values (1, "2017-01-01", "2017-06-30", 2010);
-insert into tprice(id, start_date, end_date, value) values (2, "2017-07-01", "2017-12-31", 2510);
+insert into tprice(id, start_date, end_date, value) values (1, "2018-01-01", "2018-06-30", 2010);
+insert into tprice(id, start_date, end_date, value) values (2, "2018-07-01", "2018-12-31", 2510);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (1, 1);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (1, 2);
 
@@ -47,14 +47,14 @@ insert into accomodation(accommodation_id, description, max_persons, name, accom
 insert into accommodation_accomservice(accommodation_id, service_id) values (2, 1);
 insert into accommodation_accomservice(accommodation_id, service_id) values (2, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (2, 3);
-insert into tprice(id, start_date, end_date, value) values (3, "2017-01-01", "2017-06-30", 3010);
-insert into tprice(id, start_date, end_date, value) values (4, "2017-07-01", "2017-12-31", 3510);
+insert into tprice(id, start_date, end_date, value) values (3, "2018-01-01", "2018-06-30", 3010);
+insert into tprice(id, start_date, end_date, value) values (4, "2018-07-01", "2018-12-31", 3510);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (2, 3);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (2, 4);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (3, "Bez opisa bla bla", 5, "Prime Minister Apartment", 3, "agent", 5, 3);
-insert into tprice(id, start_date, end_date, value) values (5, "2017-01-01", "2017-06-30", 5010);
-insert into tprice(id, start_date, end_date, value) values (6, "2017-07-01", "2017-12-31", 5510);
+insert into tprice(id, start_date, end_date, value) values (5, "2018-01-01", "2018-06-30", 5010);
+insert into tprice(id, start_date, end_date, value) values (6, "2018-07-01", "2018-12-31", 5510);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (3, 5);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (3, 6);
 insert into accommodation_accomservice(accommodation_id, service_id) values (3, 1);
@@ -62,69 +62,69 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (3, 
 insert into accommodation_accomservice(accommodation_id, service_id) values (3, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (4, "Bez opisa bla bla", 10, "The White House Hostel", 2, "agent", 5, 4);
-insert into tprice(id, start_date, end_date, value) values (7, "2017-01-01", "2017-06-30", 5020);
-insert into tprice(id, start_date, end_date, value) values (8, "2017-07-01", "2017-12-31", 5520);
+insert into tprice(id, start_date, end_date, value) values (7, "2018-01-01", "2018-06-30", 5020);
+insert into tprice(id, start_date, end_date, value) values (8, "2018-07-01", "2018-12-31", 5520);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (4, 7);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (4, 8);
 insert into accommodation_accomservice(accommodation_id, service_id) values (4, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (4, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (5, "Bez opisa bla bla", 10, "Anne Frank Hostel", 2, "agent", 3, 5);
-insert into tprice(id, start_date, end_date, value) values (9, "2017-01-01", "2017-06-30", 3020);
-insert into tprice(id, start_date, end_date, value) values (10, "2017-07-01", "2017-12-31", 3520);
+insert into tprice(id, start_date, end_date, value) values (9, "2018-01-01", "2018-06-30", 3020);
+insert into tprice(id, start_date, end_date, value) values (10, "2018-07-01", "2018-12-31", 3520);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (5, 9);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (5, 10);
 insert into accommodation_accomservice(accommodation_id, service_id) values (5, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (5, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (6, "Bez opisa bla bla", 10, "Empire State of Hostel", 2, "agent", 4, 6);
-insert into tprice(id, start_date, end_date, value) values (11, "2017-01-01", "2017-06-30", 4010);
-insert into tprice(id, start_date, end_date, value) values (12, "2017-07-01", "2017-12-31", 4510);
+insert into tprice(id, start_date, end_date, value) values (11, "2018-01-01", "2018-06-30", 4010);
+insert into tprice(id, start_date, end_date, value) values (12, "2018-07-01", "2018-12-31", 4510);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (6, 11);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (6, 12);
 insert into accommodation_accomservice(accommodation_id, service_id) values (6, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (6, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (7, "Bez opisa bla bla", 5, "Hollywood Breakfast", 4, "agent", 2, 7);
-insert into tprice(id, start_date, end_date, value) values (13, "2017-01-01", "2017-06-30", 2020);
-insert into tprice(id, start_date, end_date, value) values (14, "2017-07-01", "2017-12-31", 2520);
+insert into tprice(id, start_date, end_date, value) values (13, "2018-01-01", "2018-06-30", 2020);
+insert into tprice(id, start_date, end_date, value) values (14, "2018-07-01", "2018-12-31", 2520);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (7, 13);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (7, 14);
 insert into accommodation_accomservice(accommodation_id, service_id) values (7, 2);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (8, "Bez opisa bla bla", 5, "At Eiffel's", 4, "agent", 1, 8);
-insert into tprice(id, start_date, end_date, value) values (15, "2017-01-01", "2017-06-30", 1010);
-insert into tprice(id, start_date, end_date, value) values (16, "2017-07-01", "2017-12-31", 1510);
+insert into tprice(id, start_date, end_date, value) values (15, "2018-01-01", "2018-06-30", 1010);
+insert into tprice(id, start_date, end_date, value) values (16, "2018-07-01", "2018-12-31", 1510);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (8, 15);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (8, 16);
 insert into accommodation_accomservice(accommodation_id, service_id) values (7, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (9, "Bez opisa bla bla", 5, "The Mona Lisa Hostel", 3, "agent", 1, 9);
-insert into tprice(id, start_date, end_date, value) values (17, "2017-01-01", "2017-06-30", 1020);
-insert into tprice(id, start_date, end_date, value) values (18, "2017-07-01", "2017-12-31", 1520);
+insert into tprice(id, start_date, end_date, value) values (17, "2018-01-01", "2018-06-30", 1020);
+insert into tprice(id, start_date, end_date, value) values (18, "2018-07-01", "2018-12-31", 1520);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (9, 17);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (9, 18);
 insert into accommodation_accomservice(accommodation_id, service_id) values (9, 1);
 insert into accommodation_accomservice(accommodation_id, service_id) values (9, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (10, "Bez opisa bla bla", 5, "Stay At Homer's", 4, "agent", 1, 10);
-insert into tprice(id, start_date, end_date, value) values (19, "2017-01-01", "2017-06-30", 1030);
-insert into tprice(id, start_date, end_date, value) values (20, "2017-07-01", "2017-12-31", 1530);
+insert into tprice(id, start_date, end_date, value) values (19, "2018-01-01", "2018-06-30", 1030);
+insert into tprice(id, start_date, end_date, value) values (20, "2018-07-01", "2018-12-31", 1530);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (10, 19);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (10, 20);
 insert into accommodation_accomservice(accommodation_id, service_id) values (10, 2);
 insert into accommodation_accomservice(accommodation_id, service_id) values (10, 1);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (11, "Bez opisa bla bla", 5, "The Dursley Bed & Breakfast", 4, "agent", 2, 11);
-insert into tprice(id, start_date, end_date, value) values (21, "2017-01-01", "2017-06-30", 2030);
-insert into tprice(id, start_date, end_date, value) values (22, "2017-07-01", "2017-12-31", 2530);
+insert into tprice(id, start_date, end_date, value) values (21, "2018-01-01", "2018-06-30", 2030);
+insert into tprice(id, start_date, end_date, value) values (22, "2018-07-01", "2018-12-31", 2530);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (11, 21);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (11, 22);
 insert into accommodation_accomservice(accommodation_id, service_id) values (11, 1);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (12, "Bez opisa bla bla", 5, "Monika's Apartment", 3, "agent", 5, 12);
-insert into tprice(id, start_date, end_date, value) values (23, "2017-01-01", "2017-06-30", 5030);
-insert into tprice(id, start_date, end_date, value) values (24, "2017-07-01", "2017-12-31", 5530);
+insert into tprice(id, start_date, end_date, value) values (23, "2018-01-01", "2018-06-30", 5030);
+insert into tprice(id, start_date, end_date, value) values (24, "2018-07-01", "2018-12-31", 5530);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (12, 23);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (12, 24);
 insert into accommodation_accomservice(accommodation_id, service_id) values (12, 1);
@@ -132,8 +132,8 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (12,
 insert into accommodation_accomservice(accommodation_id, service_id) values (12, 3);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (13, "Bez opisa bla bla", 20, "Hotel Park", 1, "agent", 3, 13);
-insert into tprice(id, start_date, end_date, value) values (25, "2017-01-01", "2017-06-30", 3030);
-insert into tprice(id, start_date, end_date, value) values (26, "2017-07-01", "2017-12-31", 3530);
+insert into tprice(id, start_date, end_date, value) values (25, "2018-01-01", "2018-06-30", 3030);
+insert into tprice(id, start_date, end_date, value) values (26, "2018-07-01", "2018-12-31", 3530);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (13, 25);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (13, 26);
 insert into accommodation_accomservice(accommodation_id, service_id) values (13, 1);
@@ -142,8 +142,8 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (13,
 insert into accommodation_accomservice(accommodation_id, service_id) values (13, 4);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (14, "Bez opisa bla bla", 20, "Hotel Ambasador", 1, "agent", 4, 14);
-insert into tprice(id, start_date, end_date, value) values (27, "2017-01-01", "2017-06-30", 4020);
-insert into tprice(id, start_date, end_date, value) values (28, "2017-07-01", "2017-12-31", 4520);
+insert into tprice(id, start_date, end_date, value) values (27, "2018-01-01", "2018-06-30", 4020);
+insert into tprice(id, start_date, end_date, value) values (28, "2018-07-01", "2018-12-31", 4520);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (14, 27);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (14, 28);
 insert into accommodation_accomservice(accommodation_id, service_id) values (14, 1);
@@ -152,8 +152,8 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (14,
 insert into accommodation_accomservice(accommodation_id, service_id) values (14, 4);
 
 insert into accomodation(accommodation_id, description, max_persons, name, accomodation_type_typeid, agent_username, category_categoryid, location_id) values (15, "Bez opisa bla bla", 20, "Hotel Stratus", 1, "agent", 4, 15);
-insert into tprice(id, start_date, end_date, value) values (29, "2017-01-01", "2017-06-30", 4030);
-insert into tprice(id, start_date, end_date, value) values (30, "2017-07-01", "2017-12-31", 4530);
+insert into tprice(id, start_date, end_date, value) values (29, "2018-01-01", "2018-06-30", 4030);
+insert into tprice(id, start_date, end_date, value) values (30, "2018-07-01", "2018-12-31", 4530);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (15, 29);
 insert into accomodation_prices(accomodation_accommodation_id, prices_id) values (15, 30);
 insert into accommodation_accomservice(accommodation_id, service_id) values (15, 1);

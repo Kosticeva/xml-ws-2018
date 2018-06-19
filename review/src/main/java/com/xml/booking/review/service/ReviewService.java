@@ -1,11 +1,11 @@
-package com.xml.booking.service;
+package com.xml.booking.review.service;
 
-import com.xml.booking.domain.Accomodation;
-import com.xml.booking.domain.Review;
-import com.xml.booking.dto.ReviewDTO;
-import com.xml.booking.repository.AccomodationRepository;
-import com.xml.booking.repository.ReviewRepository;
-import com.xml.booking.repository.UserRepository;
+import com.xml.booking.review.domain.Accomodation;
+import com.xml.booking.review.domain.Review;
+import com.xml.booking.review.dto.ReviewDTO;
+import com.xml.booking.review.repository.AccomodationRepository;
+import com.xml.booking.review.repository.ReviewRepository;
+import com.xml.booking.review.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -163,10 +163,6 @@ public class ReviewService {
         }
 
         return reviews;
-    }
-
-    public List<Review> getAllReviewsForAccommodation(int accommodationId) {
-        return reviewRepository.findByAccomodation(accomodationRepository.findById(accommodationId).orElse(null));
     }
 
 }

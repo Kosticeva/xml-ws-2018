@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Accomodation } from '../model/accomodation';
 import { FilterService } from './filter.service';
+import { QueryShareService } from '../services/queryshare.service';
 
 @Component({
   selector: 'app-filter',
@@ -61,10 +62,13 @@ export class FilterComponent implements OnInit {
   }[];
 
   constructor(
-    private filterService: FilterService
+    private filterService: FilterService,
+	private queryShareService :QueryShareService
   ) { }
 
   ngOnInit() {
+	  
+	  
     this.allCategories = [];
     this.allServices = [];
     this.allTypes = [];
@@ -138,6 +142,11 @@ export class FilterComponent implements OnInit {
   }
 
   public doSearchh() {
+	  
+	  this.queryShareService.setQuery(this.query);
+	  
+	  
+	  
       this.accomodations.splice(0, this.accomodations.length);
 
     if(this.categoriesOpen == false && this.typesOpen == false && this.servicesOpen == false){

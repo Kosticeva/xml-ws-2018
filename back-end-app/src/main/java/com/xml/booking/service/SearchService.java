@@ -105,7 +105,7 @@ public class SearchService {
 
                 AccomodationDTO dto = new AccomodationDTO();
 
-                dto.setAccomodationId(ac.getAccommodationId());
+                dto.setId(ac.getAccommodationId());
                 dto.setAddress(ac.getLocation().getAddress());
                 dto.setCity(ac.getLocation().getCity());
                 dto.setCountry(ac.getLocation().getCountry());
@@ -123,7 +123,7 @@ public class SearchService {
 
                 dto.setServices(services);
 
-                dto.setAverageGrade(reviewService.calculateAverageGrade(dto.getAccomodationId()));
+                dto.setAverageGrade(reviewService.calculateAverageGrade(dto.getId()));
                 dto.setPrice(fullPrice);
                 dto.setPersons(searchQuery.getPersons());
                 Long mills = (searchQuery.getDateOfReturn().getTime()-searchQuery.getDateOfArrival().getTime())/(1000*60*60*24L);
