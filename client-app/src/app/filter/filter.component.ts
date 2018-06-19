@@ -22,6 +22,11 @@ export class FilterComponent implements OnInit {
     accomodationServices: number[]
   };
 
+  @Input() filters: {
+    name: string,
+    type: number
+  }[];
+
   categoriesOpen: boolean;
   typesOpen: boolean;
   servicesOpen: boolean;
@@ -65,18 +70,22 @@ export class FilterComponent implements OnInit {
     this.allTypes = [];
     this.locations = [];
     this.fullQuery = '';
+    const date = new Date();
+    let tomm = new Date();
+    tomm.setTime(date.getTime()+1000*60*60*24);
 
     this.query = {
       address: '',
       city: '',
       country: '',
       persons: 1,
-      dateOfArrival: null,
-      dateOfReturn: null,
+      dateOfArrival: this.parseDate(date),
+      dateOfReturn: this.parseDate(tomm),
       accomodationTypes: [],
       accomodationCategories: [],
       accomodationServices: []
     };
+
     this.typesOpen = false;
     this.servicesOpen = false;
     this.categoriesOpen = false;
@@ -112,11 +121,31 @@ export class FilterComponent implements OnInit {
     );*/
   }
 
+  public parseDate(date: Date): string{
+    let humDate = date.getFullYear()+'-';
+    if(date.getMonth()+1 < 10){
+      humDate += '0';
+    }
+      
+    humDate += (date.getMonth()+1)+'-';
+
+    if(date.getDate() < 10){
+      humDate += '0';
+    }
+
+    humDate += date.getDate();
+    return humDate;
+  }
+
   public doSearchh() {
+      this.accomodations.splice(0, this.accomodations.length);
+
     if(this.categoriesOpen == false && this.typesOpen == false && this.servicesOpen == false){
       this.filterService.doSearch(this.query).subscribe(
         (data) => {
-          this.accomodations = data;
+          for(let i=0; i<data.length; i++){
+            this.accomodations.push(data[i]);
+          }
         }
       );
     }else{
@@ -142,7 +171,9 @@ export class FilterComponent implements OnInit {
 
       this.filterService.doAdvancedSearch(this.query).subscribe(
         (data) => {
-          this.accomodations = data;
+          for(let i=0; i<data.length; i++){
+            this.accomodations.push(data[i]);
+          }
         }
       );
     }
@@ -167,6 +198,7 @@ export class FilterComponent implements OnInit {
     this.query.address = '';
     this.query.city = '';
     this.query.country = '';
+    this.fullQuery = '';
 
     this.query.address = location.address;
     this.query.city = location.city;
@@ -190,6 +222,20 @@ export class FilterComponent implements OnInit {
 
   public openTypes(){
     this.typesOpen = !this.typesOpen;
+  }
+
+  public checkFilter(name: string, type: number){
+    for(let filter of this.filters){
+      if(filter.name === name && filter.type === type){
+        this.filters.splice(this.filters.indexOf(filter), 1);
+        return;
+      }
+    }
+
+    this.filters.push({
+      name: name,
+      type: type
+    });
   }
 
 }

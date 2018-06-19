@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FilterComponent } from './filter/filter.component';
-import { AccommodationComponent } from './accommodation/accommodation.component';
 import { HomeComponent } from './home/home.component';
 import { AccommodationPageComponent } from './accommodation/accommodation-page.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -22,7 +21,6 @@ import { FilterService } from './filter/filter.service';
   declarations: [
     AppComponent,
     FilterComponent,
-    AccommodationComponent,
     HomeComponent,
     AccommodationPageComponent,
     LoginComponent,

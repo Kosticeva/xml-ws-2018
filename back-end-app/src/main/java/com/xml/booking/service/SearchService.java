@@ -97,6 +97,12 @@ public class SearchService {
         List<AccomodationDTO> accomDTOs = new ArrayList<>();
         for(Accomodation ac: accomodations){
             if(checkIfThereIsAPlaceAvailable(ac, searchQuery)){
+                Float fullPrice = priceService.calculateFullPrice(ac, searchQuery.getDateOfArrival(), searchQuery.getDateOfReturn(), searchQuery.getPersons());
+
+                if(fullPrice == null){
+                    continue;
+                }
+
                 AccomodationDTO dto = new AccomodationDTO();
 
                 dto.setAccomodationId(ac.getAccommodationId());
@@ -118,7 +124,12 @@ public class SearchService {
                 dto.setServices(services);
 
                 dto.setAverageGrade(reviewService.calculateAverageGrade(dto.getAccomodationId()));
-                dto.setPrice(priceService.calculateFullPrice(ac, searchQuery.getDateOfArrival(), searchQuery.getDateOfReturn(), searchQuery.getPersons()));
+                dto.setPrice(fullPrice);
+                dto.setPersons(searchQuery.getPersons());
+                Long mills = (searchQuery.getDateOfReturn().getTime()-searchQuery.getDateOfArrival().getTime())/(1000*60*60*24L);
+                System.out.println(mills);
+
+                dto.setDays(mills);
 
                 accomDTOs.add(dto);
             }

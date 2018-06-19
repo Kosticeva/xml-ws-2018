@@ -1,6 +1,5 @@
 package com.xml.booking.web.rest;
 
-import com.xml.booking.domain.Accomodation;
 import com.xml.booking.domain.TLocation;
 import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.service.SearchService;
@@ -8,16 +7,11 @@ import com.xml.booking.web.rest.util.SearchQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 public class SearchResource {
 
     @Autowired

@@ -13,7 +13,7 @@ public class AccomodationDTO implements Serializable {
 
     private String name;
     private String description;
-    private float averageGrade;
+    private Float averageGrade;
 
     private String categoryName;
     private String type;
@@ -21,11 +21,14 @@ public class AccomodationDTO implements Serializable {
     private List<String> services;
     private Float price;
 
+    private Integer persons;
+    private Long days;
+
     private int accomodationId;
 
     public AccomodationDTO() {}
 
-    public AccomodationDTO(String agentUsername, String address, String city, String country, String name, String description, float averageGrade, String categoryName, String type, List<String> services, float price, int accomodationId) {
+    public AccomodationDTO(String agentUsername, String address, String city, String country, String name, String description, Float averageGrade, String categoryName, String type, List<String> services, Float price, Integer persons, Long days, int accomodationId) {
         this.agentUsername = agentUsername;
         this.address = address;
         this.city = city;
@@ -37,6 +40,8 @@ public class AccomodationDTO implements Serializable {
         this.type = type;
         this.services = services;
         this.price = price;
+        this.persons = persons;
+        this.days = days;
         this.accomodationId = accomodationId;
     }
 
@@ -88,11 +93,11 @@ public class AccomodationDTO implements Serializable {
         this.description = description;
     }
 
-    public float getAverageGrade() {
+    public Float getAverageGrade() {
         return averageGrade;
     }
 
-    public void setAverageGrade(float averageGrade) {
+    public void setAverageGrade(Float averageGrade) {
         this.averageGrade = averageGrade;
     }
 
@@ -126,6 +131,22 @@ public class AccomodationDTO implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public Integer getPersons() {
+        return persons;
+    }
+
+    public void setPersons(Integer persons) {
+        this.persons = persons;
+    }
+
+    public Long getDays() {
+        return days;
+    }
+
+    public void setDays(Long days) {
+        this.days = days;
     }
 
     public int getAccomodationId() {

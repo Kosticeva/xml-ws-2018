@@ -12,11 +12,16 @@ import { Accomodation } from '../model/accomodation';
 export class HomeComponent implements OnInit {
 
 	accomodations: Accomodation[];
+  filters: {
+		name: string,
+		type: number
+	}[];
 
   constructor(private login : LoginService, private router : Router) { }
 
 	ngOnInit() {
 		this.accomodations = [];
+		this.filters = [];
 		this.login.authenticate(null, () => { /*nakon autentikacije*/ }, () => { /*ako ne uspe da autentfikije*/ });
 	}
   

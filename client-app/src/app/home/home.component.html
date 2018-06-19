@@ -1,10 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <nav class="bg-primary">
-        <br />
-        <h1>Meni</h1>
-        <br />
+      <nav class="bg-primary d-flex justify-content-between">
+        <h1 class="p-1">BookingApp</h1>
       </nav>
     </div>
   </div>
@@ -20,10 +18,40 @@
 	</div>
   <div class="row">
     <div class="col-3">
-      <app-filter class="sticky-top" [accomodations]="accomodations"></app-filter>
+      <app-filter class="sticky-top" [accomodations]="accomodations" [filters]="filters"></app-filter>
     </div>
     <div class="col-9">
-      <app-accommodation [accomodations]="accomodations"></app-accommodation>
+        <div class="container-fluid">
+          <div class="filters nav nav-pills">
+            <span *ngFor="let filter of filters" class="btn btn-sm m-1" [ngClass]="{'btn-success': filter.type === 1, 'btn-warning': filter.type === 2, 'btn-danger': filter.type === 3}">{{filter.name}}</span>
+          </div>
+          <div class="list-group">
+            <a *ngFor="let accomodation of accomodations" class="list-group-item card">
+              <div class="card-header d-flex justify-content-between">
+                <h4>{{accomodation.name}}</h4>
+                <button class="btn btn-lg btn-info" routerLink="/accommodation/{{accomodation.id}}">Pogledaj <b>></b></button>
+              </div>
+              <div class="card-body">
+                <div class="card-title">
+                  <h6>{{accomodation.address}}, {{accomodation.city}}, {{accomodation.country}}</h6>
+                </div>
+                <div class="card-text container">
+                  <div class="row">
+                    <div class="col-10">
+                        <p>{{accomodation.description}}</p>
+                    </div>
+                    <div class="col-2">
+                        <span class="h-100 container-fluid">Ocena: <b [ngClass]="{'text-success': accomodation.averageGrade >=4, 'text-warning': accomodation.averageGrade >=2 && accomodation.averageGrade < 4, 'text-danger': accomodation.averageGrade >= 1 && accomodation.averageGrade < 2, 'text-secondary': accomodation.averageGrade == 0}">{{accomodation.averageGrade}}</b></span>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <span class="col-12">Cena za {{accomodation.persons}} osoba, {{accomodation.days}} nocenja: <b>{{accomodation.price}}</b></span>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
     </div>
   </div>
 </div>

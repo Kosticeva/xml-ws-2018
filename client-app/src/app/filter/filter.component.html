@@ -21,7 +21,7 @@
         <input type="number" id="persNum" class="form-control form-control-sm" min="1" required name="persons" [(ngModel)]="query.persons"/>
       </div>
       <div class="container-fluid">
-        <button type="submit" role="button" class="btn btn-primary w-100 m-1" (click)="doSearchh()">Pretrazi</button>
+        <button type="submit" role="button" class="btn btn-primary w-100 m-1" (click)="doSearchh()" [disabled]="query.city.length <1">Pretrazi</button>
       </div>
     </div>
   </div>
@@ -32,7 +32,7 @@
     <ul class="list-group" *ngIf="categoriesOpen">
       <li *ngFor="let category of allCategories" class="list-group-item form-check d-flex justify-content-between container-fluid">
         <label for="{{category.idd}}" class="form-check-label">{{category.categoryName}}</label>
-        <input type="checkbox" class="form-check-input" id="category.idd}}" name="cat" [(ngModel)]="category.checked"/>
+        <input type="checkbox" class="form-check-input" id="category.idd}}" name="cat" [(ngModel)]="category.checked" (change)="checkFilter(category.categoryName, 1)"/>
       </li>
     </ul>
     <hr />
@@ -40,7 +40,7 @@
     <ul class="list-group" *ngIf="typesOpen">
       <li *ngFor="let type of allTypes" class="list-group-item form-check d-flex justify-content-between container-fluid">
         <label for="{{type.idd}}" class="form-check-label">{{type.typeName}}</label>
-        <input type="checkbox" class="form-check-input" id="{{type.idd}}" name="typ" [(ngModel)]="type.checked"/>
+        <input type="checkbox" class="form-check-input" id="{{type.idd}}" name="typ" [(ngModel)]="type.checked" (change)="checkFilter(type.typeName, 2)"/>
       </li>
     </ul>
     <hr/>
@@ -48,7 +48,7 @@
     <ul class="list-group" *ngIf="servicesOpen">
       <li *ngFor="let service of allServices" class="list-group-item form-check d-flex justify-content-between container-fluid">
         <label for="{{service.idd}}" class="form-check-label">{{service.serviceName}}</label>
-        <input type="checkbox" class="form-check-input" id="{{service.idd}}" name="ser" [(ngModel)]="service.checked"/>
+        <input type="checkbox" class="form-check-input" id="{{service.idd}}" name="ser" [(ngModel)]="service.checked" (change)="checkFilter(service.serviceName, 3)"/>
       </li>
     </ul>
   </div>

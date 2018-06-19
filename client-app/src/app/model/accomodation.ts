@@ -12,7 +12,9 @@ export class Accomodation {
         public agentUsername: string,
         public type: string,
         public category: string,
-        public services: string[]
+        public services: string[],
+        public persons: number,
+        public days: number
     ) {}
 
 }
