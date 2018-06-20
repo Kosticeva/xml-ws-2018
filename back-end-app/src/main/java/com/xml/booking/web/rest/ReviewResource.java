@@ -24,7 +24,7 @@ public class ReviewResource {
     @RequestMapping(value = "/not-allowed", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<List<ReviewDTO>> getNotAllowedReviews(){
         System.out.println("Back end: not allowed");
-        List dtos = restTemplate.getForObject("http://localhost:8092/reviews/not-allowed", List.class);
+        List dtos = restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/not-allowed", List.class);
 
         if(dtos.size() != 0){
             return ResponseEntity.ok(dtos);
@@ -36,7 +36,7 @@ public class ReviewResource {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<List<ReviewDTO>> getAll() {
         System.out.println("Back end: get all");
-        List dtos = restTemplate.getForObject("http://localhost:8092/reviews", List.class);
+        List dtos = restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews", List.class);
 
         if(dtos.size() != 0){
             return ResponseEntity.ok(dtos);
@@ -48,7 +48,7 @@ public class ReviewResource {
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO review){
         System.out.println("Back end: create");
-        ReviewDTO dto = restTemplate.postForObject("http://localhost:8092/reviews", review, ReviewDTO.class);
+        ReviewDTO dto = restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews", review, ReviewDTO.class);
 
         if(dto != null){
             return ResponseEntity.ok().body(dto);
@@ -60,7 +60,7 @@ public class ReviewResource {
     @RequestMapping(value = "/{reviewId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
     public ResponseEntity<ReviewDTO> editReview(@RequestBody ReviewDTO review, @PathVariable("reviewId") int reviewId) {
         System.out.println("Back end: update");
-        restTemplate.put("http://localhost:8092/reviews/"+reviewId, review);
+        restTemplate.put("https://temp-review-system.herokuapp.com/reviews/"+reviewId, review);
 
         return ResponseEntity.ok().body(review);
     }
@@ -68,13 +68,13 @@ public class ReviewResource {
     @RequestMapping(value = "/{reviewId}", method = RequestMethod.DELETE)
     public void deleteReview( @PathVariable("reviewId") int reviewId){
         System.out.println("Back end: delete");
-        restTemplate.delete("http://localhost:8092/reviews/"+reviewId);
+        restTemplate.delete("https://temp-review-system.herokuapp.com/reviews/"+reviewId);
     }
 
     @RequestMapping(value = "/{reviewId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<ReviewDTO> getOneReview( @PathVariable("reviewId") int reviewId){
         System.out.println("Back end: get one");
-        ReviewDTO dto = restTemplate.getForObject("http://localhost:8092/reviews/"+reviewId, ReviewDTO.class);
+        ReviewDTO dto = restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/"+reviewId, ReviewDTO.class);
 
         if(dto != null){
             return ResponseEntity.ok(dto);
@@ -86,7 +86,7 @@ public class ReviewResource {
     @RequestMapping(value = "/accommodation/{accommodationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public ResponseEntity<List<ReviewDTO>> getAllReviewsForPlace(@RequestParam int accommodationId){
         System.out.println("Back end: all for place");
-        List dtos = restTemplate.getForObject("http://localhost:8092/reviews/accomodation/"+accommodationId, List.class);
+        List dtos = restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/accomodation/"+accommodationId, List.class);
 
         if(dtos.size() != 0){
             return ResponseEntity.ok(dtos);
@@ -98,7 +98,7 @@ public class ReviewResource {
     @RequestMapping(value = "/accommodation/{accommodationId}/grade", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public Float calculateReview(@RequestParam int accommodationId){
         System.out.println("Back end: get grade");
-        return  restTemplate.getForObject("http://localhost:8092/reviews/accommodation/"+accommodationId+"/grade", Float.class);
+        return  restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/accommodation/"+accommodationId+"/grade", Float.class);
     }
 
     public ReviewDTO allowReview(Review r){
@@ -110,7 +110,7 @@ public class ReviewResource {
         dto.setReviewId(r.getReviewId());
         dto.setUser(r.getUser().getUsername());
 
-        return restTemplate.postForObject("http://localhost:8092/reviews/allow", dto, ReviewDTO.class);
+        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/allow", dto, ReviewDTO.class);
     }
 
     public ReviewDTO declineReview(Review r){
@@ -122,6 +122,6 @@ public class ReviewResource {
         dto.setReviewId(r.getReviewId());
         dto.setUser(r.getUser().getUsername());
 
-        return restTemplate.postForObject("http://localhost:8092/reviews/decline", dto, ReviewDTO.class);
+        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/decline", dto, ReviewDTO.class);
     }
 }
