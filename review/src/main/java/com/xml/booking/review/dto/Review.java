@@ -1,7 +1,11 @@
 package com.xml.booking.review.dto;
 
-public class ReviewDTO {
+import javax.persistence.*;
 
+@Entity
+public class Review {
+
+    @Id
     private Integer reviewId;
     private Integer accomodationId;
     private String user;
@@ -9,14 +13,14 @@ public class ReviewDTO {
     private Boolean allowed;
     private Integer grade;
 
-    public ReviewDTO() {
+    public Review() {
     }
 
-    public ReviewDTO(Integer reviewId) {
+    public Review(Integer reviewId) {
         this.reviewId = reviewId;
     }
 
-    public ReviewDTO(Integer reviewId, Integer accomodationId, String userId, String comment, Boolean allowed, Integer grade) {
+    public Review(Integer reviewId, Integer accomodationId, String userId, String comment, Boolean allowed, Integer grade) {
         this.reviewId = reviewId;
         this.accomodationId = accomodationId;
         this.user = userId;

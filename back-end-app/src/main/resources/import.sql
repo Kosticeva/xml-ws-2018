@@ -175,15 +175,6 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (15,
 insert into accommodation_accomservice(accommodation_id, service_id) values (15, 3);
 insert into accommodation_accomservice(accommodation_id, service_id) values (15, 4);
 
-insert into review values(1, 0, 'comment1', 3, 1, "pera");
-insert into review values(2, 0, 'comment2', 2, 1, "mika");
-insert into review values(3, 0, 'comment3', 1, 3, "pera");
-insert into review values(4, 0, 'comment4', 4, 4, "pera");
-insert into review values(5, 0, 'comment5', 2, 5, "djoka");
-insert into review values(6, 0, 'comment6', 5, 5, "pera");
-insert into review values(7, 0, 'comment7', 5, 9, "mika");
-insert into review values(8, 0, 'comment8', 1, 12, "djoka");
-
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('pera', 1, '2018-08-12', '2018-08-15', 3211.99, 2, 0, 1);
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('pera', 2, '2017-01-17', '2017-01-21', 5110.00, 1, 0, 1);
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('mika', 3, '2017-06-23', '2017-07-4', 600.67, 5, 0, 1);

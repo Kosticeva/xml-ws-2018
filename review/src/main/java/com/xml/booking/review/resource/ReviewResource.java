@@ -1,14 +1,10 @@
 package com.xml.booking.review.resource;
 
-import com.xml.booking.review.dto.ReviewDTO;
+import com.xml.booking.review.dto.Review;
 import com.xml.booking.review.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,25 +18,25 @@ public class ReviewResource {
     ReviewService reviewService;
 
     @RequestMapping(value = "/not-allowed", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public List<ReviewDTO> getNotAllowedReviews(){
+    public List<Review> getNotAllowedReviews(){
         System.out.println("Review: not allowed");
         return this.reviewService.getReviewsByAllowed(false);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public List<ReviewDTO> getAll() {
+    public List<Review> getAll() {
         System.out.println("Review: all");
         return this.reviewService.getAll();
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ReviewDTO createReview(@RequestBody ReviewDTO review) throws URISyntaxException {
+    public Review createReview(@RequestBody Review review) throws URISyntaxException {
         System.out.println("Review: create");
         if(review.getReviewId() != null) {
             return null;
         }
 
-        ReviewDTO retVal = reviewService.createReview(review);
+        Review retVal = reviewService.createReview(review);
         if(retVal != null){
             return retVal;
         }
@@ -49,13 +45,13 @@ public class ReviewResource {
     }
 
     @RequestMapping(value = "/{reviewId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ReviewDTO editReview(@RequestBody ReviewDTO review, @PathVariable("reviewId") int reviewId) {
+    public Review editReview(@RequestBody Review review, @PathVariable("reviewId") int reviewId) {
         System.out.println("Review: update");
         if(review.getReviewId() < 0 || review.getReviewId() != reviewId) {
             return null;
         }
 
-        ReviewDTO retVal = reviewService.editReview(review);
+        Review retVal = reviewService.editReview(review);
         if(retVal != null){
             return retVal;
         }
@@ -70,13 +66,13 @@ public class ReviewResource {
     }
 
     @RequestMapping(value = "/{reviewId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public ReviewDTO getOneReview( @PathVariable("reviewId") int reviewId){
+    public Review getOneReview( @PathVariable("reviewId") int reviewId){
         System.out.println("Review: one");
         return reviewService.getReview(reviewId);
     }
 
     @RequestMapping(value = "/accommodation/{accommodationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
-    public List<ReviewDTO> getAllReviewsForPlace(@PathVariable("accommodationId") int accommodationId){
+    public List<Review> getAllReviewsForPlace(@PathVariable("accommodationId") int accommodationId){
         System.out.println("Review: all for place");
         return reviewService.getAllReviewsForPlace(accommodationId);
     }
@@ -88,12 +84,12 @@ public class ReviewResource {
     }
 
     @RequestMapping(value = "/allow", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-    public ReviewDTO allowReview(@RequestBody ReviewDTO review){
+    public Review allowReview(@RequestBody Review review){
         return reviewService.allowReview(review, true);
     }
 
     @RequestMapping(value = "/decline", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
-    public ReviewDTO declineReview(@RequestBody ReviewDTO review){
+    public Review declineReview(@RequestBody Review review){
         return reviewService.allowReview(review, false);
     }
 }

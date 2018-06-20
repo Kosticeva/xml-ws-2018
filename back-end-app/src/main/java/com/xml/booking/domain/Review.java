@@ -49,21 +49,16 @@ import javax.xml.bind.annotation.XmlType;
     "comment",
     "reviewId"
 })
-@Entity
 @XmlRootElement(name = "review")
 public class Review {
 
     protected int grade;
     @XmlElement(required = true)
-    @ManyToOne
     protected Accomodation accomodation;
     @XmlElement(required = true)
-    @ManyToOne
     protected User user;
     @XmlElement(required = true)
     protected String comment;
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @XmlElement(name = "review-id")
     protected int reviewId;
     @XmlAttribute(name = "allowed")
