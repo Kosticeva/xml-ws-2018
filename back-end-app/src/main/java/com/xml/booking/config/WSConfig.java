@@ -27,6 +27,7 @@ public class WSConfig extends WsConfigurerAdapter {
 	@Bean(name = "xmlDetailsWsdl")
 	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema xmlSchema) {
 		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
+		wsdl11Definition.setServiceName("XmlDetailsService");
 		wsdl11Definition.setPortTypeName("XmlDetailsPort");
 		wsdl11Definition.setLocationUri("/service/data");
 		wsdl11Definition.setTargetNamespace("ws");

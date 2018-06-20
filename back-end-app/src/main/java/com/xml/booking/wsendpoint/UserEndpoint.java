@@ -20,8 +20,9 @@ public class UserEndpoint {
 	@ResponsePayload
 	public UserResponse getUser(@RequestPayload UserRequest request) {
 		UserResponse response = new UserResponse();
-		User User = userRepository.findById(request.getUsername()).get();
-		response.setUser(User);
+		User user = userRepository.findById(request.getUsername()).get();
+		response.setUser(user);
+		System.out.println(user.toString());
 		return response;
 	}
 
