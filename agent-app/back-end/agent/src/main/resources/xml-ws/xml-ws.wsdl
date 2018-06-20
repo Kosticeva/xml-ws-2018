@@ -1,0 +1,342 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="ws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="ws" targetNamespace="ws">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="ws">
+            <!-- User -->
+            <xs:complexType name="user">
+                <xs:sequence>
+                    <xs:element name="username" type="xs:string"/>
+                    <xs:element name="password" type="xs:string"/>
+                    <xs:element name="e-mail" type="xs:string"/>
+                    <xs:element name="first-name" type="xs:string"/>
+                    <xs:element name="last-name" type="xs:string"/>
+                </xs:sequence>
+                <xs:attribute default="false" name="activated"/>
+            </xs:complexType>
+            <xs:element name="UserRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="username" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="UserResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="User" type="tns:user"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <!-- Agent -->
+            <xs:complexType name="agent">
+                <xs:sequence>
+                    <xs:element name="username" type="xs:string"/>
+                    <xs:element name="password" type="xs:string"/>
+                    <xs:element name="first_Name" type="xs:string"/>
+                    <xs:element name="last_Name" type="xs:string"/>
+                    <xs:element name="business-ID" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="AgentRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="username" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AgentResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Agent" type="tns:agent"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <!-- Accomodation -->
+            <xs:complexType name="accomodation-type">
+                <xs:sequence>
+                    <xs:element name="type-ID" type="xs:int"/>
+                    <xs:element name="type-name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accomodation-service">
+                <xs:sequence>
+                    <xs:element name="service-ID" type="xs:int"/>
+                    <xs:element name="service-name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="category">
+                <xs:sequence>
+                    <xs:element name="category-ID" type="xs:int"/>
+                    <xs:element name="category-name" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TLocation">
+                <xs:sequence>
+                    <xs:element name="address" type="xs:string"/>
+                    <xs:element name="city" type="xs:string"/>
+                    <xs:element name="country" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="TPrice">
+                <xs:sequence>
+                    <xs:element name="value" type="xs:float"/>
+                    <xs:element name="start-date" type="xs:date"/>
+                    <xs:element name="end-date" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="accomodation">
+                <xs:sequence>
+                    <xs:element name="agent" type="tns:agent"/>
+                    <xs:element name="location" type="tns:TLocation"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element name="max-persons">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:int">
+                                <xs:minInclusive value="0"/>
+                                <xs:pattern value="[0-9]+"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="category" type="tns:category"/>
+                    <xs:element name="accomodation-type" type="tns:accomodation-type"/>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" name="picture" type="xs:base64Binary"/>
+                    </xs:sequence>
+                    <xs:sequence>
+                        <xs:element name="accomodation-service" type="tns:accomodation-service"/>
+                    </xs:sequence>
+                    <xs:element name="price-plan">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element maxOccurs="unbounded" minOccurs="1" name="price" type="tns:TPrice"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="accommodation-id" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="AccommodationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="AccommodationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Accommodation" type="tns:accomodation"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <!-- Message -->
+            <xs:complexType name="message">
+                <xs:sequence>
+                    <xs:element name="agent" type="tns:agent"/>
+                    <xs:element name="content" type="xs:string"/>
+                    <xs:element name="user" type="tns:user"/>
+                    <xs:element name="message-id" type="xs:int"/>
+                </xs:sequence>
+                <xs:attribute default="false" name="read" type="xs:boolean"/>
+            </xs:complexType>
+            <xs:element name="MessageRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="message-id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="MessageResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Message" type="tns:message"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <!-- Reservation -->
+            <xs:complexType name="reservation">
+                <xs:sequence>
+                    <xs:element name="user" type="tns:user"/>
+                    <xs:element name="accomodation" type="tns:accomodation"/>
+                    <xs:element name="reservation-id" type="xs:int"/>
+                </xs:sequence>
+                <xs:attribute default="false" name="realized" type="xs:boolean"/>
+                <xs:attribute default="true" name="active" type="xs:boolean"/>
+                <!-- not canceled -->
+                <xs:attribute name="num-persons">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:int">
+                            <xs:minInclusive value="0"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="final-price" type="xs:float"/>
+                <xs:attribute name="start-date" type="xs:date"/>
+                <xs:attribute name="end-date" type="xs:date"/>
+            </xs:complexType>
+            <xs:element name="ReservationRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="reservation-id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReservationResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Reservation" type="tns:reservation"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <!-- Review -->
+            <xs:complexType name="review">
+                <xs:sequence>
+                    <xs:element name="grade" type="xs:int"/>
+                    <xs:element name="accomodation" type="tns:accomodation"/>
+                    <xs:element name="user" type="tns:user"/>
+                    <xs:element name="comment" type="xs:string"/>
+                    <xs:element name="review-id" type="xs:int"/>
+                </xs:sequence>
+                <xs:attribute name="allowed" type="xs:boolean"/>
+            </xs:complexType>
+            <xs:element name="ReviewRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="review-id" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ReviewResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Review" type="tns:review"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="ReviewRequest">
+        <wsdl:part element="tns:ReviewRequest" name="ReviewRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AgentResponse">
+        <wsdl:part element="tns:AgentResponse" name="AgentResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="UserRequest">
+        <wsdl:part element="tns:UserRequest" name="UserRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AccommodationRequest">
+        <wsdl:part element="tns:AccommodationRequest" name="AccommodationRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ReviewResponse">
+        <wsdl:part element="tns:ReviewResponse" name="ReviewResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AgentRequest">
+        <wsdl:part element="tns:AgentRequest" name="AgentRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="AccommodationResponse">
+        <wsdl:part element="tns:AccommodationResponse" name="AccommodationResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="MessageResponse">
+        <wsdl:part element="tns:MessageResponse" name="MessageResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ReservationRequest">
+        <wsdl:part element="tns:ReservationRequest" name="ReservationRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="UserResponse">
+        <wsdl:part element="tns:UserResponse" name="UserResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="ReservationResponse">
+        <wsdl:part element="tns:ReservationResponse" name="ReservationResponse"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="MessageRequest">
+        <wsdl:part element="tns:MessageRequest" name="MessageRequest"> </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="XmlDetailsPort">
+        <wsdl:operation name="Review">
+            <wsdl:input message="tns:ReviewRequest" name="ReviewRequest"> </wsdl:input>
+            <wsdl:output message="tns:ReviewResponse" name="ReviewResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Agent">
+            <wsdl:input message="tns:AgentRequest" name="AgentRequest"> </wsdl:input>
+            <wsdl:output message="tns:AgentResponse" name="AgentResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="User">
+            <wsdl:input message="tns:UserRequest" name="UserRequest"> </wsdl:input>
+            <wsdl:output message="tns:UserResponse" name="UserResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Accommodation">
+            <wsdl:input message="tns:AccommodationRequest" name="AccommodationRequest"> </wsdl:input>
+            <wsdl:output message="tns:AccommodationResponse" name="AccommodationResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Message">
+            <wsdl:input message="tns:MessageRequest" name="MessageRequest"> </wsdl:input>
+            <wsdl:output message="tns:MessageResponse" name="MessageResponse"> </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Reservation">
+            <wsdl:input message="tns:ReservationRequest" name="ReservationRequest"> </wsdl:input>
+            <wsdl:output message="tns:ReservationResponse" name="ReservationResponse"> </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="XmlDetailsPortSoap11" type="tns:XmlDetailsPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="Review">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="ReviewRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ReviewResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Agent">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="AgentRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="AgentResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="User">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="UserRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="UserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Accommodation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="AccommodationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="AccommodationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Message">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="MessageRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="MessageResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="Reservation">
+            <soap:operation soapAction=""/>
+            <wsdl:input name="ReservationRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="ReservationResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="XmlDetailsPortService">
+        <wsdl:port binding="tns:XmlDetailsPortSoap11" name="XmlDetailsPortSoap11">
+            <soap:address location="http://localhost:8091/service/data"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

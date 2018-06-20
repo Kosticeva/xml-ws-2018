@@ -17,14 +17,13 @@ public class AccommodationEndpoint {
 	@Autowired
 	AccomodationRepository accomodationRepository;
 
-	/*
 	@PayloadRoot(namespace = "ws", localPart = "AccommodationRequest")
 	@ResponsePayload
 	public AccommodationResponse createAccommodation(@RequestPayload AccommodationRequest request) {
 		AccommodationResponse response = new AccommodationResponse();
-		Accommodation agent = accomodationRepository.findById(request.getName()).get();
-		response.setAgent(agent);
+		Accomodation acc = accomodationRepository.findById(request.getId()).get();
+		response.setAccommodation(acc);
 		return response;
 	}
-	*/
+
 }

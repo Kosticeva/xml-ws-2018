@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
 public class AccommodationRequest {
 
     @XmlElement(required = true)
-    protected String name;
+    protected int id;
 
     /**
      * Gets the value of the name property.
@@ -52,8 +52,8 @@ public class AccommodationRequest {
      *     {@link String }
      *     
      */
-    public String getName() {
-        return name;
+    public int getId() {
+        return id;
     }
 
     /**
@@ -64,8 +64,8 @@ public class AccommodationRequest {
      *     {@link String }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setId(int value) {
+        this.id = value;
     }
 
 }
