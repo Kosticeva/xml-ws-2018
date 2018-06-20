@@ -77,10 +77,11 @@
             <hr />
             <a name="reservation"></a>
             <div class="row">
-                <div class="col-9 pt-3">
-                    <span>Za odabrani period <b>{{dateStart | date}} - {{dateEnd | date}}</b> cena je <em style='color:#2c3;'>{{price}} rsd</em></span>
+                <div class="col-6 pt-4">
+                    <span>Za odabrani period <b>{{dateStart | date}} - {{dateEnd | date}}</b> cena je</span>
                 </div>
-                <div class="col-3">
+                <em class="col-3 display-4" style='color:#2c3;'>{{price}} rsd</em>
+                <div class="col-3 pt-2">
                     <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()">Rezervisi</button>
                 </div>
             </div>

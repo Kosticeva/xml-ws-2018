@@ -1,52 +1,58 @@
 <div class="container">
-  <!--<div class="row">
-    <div class="col-12">
-      <nav class="bg-primary d-flex justify-content-between">
-        <h1 class="p-1" style='margin:5px 10px; color:white;'>BookingApp</h1>
-      </nav>
-    </div>
-  </div>-->
-	<div class='row' >
-		<div class='col-12'>
-			<div style='text-align:right; padding:5px 10px;'>
-				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Uloguj se</button>
-				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/register" class='btn'>Registruj se</button>
-				<button [hidden]="!authenticated()" routerLinkActive="active" routerLink="/user"   class='btn'>Moj profil</button>
-				<button [hidden]="!authenticated()" routerLinkActive="active" routerLink="/messages"   class='btn'>Poruke</button>
-				<button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Izloguj se</button>
-			</div>
-		<div>
-	</div>
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <app-filter class="sticky-top" [accomodations]="accomodations" [filters]="filters"></app-filter>
     </div>
-    <div class="col-9">
+    <div class="col-8">
         <div class="container-fluid">
           <div class="filters nav nav-pills">
             <span *ngFor="let filter of filters" class="btn btn-sm m-1" [ngClass]="{'btn-success': filter.type === 1, 'btn-warning': filter.type === 2, 'btn-danger': filter.type === 3}">{{filter.name}}</span>
           </div>
+          <div class="nav container-fluid d-flex justify-content-between pr-0">
+            <h6>Sortiraj po:</h6>
+            <span>
+                <span class="btn-group">
+                    <span class="text-light bg-secondary p-1 rounded-left">Ceni</span>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByPrice(true)"><i class="fa fa-sort-asc text-light"></i></button>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByPrice(false)"><i class="fa fa-sort-desc text-light"></i></button>
+                </span>
+                <span class="btn-group">
+                    <span class="text-light bg-secondary p-1 rounded-left">Oceni</span>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByGrade(true)"><i class="fa fa-sort-asc text-light"></i></button>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByGrade(false)"><i class="fa fa-sort-desc text-light"></i></button>
+                </span>
+                <span class="btn-group">
+                    <span class="text-light bg-secondary p-1 rounded-left">Kategoriji</span>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByCat(true)"><i class="fa fa-sort-asc text-light"></i></button>
+                    <button class="btn btn-sm btn-secondary" (click)="sortByCat(false)"><i class="fa fa-sort-desc text-light"></i></button>
+                </span>
+            </span>
+          </div>
+          <br />
           <div class="list-group">
             <a *ngFor="let accomodation of accomodations" class="list-group-item card">
               <div class="card-header d-flex justify-content-between">
                 <h4>{{accomodation.name}}</h4>
                 <button
-					class="btn btn-lg btn-info"
-					[routerLink]="['/accommodation', accomodation.id]"
-					[queryParams]="{datestart: getStartDate(), dateend: getEndDate(), persons: getPersons(), price: accomodation.price}" queryParamsHandling="merge"
-					>Pogledaj <b>></b></button>
+                  class="btn btn-lg btn-info"
+                  [routerLink]="['/accommodation', accomodation.id]"
+                  [queryParams]="{datestart: getStartDate(), dateend: getEndDate(), persons: getPersons(), price: accomodation.price}" queryParamsHandling="merge"
+                  >Pogledaj <b>></b></button>
               </div>
               <div class="card-body">
-                <div class="card-title">
-                  <h6>{{accomodation.address}}, {{accomodation.city}}, {{accomodation.country}}</h6>
-                </div>
-                <div class="card-text container">
+                <div class="card-title container-fluid">
                   <div class="row">
-                    <div class="col-10">
+                      <h6 class="col-9">{{accomodation.address}}, {{accomodation.city}}, {{accomodation.country}}</h6>
+                      <h6 class="col-3">{{accomodation.category}}</h6>
+                  </div>
+                </div>
+                <div class="card-text container-fluid">
+                  <div class="row">
+                    <div class="col-9">
                         <p>{{accomodation.description}}</p>
                     </div>
-                    <div class="col-2">
-                        <span class="h-100 container-fluid">Ocena: <b [ngClass]="{'text-success': accomodation.averageGrade >=4, 'text-warning': accomodation.averageGrade >=2 && accomodation.averageGrade < 4, 'text-danger': accomodation.averageGrade >= 1 && accomodation.averageGrade < 2, 'text-secondary': accomodation.averageGrade == 0}">{{accomodation.averageGrade}}</b></span>
+                    <div class="col-3">
+                        <span class="container-fluid">Ocena: <b [ngClass]="{'text-success': accomodation.averageGrade >=4, 'text-warning': accomodation.averageGrade >=2 && accomodation.averageGrade < 4, 'text-danger': accomodation.averageGrade >= 1 && accomodation.averageGrade < 2, 'text-secondary': accomodation.averageGrade == 0}">{{accomodation.averageGrade}}</b></span>
                     </div>
                   </div>
                   <div class="row">

@@ -144,10 +144,7 @@ export class FilterComponent implements OnInit {
   public doSearchh() {
 	  
 	  this.queryShareService.setQuery(this.query);
-	  
-	  
-	  
-      this.accomodations.splice(0, this.accomodations.length);
+    this.accomodations.splice(0, this.accomodations.length);
 
     if(this.categoriesOpen == false && this.typesOpen == false && this.servicesOpen == false){
       this.filterService.doSearch(this.query).subscribe(

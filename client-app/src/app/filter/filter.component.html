@@ -16,12 +16,14 @@
         <label for="depField">Datum odlaska</label>
         <input type="date" id="depField" class="form-control form-control-sm" name="dateOfReturn" [(ngModel)]="query.dateOfReturn" min="query.dateOfArrival" required/>
       </div>
-      <div class="persons form-group">
-        <label for="persNum">Broj osoba</label>
-        <input type="number" id="persNum" class="form-control form-control-sm" min="1" required name="persons" [(ngModel)]="query.persons"/>
+      <div class="persons form-group container-fluid">
+        <div class="row">
+          <label for="persNum" class="col-9">Broj osoba</label>
+          <input type="number" id="persNum" class="form-control form-control-sm col-3" min="1" required name="persons" [(ngModel)]="query.persons"/>
+        </div>
       </div>
       <div class="container-fluid">
-        <button type="submit" role="button" class="btn btn-primary w-100 m-1" (click)="doSearchh()" [disabled]="query.city.length <1">Pretrazi</button>
+        <button type="submit" role="button" class="btn btn-primary w-100" (click)="doSearchh()" [disabled]="query.city.length <1">Pretrazi</button>
       </div>
     </div>
   </div>

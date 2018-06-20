@@ -10,7 +10,6 @@ import { HomeComponent } from './home/home.component';
 import { AccommodationPageComponent } from './accommodation/accommodation-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
-import { MenubarComponent } from './menubar/menubar.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -24,7 +23,6 @@ import { FilterService } from './filter/filter.service';
     HomeComponent,
     AccommodationPageComponent,
     LoginComponent,
-    MenubarComponent,
     UserComponent,
     RegisterComponent,
     MessagesComponent

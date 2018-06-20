@@ -1,11 +1,18 @@
- <div class='container'>
- <div class="row">
+<div class='container'>
+  <div class="row">
     <div class="col-12">
       <nav class="bg-primary d-flex justify-content-between">
         <h1 class="p-1 main-header" routerLinkActive="active" routerLink="/home">BookingApp</h1>
+        <span style='text-align:right; padding:5px 10px;'>
+            <button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Uloguj se</button>
+            <button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/register" class='btn'>Registruj se</button>
+            <button [hidden]="!authenticated()" routerLinkActive="active" routerLink="/messages"   class='btn'>Poruke</button>
+            <button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Izloguj se</button>
+        </span>
       </nav>
     </div>
   </div>
-<router-outlet></router-outlet>
+  <br />
+  <router-outlet></router-outlet>
 </div>
 
