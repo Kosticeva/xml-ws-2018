@@ -1,6 +1,8 @@
 package com.xml.booking.service;
 
 import com.xml.booking.domain.User;
+import com.xml.booking.dto.UserDTO;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,4 +14,6 @@ public interface UserService {
     List<User> getUsers();
     List<User> getUsers(String activated);
     User createUser(User user);
+
+    User getUser(String name);
 }

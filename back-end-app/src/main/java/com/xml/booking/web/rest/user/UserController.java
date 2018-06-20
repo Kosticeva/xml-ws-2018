@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -58,6 +59,15 @@ public class UserController {
         return new ResponseEntity<>(this.userService.getUsers("PENDING"), HttpStatus.OK);
     }
 
-
+    @RequestMapping(
+            value = "/get",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON
+    )
+    public ResponseEntity<UserDTO> getUser(Principal user) {
+        User user1 = userService.getUser(user.getName());
+        user1.setPassword("");
+        return new ResponseEntity<UserDTO>(new UserDTO(user1), HttpStatus.OK);
+    }
 
 }

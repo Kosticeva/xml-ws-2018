@@ -11,6 +11,8 @@ public class ReservationDTO {
     float finalPrice;
     Date startDate;
     Date endDate;
+    String accomodationName;
+    String accomodationAddress;
 
 
     public ReservationDTO() {
@@ -20,9 +22,11 @@ public class ReservationDTO {
         this.accomodationId = reservation.getAccomodation().getAccommodationId();
         this.id = reservation.getReservationId();
         this.numPersons = reservation.getNumPersons();
-        this.finalPrice = reservation.getNumPersons();
+        this.finalPrice = reservation.getFinalPrice();
         this.startDate = reservation.getStartDate();
         this.endDate = reservation.getEndDate();
+        this.accomodationName = reservation.getAccomodation().getName();
+        this.accomodationAddress = reservation.getAccomodation().getLocation().toString();
     }
 
     public int getId() {
@@ -71,5 +75,21 @@ public class ReservationDTO {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public String getAccomodationName() {
+        return accomodationName;
+    }
+
+    public void setAccomodationName(String accomodationName) {
+        this.accomodationName = accomodationName;
+    }
+
+    public String getAccomodationAddress() {
+        return accomodationAddress;
+    }
+
+    public void setAccomodationAddress(String accomodationAddress) {
+        this.accomodationAddress = accomodationAddress;
     }
 }

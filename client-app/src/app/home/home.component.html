@@ -11,6 +11,7 @@
 			<div style='text-align:right; padding:5px 10px;'>
 				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/login" class='btn'>Uloguj se</button>
 				<button [hidden]="authenticated()"  routerLinkActive="active" routerLink="/register" class='btn'>Registruj se</button>
+				<button [hidden]="!authenticated()" routerLinkActive="active" routerLink="/user"   class='btn'>Moj profil</button>
 				<button [hidden]="!authenticated()" routerLinkActive="active" routerLink="/messages"   class='btn'>Poruke</button>
 				<button [hidden]="!authenticated()" (click)="logout()"  class='btn'>Izloguj se</button>
 			</div>

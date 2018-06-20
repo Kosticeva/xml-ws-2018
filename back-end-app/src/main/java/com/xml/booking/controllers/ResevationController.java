@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -45,10 +47,48 @@ public class ResevationController {
     }
 
 
-    @RequestMapping(value = "/cancel/{id}",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ReservationDTO> cancelReservation(@RequestParam("id") int id) {
+    @RequestMapping(
+            value = "/cancel/{id}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<ReservationDTO> cancelReservation(@PathVariable("id") int id) {
         return new ResponseEntity<ReservationDTO>(new ReservationDTO(reservationService.cancelReservation(id)), HttpStatus.OK);
     }
+    @RequestMapping(
+            value = "/activate/{id}",
+            method = RequestMethod.PUT,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<ReservationDTO> activateReservation(@PathVariable("id") int id) {
+        return new ResponseEntity<ReservationDTO>(new ReservationDTO(reservationService.activateReservation(id)), HttpStatus.OK);
+    }
+
+    @RequestMapping(
+            value = "getbyuseractive/{username}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<ReservationDTO>> getAllByUserActive(@PathVariable("username") String username, Principal user) {
+        List<Reservation> reservations = reservationService.getAllByUsernameActive(user.getName());
+        List<ReservationDTO> reservationDTOS = new ArrayList<ReservationDTO>();
+        for (Reservation r : reservations) {
+            reservationDTOS.add(new ReservationDTO(r));
+        }
+        return new ResponseEntity<List<ReservationDTO>>(reservationDTOS, HttpStatus.OK);
+    }
+    @RequestMapping(
+            value = "getbyuserinactive/{username}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<ReservationDTO>> getAllByUserInActive(@PathVariable("username") String username, Principal user) {
+        List<Reservation> reservations = reservationService.getAllByUsernameInActive(user.getName());
+        List<ReservationDTO> reservationDTOS = new ArrayList<ReservationDTO>();
+        for (Reservation r : reservations) {
+            reservationDTOS.add(new ReservationDTO(r));
+        }
+        return new ResponseEntity<List<ReservationDTO>>(reservationDTOS, HttpStatus.OK);
+    }
+
 }

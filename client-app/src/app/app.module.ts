@@ -11,7 +11,7 @@ import { AccommodationPageComponent } from './accommodation/accommodation-page.c
 import { AppRoutingModule } from './app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { MenubarComponent } from './menubar/menubar.component';
-import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
 import { FilterService } from './filter/filter.service';
@@ -25,7 +25,7 @@ import { FilterService } from './filter/filter.service';
     AccommodationPageComponent,
     LoginComponent,
     MenubarComponent,
-    ProfileComponent,
+    UserComponent,
     RegisterComponent,
     MessagesComponent
   ],

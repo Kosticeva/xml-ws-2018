@@ -1,0 +1,39 @@
+<div class='container'>
+	<div class='row' style='padding:10px 15px;' *ngIf="user">
+		<div class='col-4'>
+			<div style='background-color:#FF6347; color: white; text-transform:uppercase; font-size: x-large; padding:5px 10px;'>{{user.username}}</div>
+			<div style='padding:5px 10px; border-bottom: #FF6347 1px solid;'>
+				<div>{{user.firstName}} {{user.lastName}}</div>
+				<div>{{user.email}}</div>
+			</div>
+		</div>
+		<div class='col-8'>
+			<div>
+				<div style='background-color:#3CB371; color: white; font-size: x-large; padding:5px 10px;'>Rezevacije</div>
+				<ul style='list-style:none; margin-left:0px; padding:0px; '>
+					<li *ngFor="let reservation of reservationsActive" style='border-bottom: #3CB371 1px solid; padding: 5px 10px;'>
+						<button style='float:right;' class='btn' (click)="cancelReservation(reservation.id)">Otkazi</button>
+						<div>{{reservation.accomodationName}}</div>
+						<div>{{reservation.accomodationAddress}}</div>
+						<div><span style='color:#3CB371'>{{reservation.startDate | date}}</span> - <span style='color:#3CB371'>{{reservation.endDate | date}}</span></div>
+						<div><span style='color:#aaa;'>(Za {{reservation.numPersons}} osobe)</span> - <span style='color:#007bff'>{{reservation.finalPrice}} rsd</span></div>
+					</li>
+				</ul>
+				<div *ngIf="!reservationsActive || reservationsActive.length==0" style='color:#bbb; text-align:center; margin-bottom:20px;'>(nemate aktivnih rezervacija)</div>
+			</div>
+			<div>
+				<div style='background-color:#999; color: white; font-size: x-large; padding:5px 10px;'>Otkazane rezervacije</div>
+				<ul style='list-style:none; margin-left:0px; padding:0px; '>
+					<li *ngFor="let reservation of reservationsInactive" style='border-bottom: #999 1px solid; padding: 5px 10px;'>
+						<button style='float:right;' class='btn' (click)="activateReservation(reservation.id)">Aktiviraj</button>
+						<div>{{reservation.accomodationName}}</div>
+						<div>{{reservation.accomodationAddress}}</div>
+						<div><span style='color:#999'>{{reservation.startDate | date}}</span> - <span style='color:#999'>{{reservation.endDate | date}}</span></div>
+						<div><span style='color:#aaa;'>(Za {{reservation.numPersons}} osobe)</span> - <span style='color:black;'>{{reservation.finalPrice}} rsd</span></div>
+					</li>
+				</ul>
+				<div *ngIf="!reservationsInactive || reservationsInactive.length==0" style='color:#bbb; text-align:center;'>(nemate otkazanih rezervacija)</div>
+			</div>
+		</div>
+	</div>
+</div>
