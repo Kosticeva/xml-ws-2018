@@ -1,4 +1,4 @@
-<div class="card container ml-10 mr-10">
+<div class="card container ml-10 mr-10"  *ngIf="accommodation">
     <br />
     <br />
     <div class="card-header container">
@@ -82,7 +82,14 @@
                 </div>
                 <em class="col-3 display-4" style='color:#2c3;'>{{price}} rsd</em>
                 <div class="col-3 pt-2">
-                    <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()">Rezervisi</button>
+                    <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()" [hidden]="!authenticated()">Rezervisi</button>
+                    <button
+						class="btn btn-lg btn-primary"
+						style='float:right;'
+						[routerLink]="['/login']"
+						[queryParams]="{refback: location.path()}"
+						[hidden]="authenticated()"
+						>Uloguj se da rezervises</button>
                 </div>
             </div>
 			<hr />

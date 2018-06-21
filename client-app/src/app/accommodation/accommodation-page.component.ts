@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccommodationService } from '../services/accommodation.service';
 import { ReservationService } from '../services/reservation.service';
+import { LoginService } from '../login/login.service';
 import { Accomodation } from '../model/accomodation';
 import { Reservation } from '../model/reservation';
 import { ActivatedRoute } from '@angular/router';
@@ -35,7 +36,9 @@ export class AccommodationPageComponent implements OnInit {
 	constructor(
 		private accommodationService : AccommodationService,
 		private reservationService : ReservationService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private login : LoginService,
+		private location : Location
 		) { }
 
 	ngOnInit() {
@@ -71,7 +74,6 @@ export class AccommodationPageComponent implements OnInit {
 			() => {/*fail*/ alert('Doslo je do greske pri pravljenju rezervacije...')}
 		);
 	}
-  
 	//private
 	toDate(datum: string) {
 		const parts = datum.split('-');
@@ -98,21 +100,25 @@ export class AccommodationPageComponent implements OnInit {
 		this.currPic = id;
 	  }
 	
-		filterGrades(){
-			this.reviews = [];
-			this.accommodationService.getReviewByGrade(this.accommodation.id, this.filterGrade).subscribe(
-				(data) => {
-					this.reviews = data;
-				}
-			)
-		}
+	filterGrades(){
+		this.reviews = [];
+		this.accommodationService.getReviewByGrade(this.accommodation.id, this.filterGrade).subscribe(
+			(data) => {
+				this.reviews = data;
+			}
+		)
+	}
 
-		loadReviews(){
-			this.reviews = [];
-			this.accommodationService.getReviews(this.accommodation.id).subscribe(
-				(data) => {
-					this.reviews = data
-				}
-			)
-		}
+	loadReviews(){
+		this.reviews = [];
+		this.accommodationService.getReviews(this.accommodation.id).subscribe(
+			(data) => {
+				this.reviews = data
+			}
+		)
+	}
+	
+	authenticated() {
+		return this.login.authenticated;
+	}
 }
