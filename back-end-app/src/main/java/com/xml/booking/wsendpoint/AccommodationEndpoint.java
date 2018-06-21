@@ -9,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ws.AccommodationRequest;
 import ws.AccommodationResponse;
+import ws.CreateAccommodationRequest;
+import ws.CreateAccommodationResponse;
 
 @Endpoint
 public class AccommodationEndpoint {
@@ -18,12 +20,19 @@ public class AccommodationEndpoint {
 
 	@PayloadRoot(namespace = "ws", localPart = "AccommodationRequest")
 	@ResponsePayload
-	public AccommodationResponse createAccommodation(@RequestPayload AccommodationRequest request) {
-		AccommodationResponse response = new AccommodationResponse();
-		Accomodation acc = accomodationRepository.findById(request.getId()).get();
-		ws.Accomodation accomodation = new ws.Accomodation();
+	public CreateAccommodationResponse createAccommodation(@RequestPayload CreateAccommodationRequest request) {
+		/*
+		Accomodation accomodation = new Accomodation();
+		Accomodation acc = request.getAccommodation();
+
+		accomodation.setName(acc.getName());
 		accomodation.setAccommodationId(acc.getAccommodationId());
-		response.setAccommodation(accomodation);
+		accomodation.setAccomodationService();*/
+
+		CreateAccommodationResponse response = new CreateAccommodationResponse();
+
+
+
 		return response;
 	}
 

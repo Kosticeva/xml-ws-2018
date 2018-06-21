@@ -1,5 +1,6 @@
 package com.xml.booking.wsendpoint;
 
+import com.xml.booking.domain.Agent;
 import com.xml.booking.repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -19,10 +20,8 @@ public class AgentEndpoint {
 	@ResponsePayload
 	public AgentResponse getUser(@RequestPayload AgentRequest request) {
 		AgentResponse response = new AgentResponse();
-		/*
 		Agent agent = agentRepository.findById(request.getUsername()).get();
 		response.setAgent(agent);
-		*/
 		return response;
 	}
 
