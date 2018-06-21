@@ -9,16 +9,17 @@ export class AccommodationService {
 	constructor(private http: HttpClient) { }
   
 	getAccommodation(id: number) : Observable<Accomodation> {
-		const httpOptions = {
+		/*const httpOptions = {
 			headers: new HttpHeaders({ 'Authorization': 'Basic ' + localStorage.getItem('token') })
-		};
-		return this.http.get<Accomodation>(`http://localhost:8091/accommodation/get/${id}`, httpOptions);
+		};*/
+		return this.http.get<Accomodation>(`http://localhost:8091/accommodation/get/${id}`/*, httpOptions*/);
 	}
   
 	getReviewByGrade(accId: number, value: number): Observable<any> {
-		const httpOptions = {
-			headers: new HttpHeaders({ 'Authorization': 'Basic ' + localStorage.getItem('token') })
-		};
-		return this.http.get(`http://localhost:8091/reviews/accomodation/`+accId+`/grade/`+value, httpOptions);
+		return this.http.get(`http://localhost:8091/reviews/accommodation/`+accId+`/grade/`+value);
+	}
+
+	getReviews(accId: number): Observable<any>{
+		return this.http.get(`http://localhost:8091/reviews/accommodation/`+accId);
 	}
 }

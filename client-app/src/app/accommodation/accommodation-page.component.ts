@@ -45,27 +45,9 @@ export class AccommodationPageComponent implements OnInit {
 		this.dateEnd = this.toDate(this.route.snapshot.queryParamMap.get('dateend'));
 		this.persons = +this.route.snapshot.queryParamMap.get('persons');
 		this.price = +this.route.snapshot.queryParamMap.get('price');
-		//this.getAccommodation(id);
-		this.accommodation = {
-			id: -1,
-			address: "",
-			agentUsername: "",
-			averageGrade: 0,
-			category: "",
-			city: "",
-			country: "",
-			description: "",
-			name: "",
-			price: 0,
-			type: "",
-			services: [],
-			days: 0,
-			persons: 0
-		  };
-	  
-		  this.reviews = [];
-		  this.currPic = 0;
-		  this.images = [];
+		this.getAccommodation(id);
+		this.images = [];
+		this.reviews = [];
 	}
 
 	getHref(): string{
@@ -121,6 +103,15 @@ export class AccommodationPageComponent implements OnInit {
 			this.accommodationService.getReviewByGrade(this.accommodation.id, this.filterGrade).subscribe(
 				(data) => {
 					this.reviews = data;
+				}
+			)
+		}
+
+		loadReviews(){
+			this.reviews = [];
+			this.accommodationService.getReviews(this.accommodation.id).subscribe(
+				(data) => {
+					this.reviews = data
 				}
 			)
 		}
