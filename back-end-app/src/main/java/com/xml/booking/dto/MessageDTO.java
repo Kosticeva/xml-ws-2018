@@ -3,7 +3,6 @@ package com.xml.booking.dto;
 import com.xml.booking.domain.Message;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 public class MessageDTO {
     int messageId;

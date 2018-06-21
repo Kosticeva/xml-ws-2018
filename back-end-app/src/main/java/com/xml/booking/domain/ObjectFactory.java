@@ -8,7 +8,6 @@
 
 package com.xml.booking.domain;
 
-import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRegistry;
 
 

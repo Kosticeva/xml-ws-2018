@@ -1,7 +1,10 @@
 package com.xml.booking.service;
 
 
-import com.xml.booking.domain.*;
+import com.xml.booking.domain.Agent;
+import com.xml.booking.domain.Message;
+import com.xml.booking.domain.Reservation;
+import com.xml.booking.domain.User;
 import com.xml.booking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,4 +69,20 @@ public class MessageServiceImpl implements MessageService {
         }
         return ret;
     }
+
+    @Override
+    public List<Message> findAll() {
+        return messageRepository.findAll();
+    }
+
+    @Override
+    public Message get(int id) {
+        return messageRepository.findById(id).get();
+    }
+
+    @Override
+    public void delete(int id) {
+        messageRepository.deleteById(id);
+    }
+
 }

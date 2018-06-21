@@ -17,7 +17,6 @@ public class AccomodationSerServiceImpl implements AccomodationSerService {
     @Override
     public AccomodationService save(AccomodationService ac){
         return this.accomodationServiceRepository.save(ac);
-
     }
 
     @Override
@@ -36,7 +35,7 @@ public class AccomodationSerServiceImpl implements AccomodationSerService {
 
     @Override
     public AccomodationService get(int id) {
-        return this.accomodationServiceRepository.findById(id).orElse(null);
+        return accomodationServiceRepository.findById(id).get();
     }
 
 }

@@ -2,7 +2,6 @@ package com.xml.booking.web.rest;
 
 import com.xml.booking.domain.Review;
 import com.xml.booking.dto.ReviewDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;

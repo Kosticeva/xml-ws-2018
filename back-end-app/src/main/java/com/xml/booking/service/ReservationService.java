@@ -14,4 +14,8 @@ public interface ReservationService {
     public List<Reservation> getAllByUsernameInActive(String name);
 
     public Reservation activateReservation(int reservationId);
+    Reservation save(Reservation reservation);
+    List<Reservation> findAll();
+    Reservation get(int id);
+    void delete(int id);
 }

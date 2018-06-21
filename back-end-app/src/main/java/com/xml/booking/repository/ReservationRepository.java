@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
-    public List<Reservation> findByAccomodationAndStartDateBeforeAndEndDateAfter
+    List<Reservation> findByAccomodationAndStartDateBeforeAndEndDateAfter
             (Accomodation accomodation, Date startDate, Date endDate);
 
-    public List<Reservation> findByUserAndActive(User user, boolean active);
+    List<Reservation> findByUserAndActive(User user, boolean active);
 
-    public List<Reservation> findByUser(User user);
+    List<Reservation> findByUser(User user);
 }

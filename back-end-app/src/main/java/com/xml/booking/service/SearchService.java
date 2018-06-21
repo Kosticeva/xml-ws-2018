@@ -1,11 +1,7 @@
 package com.xml.booking.service;
 
+import com.xml.booking.domain.*;
 import com.xml.booking.domain.AccomodationService;
-import com.xml.booking.domain.Accomodation;
-import com.xml.booking.domain.TLocation;
-import com.xml.booking.domain.AccomodationType;
-import com.xml.booking.domain.Category;
-import com.xml.booking.domain.Reservation;
 import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.repository.*;
 import com.xml.booking.web.rest.ReviewResource;

@@ -8,7 +8,12 @@ import java.util.List;
 
 @Service
 public interface MessageService {
-    public Message sendMessage(Message message);
-    public List<Message> getConversation(String userUsername, String agentUsername);
-    public List<Agent> getAllAgentsForUserUsername(String userUsername);
+
+	Message sendMessage(Message message);
+    List<Message> getConversation(String userUsername, String agentUsername);
+    List<Agent> getAllAgentsForUserUsername(String userUsername);
+	List<Message> findAll();
+	Message get(int id);
+	void delete(int id);
+
 }

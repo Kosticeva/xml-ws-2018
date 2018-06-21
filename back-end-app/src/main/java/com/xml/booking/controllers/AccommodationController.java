@@ -2,9 +2,8 @@ package com.xml.booking.controllers;
 
 
 import com.xml.booking.domain.Accomodation;
-import com.xml.booking.domain.Review;
-import com.xml.booking.service.AccomodationService;
 import com.xml.booking.dto.AccomodationDTO;
+import com.xml.booking.service.AccomodationService;
 import com.xml.booking.web.rest.ReviewResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

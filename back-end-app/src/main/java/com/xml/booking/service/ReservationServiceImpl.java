@@ -38,6 +38,26 @@ public class ReservationServiceImpl implements ReservationService {
     }
 
     @Override
+    public Reservation save(Reservation reservation) {
+        return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public List<Reservation> findAll() {
+        return reservationRepository.findAll();
+    }
+
+    @Override
+    public Reservation get(int id) {
+        return reservationRepository.findById(id).get();
+    }
+
+    @Override
+    public void delete(int id) {
+        reservationRepository.deleteById(id);
+    }
+
+    @Override
     public List<Reservation> getAllByUsernameActive(String username) {
         User user = userRepository.findById(username).orElse(null);
         return reservationRepository.findByUserAndActive(user, true);

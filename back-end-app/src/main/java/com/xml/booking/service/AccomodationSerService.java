@@ -1,8 +1,9 @@
 package com.xml.booking.service;
-import java.util.List;
 
 import com.xml.booking.domain.AccomodationService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public interface AccomodationSerService {

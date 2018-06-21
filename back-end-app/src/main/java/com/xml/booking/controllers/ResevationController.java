@@ -1,13 +1,11 @@
 package com.xml.booking.controllers;
 
-import com.xml.booking.service.AccomodationService;
 import com.xml.booking.domain.Reservation;
 import com.xml.booking.dto.ReservationDTO;
-import com.xml.booking.service.AccomodationSerService;
+import com.xml.booking.service.AccomodationService;
 import com.xml.booking.service.ReservationService;
 import com.xml.booking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -1,10 +1,5 @@
 package com.xml.booking.web.rest.util;
 
-import com.xml.booking.domain.AccomodationService;
-import com.xml.booking.domain.AccomodationType;
-import com.xml.booking.domain.Category;
-import com.xml.booking.domain.TLocation;
-
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
