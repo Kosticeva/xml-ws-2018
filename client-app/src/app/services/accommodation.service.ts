@@ -15,4 +15,10 @@ export class AccommodationService {
 		return this.http.get<Accomodation>(`http://localhost:8091/accommodation/get/${id}`, httpOptions);
 	}
   
+	getReviewByGrade(accId: number, value: number): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Authorization': 'Basic ' + localStorage.getItem('token') })
+		};
+		return this.http.get(`http://localhost:8091/reviews/accomodation/`+accId+`/grade/`+value, httpOptions);
+	}
 }

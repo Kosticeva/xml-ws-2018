@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Review {
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer reviewId;
     private Integer accomodationId;
     private String user;

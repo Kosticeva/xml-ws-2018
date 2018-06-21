@@ -83,6 +83,12 @@ public class ReviewResource {
         return reviewService.calculateAverageGrade(accommodationId);
     }
 
+    @RequestMapping(value = "/accommodation/{accommodationId}/grade/{gradeVal}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    public List<Review> getAllGradesWithValueForAccomodation(@PathVariable("accommodationId") Integer accId, @PathVariable("gradeVal") Integer gradeVal){
+        System.out.println("Review: grade "+gradeVal+" for place");
+        return reviewService.getAllReviewsForPlaceByGrade(accId, gradeVal);
+    }
+
     @RequestMapping(value = "/allow", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON)
     public Review allowReview(@RequestBody Review review){
         return reviewService.allowReview(review, true);

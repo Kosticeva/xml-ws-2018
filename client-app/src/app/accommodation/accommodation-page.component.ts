@@ -30,6 +30,7 @@ export class AccommodationPageComponent implements OnInit {
 		approved: boolean
 	}[];
 	currPic: number;
+	filterGrade: number;
 
 	constructor(
 		private accommodationService : AccommodationService,
@@ -38,6 +39,7 @@ export class AccommodationPageComponent implements OnInit {
 		) { }
 
 	ngOnInit() {
+		this.filterGrade = 0;
 		const id = +this.route.snapshot.paramMap.get('id');
 		this.dateStart = this.toDate(this.route.snapshot.queryParamMap.get('datestart'));
 		this.dateEnd = this.toDate(this.route.snapshot.queryParamMap.get('dateend'));
@@ -114,4 +116,12 @@ export class AccommodationPageComponent implements OnInit {
 		this.currPic = id;
 	  }
 	
+		filterGrades(){
+			this.reviews = [];
+			this.accommodationService.getReviewByGrade(this.accommodation.id, this.filterGrade).subscribe(
+				(data) => {
+					this.reviews = data;
+				}
+			)
+		}
 }

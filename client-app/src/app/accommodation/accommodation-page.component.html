@@ -87,7 +87,16 @@
             </div>
 			<hr />
             <a name="comments"></a>
-            <h5 class="d-flex justify-content-center">KOMENTARI</h5>
+            <h5 class="d-flex justify-content-center">
+                <span>KOMENTARI</span>
+                <select class="form-control" [(ngModel)]="filterGrade" (change)="filterGrades()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </h5>
             <br />
             <div class="row">
                 <ul class="col-12 list-group">

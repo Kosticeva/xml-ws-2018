@@ -101,6 +101,17 @@ public class ReviewResource {
         return  restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/accommodation/"+accommodationId+"/grade", Float.class);
     }
 
+    @RequestMapping(value = "/accommodation/{accommodationId}/grade/{gradeVal}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
+    public ResponseEntity<List<ReviewDTO>> getAllGradesWithValueForAccomodation(@PathVariable("accommodationId") Integer accId, @PathVariable("gradeVal") Integer gradeVal){
+        List dtos = restTemplate.getForObject("https://temp-review-system.herokuapp.com/reviews/accomodation/"+accId+"/grade/"+gradeVal, List.class);
+
+        if(dtos.size() != 0){
+            return ResponseEntity.ok(dtos);
+        }
+
+        return ResponseEntity.badRequest().body(null);
+    }
+
     public ReviewDTO allowReview(Review r){
         ReviewDTO dto = new ReviewDTO();
         dto.setComment(r.getComment());
