@@ -9,7 +9,6 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 import ws.AccommodationRequest;
 import ws.AccommodationResponse;
-import ws.UserResponse;
 
 @Endpoint
 public class AccommodationEndpoint {
@@ -22,7 +21,9 @@ public class AccommodationEndpoint {
 	public AccommodationResponse createAccommodation(@RequestPayload AccommodationRequest request) {
 		AccommodationResponse response = new AccommodationResponse();
 		Accomodation acc = accomodationRepository.findById(request.getId()).get();
-		response.setAccommodation(acc);
+		ws.Accomodation accomodation = new ws.Accomodation();
+		accomodation.setAccommodationId(acc.getAccommodationId());
+		response.setAccommodation(accomodation);
 		return response;
 	}
 

@@ -1,6 +1,5 @@
 package com.xml.booking.wsendpoint;
 
-import com.xml.booking.domain.User;
 import com.xml.booking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -20,9 +19,11 @@ public class UserEndpoint {
 	@ResponsePayload
 	public UserResponse getUser(@RequestPayload UserRequest request) {
 		UserResponse response = new UserResponse();
+		/*
 		User user = userRepository.findById(request.getUsername()).get();
 		response.setUser(user);
 		System.out.println(user.toString());
+		*/
 		return response;
 	}
 

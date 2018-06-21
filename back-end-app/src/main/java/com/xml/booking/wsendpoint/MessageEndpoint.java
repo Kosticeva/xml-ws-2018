@@ -1,6 +1,5 @@
 package com.xml.booking.wsendpoint;
 
-import com.xml.booking.domain.Message;
 import com.xml.booking.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
@@ -20,11 +19,13 @@ public class MessageEndpoint {
 	@ResponsePayload
 	public MessageResponse getMessage(@RequestPayload MessageRequest request) {
 		MessageResponse response = new MessageResponse();
+		/*
 		System.out.println("ID: " + request.getMessageId());
 		Message message = messageRepository.findById(request.getMessageId()).get();
 		System.out.println(message.toString());
 		System.out.println(message.getUser().getUsername());
 		response.setMessage(message);
+		*/
 		return response;
 	}
 
