@@ -1,4 +1,4 @@
-<div class="card container ml-10 mr-10">
+<div class="card container ml-10 mr-10"  *ngIf="accommodation">
     <br />
     <br />
     <div class="card-header container">
@@ -7,7 +7,7 @@
                 <h2>{{accommodation.name}}</h2>
                 <br />
                 <span class="btn btn-lg m-1 btn-success">{{accommodation.type}}</span>
-                <span class="btn btn-lg m-1 btn-warning">{{accommodation.category}}</span>
+                <span class="btn btn-lg m-1 btn-warning">{{accommodation.categoryName}}</span>
                 <hr />
                 <ul class="breadcrumb">
                     <li class="breadcrumb-item">Adresa: &nbsp;</li>
@@ -19,7 +19,7 @@
                     <li class="breadcrumb-item">Kontakt: &nbsp;<b>{{accommodation.agentUsername}}</b></li>
                 </ul>
                 <a class="btn btn-primary btn-lg w-100 mt-1 mb-1" role="button" href="{{getHref()}}#reservation">Odmah rezervisi</a>
-                <a class="btn btn-primary btn-lg w-100 mt-1 mb-1" role="button" href="{{getHref()}}#comments">Prikazi komentare</a>
+                <a class="btn btn-primary btn-lg w-100 mt-1 mb-1" role="button" href="{{getHref()}}#comments" (click)="loadReviews()">Prikazi komentare</a>
             </div>
             <div class="col-3 border-left">
                 <div><h5>Prosecna ocena: </h5>
@@ -82,12 +82,28 @@
                 </div>
                 <em class="col-3 display-4" style='color:#2c3;'>{{price}} rsd</em>
                 <div class="col-3 pt-2">
-                    <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()">Rezervisi</button>
+                    <button class="btn btn-lg btn-primary" style='float:right;' (click)="createReservation()"  [hidden]="!authenticated()">Rezervisi</button>
+                    <button
+						class="btn btn-lg btn-primary"
+						style='float:right;'
+						[routerLink]="['/login']"
+						[queryParams]="{refback: location.path()}"
+						[hidden]="authenticated()"
+						>Uloguj se da rezervises</button>
                 </div>
             </div>
 			<hr />
             <a name="comments"></a>
-            <h5 class="d-flex justify-content-center">KOMENTARI</h5>
+            <h5 class="d-flex justify-content-between">
+                <span>KOMENTARI</span>
+                <select class="form-control w-50" [(ngModel)]="filterGrade" (change)="filterGrades()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </h5>
             <br />
             <div class="row">
                 <ul class="col-12 list-group">

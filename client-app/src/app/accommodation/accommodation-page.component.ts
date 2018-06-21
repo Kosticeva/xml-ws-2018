@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccommodationService } from '../services/accommodation.service';
 import { ReservationService } from '../services/reservation.service';
+import { LoginService } from '../login/login.service';
 import { Accomodation } from '../model/accomodation';
 import { Reservation } from '../model/reservation';
 import { ActivatedRoute } from '@angular/router';
@@ -30,40 +31,26 @@ export class AccommodationPageComponent implements OnInit {
 		approved: boolean
 	}[];
 	currPic: number;
+	filterGrade: number;
 
 	constructor(
 		private accommodationService : AccommodationService,
 		private reservationService : ReservationService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private login : LoginService,
+		private location : Location
 		) { }
 
 	ngOnInit() {
+		this.filterGrade = 0;
 		const id = +this.route.snapshot.paramMap.get('id');
 		this.dateStart = this.toDate(this.route.snapshot.queryParamMap.get('datestart'));
 		this.dateEnd = this.toDate(this.route.snapshot.queryParamMap.get('dateend'));
 		this.persons = +this.route.snapshot.queryParamMap.get('persons');
 		this.price = +this.route.snapshot.queryParamMap.get('price');
-		//this.getAccommodation(id);
-		this.accommodation = {
-			id: -1,
-			address: "",
-			agentUsername: "",
-			averageGrade: 0,
-			category: "",
-			city: "",
-			country: "",
-			description: "",
-			name: "",
-			price: 0,
-			type: "",
-			services: [],
-			days: 0,
-			persons: 0
-		  };
-	  
-		  this.reviews = [];
-		  this.currPic = 0;
-		  this.images = [];
+		this.getAccommodation(id);
+		this.images = [];
+		this.reviews = [];
 	}
 
 	getHref(): string{
@@ -87,7 +74,6 @@ export class AccommodationPageComponent implements OnInit {
 			() => {/*fail*/ alert('Doslo je do greske pri pravljenju rezervacije...')}
 		);
 	}
-  
 	//private
 	toDate(datum: string) {
 		const parts = datum.split('-');
@@ -114,4 +100,25 @@ export class AccommodationPageComponent implements OnInit {
 		this.currPic = id;
 	  }
 	
+	filterGrades(){
+		this.reviews = [];
+		this.accommodationService.getReviewByGrade(this.accommodation.id, this.filterGrade).subscribe(
+			(data) => {
+				this.reviews = data;
+			}
+		)
+	}
+
+	loadReviews(){
+		this.reviews = [];
+		this.accommodationService.getReviews(this.accommodation.id).subscribe(
+			(data) => {
+				this.reviews = data
+			}
+		)
+	}
+	
+	authenticated() {
+		return this.login.authenticated;
+	}
 }

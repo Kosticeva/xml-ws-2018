@@ -48,6 +48,10 @@ public class ReviewService {
         return reviewRepository.findByAccomodationId(accommodationId);
     }
 
+    public List<Review> getAllReviewsForPlaceByGrade(Integer accommodationId, Integer grade){
+        return reviewRepository.findByAccomodationIdAndGrade(accommodationId, grade);
+    }
+
     public void deleteReview(int reviewId) {
         reviewRepository.deleteById(reviewId);
     }

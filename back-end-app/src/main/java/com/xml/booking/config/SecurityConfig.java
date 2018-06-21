@@ -34,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/service/**").permitAll()
             .antMatchers("/locations", "/search", "/search/advanced").permitAll()
             .antMatchers(HttpMethod.GET, "/accomodation-type", "/accomodation-service", "/reviews**").permitAll()
+            .antMatchers(HttpMethod.GET, "/accommodation/get/**").permitAll()
             .antMatchers("/**").permitAll() //jbg
             .anyRequest().authenticated()
         .and()
