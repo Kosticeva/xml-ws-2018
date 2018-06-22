@@ -31,8 +31,8 @@ public class AgentMessageResource {
 
 	@GetMapping("/read/{id}")
 	public ResponseEntity<Message> getMessage(@PathVariable int id) {
-		Message accomodation = messageService.get(id);
-		return ResponseEntity.ok(accomodation);
+		Message m = messageService.get(id);
+		return ResponseEntity.ok(m);
 	}
 
 	@PostMapping("/update")
@@ -47,6 +47,12 @@ public class AgentMessageResource {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(getClass().getName().toString(), "DELETED " + id);
 		return ResponseEntity.ok().headers(headers).build();
+	}
+
+	@GetMapping("/read/{userUsername}/{agentUsername}")
+	public ResponseEntity<List<Message>> getMessage(@PathVariable String userUsername, @PathVariable String agentUsername) {
+		List<Message> messages = messageService.getConversation(userUsername, agentUsername);
+		return ResponseEntity.ok(messages);
 	}
 
 }

@@ -9,4 +9,5 @@ public interface AccomodationTypeService {
     AccomodationType save(AccomodationType at);
     boolean delete(String id);
     List<AccomodationType> getAll();
+    List<AccomodationType> findAll();
 }

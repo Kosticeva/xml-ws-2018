@@ -14,4 +14,12 @@ public interface UserService {
     User createUser(User user);
 
     User getUser(String name);
+
+	User save(User user);
+
+    List<User> findAll();
+
+    User get(String username);
+
+    void delete(String username);
 }

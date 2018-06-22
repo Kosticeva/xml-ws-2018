@@ -32,4 +32,9 @@ public class AccomodationTypeServiceImpl implements AccomodationTypeService {
     public List<AccomodationType> getAll() {
         return this.accomodationTypeRepository.findAll();
     }
+
+    @Override
+    public List<AccomodationType> findAll() {
+        return this.accomodationTypeRepository.findAll();
+    }
 }

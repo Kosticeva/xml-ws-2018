@@ -56,4 +56,9 @@ public class PriceService {
         System.out.println("Cena za jednog "+priceForOne);
         return priceForOne * persons;
     }
+
+    public List<TPrice> findAll() {
+        return priceRepository.findAll();
+    }
+
 }
