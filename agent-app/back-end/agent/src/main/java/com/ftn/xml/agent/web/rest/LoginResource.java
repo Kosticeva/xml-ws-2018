@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/api")
 public class LoginResource {
@@ -21,10 +23,19 @@ public class LoginResource {
 	@Autowired
 	AuthService authService;
 
+	@Autowired
+	HttpSession session;
+
 	@PostMapping("/login")
 	public ResponseEntity<Agent> loginAgent(@RequestBody LoginDTO loginDTO) {
 		syncService.initializeOnLogin();
 		Agent agent = authService.authenticateAgent(loginDTO);
+		if(agent != null) {
+			session.setAttribute("user", agent);
+		}
+		else {
+			session.setAttribute("user", null);
+		}
 		return ResponseEntity.ok(agent);
 	}
 
