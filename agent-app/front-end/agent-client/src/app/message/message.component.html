@@ -1,0 +1,6 @@
+<div>
+  <button (click)="getMessages()">Get messages</button>
+  <div *ngFor="let message of messages">
+    <a>{{message.messageId}}</a>
+  </div>
+</div>
