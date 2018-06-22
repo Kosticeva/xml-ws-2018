@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MessageComponent } from './message/message.component';
+import { ReservationComponent } from './reservation/reservation.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'messages',
     component: MessageComponent
+  },
+  {
+    path: 'reservations',
+    component: ReservationComponent
   }
 ];
 
@@ -33,7 +38,8 @@ const routes: Routes = [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    MessageComponent
+    MessageComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

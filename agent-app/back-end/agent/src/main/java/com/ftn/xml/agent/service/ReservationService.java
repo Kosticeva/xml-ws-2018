@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class ReservationService {
 
@@ -23,6 +25,10 @@ public class ReservationService {
 		System.out.println(r);
 		reservation = reservationRepository.save(r);
 		return reservation;
+	}
+
+	public List<Reservation> findAll() {
+		return reservationRepository.findAll();
 	}
 
 	public Reservation approveReservation(int id) {

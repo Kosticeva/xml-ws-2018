@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/reservation")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -18,6 +20,12 @@ public class ReservationResource {
 	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
 		Reservation r = reservationService.createReservation(reservation);
 		return ResponseEntity.ok(r);
+	}
+
+	@GetMapping("/read")
+	public ResponseEntity<List<Reservation>> getReservations() {
+		List<Reservation> reservations = reservationService.findAll();
+		return ResponseEntity.ok(reservations);
 	}
 
 	@GetMapping("/approve/{id}")

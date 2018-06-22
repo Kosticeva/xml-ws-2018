@@ -1,0 +1,10 @@
+<div>
+  <button (click)="getReservations()">Get reservations</button>
+  <div *ngFor="let reservation of reservations">
+    <div>
+      <p>{{reservation.reservationId}}</p>
+      <button *ngIf="reservation.realized === false" (click)="approve(reservation.reservationId)">Approve</button>
+      <button *ngIf="reservation.realized === true" (click)="reject(reservation.reservationId)">Reject</button>
+    </div>
+  </div>
+</div>
