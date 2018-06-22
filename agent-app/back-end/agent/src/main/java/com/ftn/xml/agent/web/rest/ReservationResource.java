@@ -13,6 +13,12 @@ public class ReservationResource {
 	@Autowired
 	ReservationService reservationService;
 
+	@PostMapping("/create")
+	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+		Reservation r = reservationService.createReservation(reservation);
+		return ResponseEntity.ok(r);
+	}
+
 	@GetMapping("/approve/{id}")
 	public ResponseEntity<Reservation> approveReservation(@PathVariable int id) {
 		Reservation r = reservationService.approveReservation(id);

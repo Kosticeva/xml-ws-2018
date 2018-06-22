@@ -16,6 +16,15 @@ public class ReservationService {
 	@Autowired
 	RestTemplate restTemplate;
 
+	public Reservation createReservation(Reservation reservation) {
+		ResponseEntity<Reservation> res = restTemplate.postForEntity("http://localhost:8091/reservation/create",
+				reservation, Reservation.class);
+		Reservation r = res.getBody();
+		System.out.println(r);
+		reservation = reservationRepository.save(r);
+		return reservation;
+	}
+
 	public Reservation approveReservation(int id) {
 		Reservation reservation = reservationRepository.findById(id).get();
 		reservation.setRealized(true);
