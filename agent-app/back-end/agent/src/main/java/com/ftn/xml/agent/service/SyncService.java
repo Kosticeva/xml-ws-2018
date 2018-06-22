@@ -77,10 +77,10 @@ public class SyncService {
 	}
 
 	public void getAccomodationServices() {
-		ResponseEntity<AccomodationService[]> responseEntity = restTemplate.getForEntity("http://localhost:8091/accomodationService/read", AccomodationService[].class);
-		AccomodationService[] accomodationServices = responseEntity.getBody();
+		ResponseEntity<com.ftn.xml.agent.domain.AccomodationService[]> responseEntity = restTemplate.getForEntity("http://localhost:8091/accomodationService/read", com.ftn.xml.agent.domain.AccomodationService[].class);
+		com.ftn.xml.agent.domain.AccomodationService[] accomodationServices = responseEntity.getBody();
 
-		for(AccomodationService a:accomodationServices) {
+		for(com.ftn.xml.agent.domain.AccomodationService a:accomodationServices) {
 			System.out.println(a);
 			accomodationServiceRepository.save(a);
 		}

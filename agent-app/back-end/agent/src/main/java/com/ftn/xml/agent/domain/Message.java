@@ -8,7 +8,9 @@
 
 package com.ftn.xml.agent.domain;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.*;
 import java.sql.Timestamp;
 
