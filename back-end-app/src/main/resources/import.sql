@@ -177,6 +177,7 @@ insert into accommodation_accomservice(accommodation_id, service_id) values (15,
 
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('pera', 1, '2018-08-12', '2018-08-15', 3211.99, 2, 0, 1);
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('pera', 2, '2017-01-17', '2017-01-21', 5110.00, 1, 0, 1);
+insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('pera', 4, '2018-03-18', '2018-03-20', 4120.00, 4, 1, 1);
 insert into reservation (user_username, accomodation_accommodation_id, start_date, end_date, final_price, num_persons, realized, active) values ('mika', 3, '2017-06-23', '2017-07-4', 600.67, 5, 0, 1);
 insert into message values (1, 'cao sta ima', 0, 'USER', '2018-07-10 13:28:59', 'zoran', 'pera');
 insert into message values (2, 'nista, kod tebe?', 0, 'AGENT', '2018-07-10 13:31:20', 'zoran', 'pera');

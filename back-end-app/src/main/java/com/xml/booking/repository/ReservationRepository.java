@@ -15,7 +15,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Intege
     List<Reservation> findByAccomodationAndStartDateBeforeAndEndDateAfter
             (Accomodation accomodation, Date startDate, Date endDate);
 
-    List<Reservation> findByUserAndActive(User user, boolean active);
+    List<Reservation> findByUserAndActiveAndRealized(User user, boolean active, boolean realized);
 
     List<Reservation> findByUser(User user);
+
+    List<Reservation> findByUserAndRealized(User user, boolean realized);
 }

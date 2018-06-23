@@ -33,6 +33,12 @@ export class ReservationService {
 		};
 		return this.http.get<Reservation[]>(`http://localhost:8091/reservation/getbyuserinactive/${username}`, httpOptions);
 	}
+	getReservationsForUserRealized(username: string) : Observable<Reservation[]>  {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Authorization': 'Basic ' + localStorage.getItem('token') })
+		};
+		return this.http.get<Reservation[]>(`http://localhost:8091/reservation/getbyuserrealized/${username}`, httpOptions);
+	}
 	
 	cancelReservation(reservationId: number, callback, errorCallback) {
 		const httpOptions = {

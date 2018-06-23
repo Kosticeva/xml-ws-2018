@@ -10,8 +10,9 @@ public interface ReservationService {
     public Reservation createReservation(Reservation reservation);
     public Reservation cancelReservation(int reservationId);
 
-    public List<Reservation> getAllByUsernameActive(String name);
-    public List<Reservation> getAllByUsernameInActive(String name);
+    public List<Reservation> getAllByUsernameActive(String name); //ne vraca realizovane
+    public List<Reservation> getAllByUsernameInActive(String name); //ne vraca realizovane
+    public List<Reservation> getAllByUsernameRealized(String name);
 
     public Reservation activateReservation(int reservationId);
     Reservation save(Reservation reservation);

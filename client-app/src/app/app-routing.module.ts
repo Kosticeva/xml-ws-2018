@@ -8,6 +8,7 @@ import { AccommodationPageComponent } from './accommodation/accommodation-page.c
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
+import { ReviewComponent } from './review/review.component';
 
 export const routes: Routes = [
   {
@@ -38,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'messages',
     component: MessagesComponent
+  },
+  {
+    path: 'review/:id',
+    component: ReviewComponent
   }
 ];
 
