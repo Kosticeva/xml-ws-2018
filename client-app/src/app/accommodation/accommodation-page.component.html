@@ -120,7 +120,7 @@
                             <!-- <span><b>{{review.grade}}</b></span> -->
                         </div>
                         <div class="card-body">
-                            <p *ngIf="!review.approved">{{review.comment}}</p> <!--IZBACITI ONO ! KADA ODOBARAVNJE REVIEWOVA BUDE RADILO-->
+                            <p *ngIf="review.approved">{{review.comment}}</p> <!--REVIEW APPROVAL (???)-->
                         </div>
                     </li>
                 </ul>
