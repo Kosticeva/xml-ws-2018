@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/index.html", "/", "/home", "/login/**", "/register/**").permitAll()
             .antMatchers("/service/**").permitAll()
             .antMatchers("/locations", "/search", "/search/advanced").permitAll()
-            .antMatchers(HttpMethod.GET, "/accomodation-type", "/accomodation-service", "/reviews**").permitAll()
+            .antMatchers(HttpMethod.GET, "/accomodation-type", "/accomodation-service", "/accomodation-category","/reviews**").permitAll()
             .antMatchers(HttpMethod.GET, "/accommodation/get/**").permitAll()
             .antMatchers("/**").permitAll() //jbg
             .anyRequest().authenticated()

@@ -21,7 +21,7 @@ export class FilterService {
   }
 
   public getCategories(): any{
-    return this.http.get('http://localhost:8091/NEKIENDPOINTKADMILJANAZAVRSI',this.httpOptions);
+    return this.http.get('http://localhost:8091/accomodation-category',this.httpOptions);
   }
 
   public doSearch(query: any): any{

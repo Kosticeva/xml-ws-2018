@@ -114,7 +114,7 @@ export class FilterComponent implements OnInit {
       }
     );
 
-    /*this.filterService.getCategories().subscribe(
+    this.filterService.getCategories().subscribe(
       (data) => {
         this.allCategories = data;
         for(let i=0; i<this.allCategories.length; i++){
@@ -122,7 +122,7 @@ export class FilterComponent implements OnInit {
           this.allCategories[i].idd = this.allCategories[i].categoryID+"_"+this.allCategories[i].categoryName;
         }
       }
-    );*/
+    );
   }
 
   public parseDate(date: Date): string{
