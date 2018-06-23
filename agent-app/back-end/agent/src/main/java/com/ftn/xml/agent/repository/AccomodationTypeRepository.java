@@ -9,6 +9,8 @@ import java.util.List;
 @Repository
 public interface AccomodationTypeRepository  extends JpaRepository<AccomodationType, Integer> {
 
-    public List<AccomodationType> findByTypeIDIn(List<Integer> typeIDs);
+    List<AccomodationType> findByTypeIDIn(List<Integer> typeIDs);
+
+    AccomodationType findById(int id);
 
 }

@@ -93,8 +93,8 @@ public class Accomodation {
     @ManyToOne
     protected AccomodationType accomodationType;
     @XmlElement(required = true)
-    @Transient //TODO: temp solution
-    protected List<byte[]> picture;
+    @Lob
+    protected String pictures;
     @XmlElement(name = "accomodation-service", required = true)
     @ManyToMany
     @JoinTable(
@@ -113,6 +113,9 @@ public class Accomodation {
     @XmlElement(name = "accommodation-id")
     //@GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int accommodationId;
+
+    @OneToMany
+    protected List<Image> images;
 
     /**
      * Gets the value of the agent property.
@@ -295,11 +298,11 @@ public class Accomodation {
      * byte[]
      * 
      */
-    public List<byte[]> getPicture() {
-        if (picture == null) {
-            picture = new ArrayList<byte[]>();
-        }
-        return this.picture;
+    public void setPictures(String pictures) {
+        this.pictures = pictures;
+    }
+    public String getPictures() {
+        return this.pictures;
     }
 
     /**
@@ -366,5 +369,28 @@ public class Accomodation {
         this.accommodationId = value;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
 
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
+
+    @Override
+    public String toString() {
+        return "Accomodation{" +
+                "agent=" + agent +
+                ", location=" + location +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", maxPersons=" + maxPersons +
+                ", category=" + category +
+                ", accomodationType=" + accomodationType +
+                ", pictures=" + pictures +
+                ", accomodationServices=" + accomodationServices +
+                ", prices=" + prices +
+                ", accommodationId=" + accommodationId +
+                '}';
+    }
 }

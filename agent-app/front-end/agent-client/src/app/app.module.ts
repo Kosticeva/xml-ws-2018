@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MessageComponent } from './message/message.component';
 import { ReservationComponent } from './reservation/reservation.component';
+import { ReplyComponent } from './reply/reply.component';
+import { AccomodationComponent } from './accomodation/accomodation.component';
 
 const routes: Routes = [
   {
@@ -30,6 +32,14 @@ const routes: Routes = [
   {
     path: 'reservations',
     component: ReservationComponent
+  },
+  {
+    path: 'reply/:id',
+    component: ReplyComponent
+  },
+  {
+    path: 'accomodations',
+    component: AccomodationComponent
   }
 ];
 
@@ -39,7 +49,9 @@ const routes: Routes = [
     HomeComponent,
     LoginComponent,
     MessageComponent,
-    ReservationComponent
+    ReservationComponent,
+    ReplyComponent,
+    AccomodationComponent
   ],
   imports: [
     BrowserModule,

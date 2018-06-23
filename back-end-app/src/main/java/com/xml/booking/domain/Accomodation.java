@@ -8,6 +8,8 @@
 
 package com.xml.booking.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
@@ -92,9 +94,11 @@ public class Accomodation {
     @XmlElement(name = "accomodation-type", required = true)
     @ManyToOne
     protected AccomodationType accomodationType;
+    /*
     @XmlElement(required = true)
-    @Transient //TODO: temp solution
-    protected List<byte[]> picture;
+    @Lob
+    protected String pictures;
+    */
     @XmlElement(name = "accomodation-service", required = true)
     @ManyToMany
     @JoinTable(
@@ -113,6 +117,10 @@ public class Accomodation {
     @XmlElement(name = "accommodation-id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     protected int accommodationId;
+
+    @OneToMany
+    @JsonIgnore
+    protected List<Image> images;
 
     /**
      * Gets the value of the agent property.
@@ -295,12 +303,11 @@ public class Accomodation {
      * byte[]
      * 
      */
-    public List<byte[]> getPicture() {
-        if (picture == null) {
-            picture = new ArrayList<byte[]>();
-        }
-        return this.picture;
+    /*
+    public String getPictures() {
+        return this.pictures;
     }
+    */
 
     /**
      * Gets the value of the accomodationService property.
@@ -366,5 +373,11 @@ public class Accomodation {
         this.accommodationId = value;
     }
 
+    public List<Image> getImages() {
+        return images;
+    }
 
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }

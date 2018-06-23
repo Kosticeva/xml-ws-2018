@@ -1,6 +1,8 @@
 package com.xml.booking.agent.rest;
 
+import com.xml.booking.agent.rest.dto.AgentAccomodationDTO;
 import com.xml.booking.domain.Accomodation;
+import com.xml.booking.dto.AccomodationDTO;
 import com.xml.booking.service.AccomodationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,9 +19,8 @@ public class AgentAccomodationResource {
 	AccomodationService accomodationService;
 
 	@PostMapping("/create")
-	public ResponseEntity<Accomodation> createAccomodation(@RequestBody Accomodation accomodation) {
-		accomodation.setAccommodationId(0);
-		Accomodation acc = accomodationService.save(accomodation);
+	public ResponseEntity<Accomodation> createAccomodation(@RequestBody AgentAccomodationDTO agentAccomodationDTO) {
+		Accomodation acc = accomodationService.saveDTO(agentAccomodationDTO);
 		return ResponseEntity.ok(acc);
 	}
 

@@ -169,3 +169,5 @@ insert into review values(5, 0, 'comment5', 2, 5, "djoka");
 insert into review values(6, 0, 'comment6', 5, 5, "pera");
 insert into review values(7, 0, 'comment7', 5, 9, "mika");
 insert into review values(8, 0, 'comment8', 1, 12, "djoka");
+
+

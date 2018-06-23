@@ -2,6 +2,7 @@ package com.ftn.xml.agent.web.rest;
 
 import com.ftn.xml.agent.domain.Agent;
 import com.ftn.xml.agent.domain.Message;
+import com.ftn.xml.agent.dto.MessageDTO;
 import com.ftn.xml.agent.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,10 +23,18 @@ public class MessagingResource {
 	HttpSession httpSession;
 
 	@PostMapping("/create")
-	public ResponseEntity<Message> createMessage(@RequestBody Message message) {
-		message.setMessageId(0);
-		Message m = messageService.sendMessage(message);
+	public ResponseEntity<Message> createMessage(@RequestBody MessageDTO messageDTO) {
+		Agent a = (Agent) httpSession.getAttribute("user");
+		messageDTO.setSender(a.getUsername());
+		Message m = messageService.sendMessage(messageDTO);
 		return ResponseEntity.ok(m);
+	}
+
+	@GetMapping("/read/{id}")
+	public ResponseEntity<Message> getMessage(@PathVariable int id) {
+		Agent a = (Agent) httpSession.getAttribute("user");
+		Message message = messageService.findById(id);
+		return ResponseEntity.ok(message);
 	}
 
 	@GetMapping("/read")
@@ -34,5 +43,13 @@ public class MessagingResource {
 		List<Message> messages = messageService.findByAgent(a);
 		return ResponseEntity.ok(messages);
 	}
+
+	@GetMapping("/seen/{id}")
+	public ResponseEntity<Message> setSeen(@PathVariable int id) {
+		Message message = messageService.setSeen(id);
+		return ResponseEntity.ok(message);
+	}
+
+
 
 }

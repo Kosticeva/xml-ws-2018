@@ -1,12 +1,9 @@
 package com.xml.booking.repository;
 
-import com.xml.booking.domain.Agent;
+import com.xml.booking.domain.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AgentRepository  extends JpaRepository<Agent, String> {
-
-	Agent findOneByUsername(String username);
-
+public interface ImageRepository extends JpaRepository<Image, Integer> {
 }

@@ -1,14 +1,17 @@
 package com.xml.booking.service;
 
 
+import com.xml.booking.agent.rest.dto.AgentMessageDTO;
 import com.xml.booking.domain.Agent;
 import com.xml.booking.domain.Message;
 import com.xml.booking.domain.Reservation;
 import com.xml.booking.domain.User;
+import com.xml.booking.dto.MessageDTO;
 import com.xml.booking.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -81,8 +84,27 @@ public class MessageServiceImpl implements MessageService {
     }
 
     @Override
+    public Message create(AgentMessageDTO messageDTO) {
+        Message m = new Message();
+        m.setMessageId(0);
+        m.setAgent(agentRepository.findOneByUsername(messageDTO.getSender()));
+        m.setUser(userRepository.findOneByUsername(messageDTO.getReceiver()));
+        m.setReaded(false);
+        m.setSender("AGENT");
+        m.setTime(new Timestamp(System.currentTimeMillis()));
+        m.setContent(messageDTO.getContent());
+        return messageRepository.save(m);
+    }
+
+    @Override
     public void delete(int id) {
         messageRepository.deleteById(id);
     }
 
+    @Override
+    public Message setSeen(int id) {
+        Message m = messageRepository.findById(id).get();
+        m.setReaded(true);
+        return messageRepository.save(m);
+    }
 }

@@ -1,5 +1,6 @@
 package com.xml.booking.agent.rest;
 
+import com.xml.booking.agent.rest.dto.AgentMessageDTO;
 import com.xml.booking.domain.Message;
 import com.xml.booking.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,8 @@ public class AgentMessageResource {
 	MessageService messageService;
 
 	@PostMapping("/create")
-	public ResponseEntity<Message> createMessage(@RequestBody Message message) {
-		message.setMessageId(0);
-		Message m = messageService.sendMessage(message);
+	public ResponseEntity<Message> createMessage(@RequestBody AgentMessageDTO messageDTO) {
+		Message m = messageService.create(messageDTO);
 		return ResponseEntity.ok(m);
 	}
 
@@ -53,6 +53,12 @@ public class AgentMessageResource {
 	public ResponseEntity<List<Message>> getMessage(@PathVariable String userUsername, @PathVariable String agentUsername) {
 		List<Message> messages = messageService.getConversation(userUsername, agentUsername);
 		return ResponseEntity.ok(messages);
+	}
+
+	@GetMapping("/seen/{id}")
+	public ResponseEntity<Message> setSeen(@PathVariable int id) {
+		Message message = messageService.setSeen(id);
+		return ResponseEntity.ok(message);
 	}
 
 }

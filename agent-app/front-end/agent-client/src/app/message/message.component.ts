@@ -13,7 +13,7 @@ export class MessageComponent implements OnInit {
   constructor(private messageService: MessageService) { }
 
   ngOnInit() {
-    
+    this.getMessages();
   }
 
   getMessages() {

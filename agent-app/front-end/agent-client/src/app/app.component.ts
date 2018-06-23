@@ -13,8 +13,6 @@ export class AppComponent {
   }
 
   logout() {
-    this.loginService.logout().subscribe(data => {
-      alert(data);
-    });
+    this.loginService.logout().subscribe();
   }
 }

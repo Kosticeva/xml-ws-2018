@@ -1,0 +1,5 @@
+<div *ngIf="message !== undefined">
+  <p>{{message.content}}</p>
+  <input [(ngModel)]="replyText">
+  <button (click)="sendMessage()">Send</button>
+</div>

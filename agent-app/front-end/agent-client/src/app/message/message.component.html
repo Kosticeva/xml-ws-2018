@@ -1,6 +1,6 @@
 <div>
   <button (click)="getMessages()">Get messages</button>
   <div *ngFor="let message of messages">
-    <a>{{message.messageId}}</a>
+    <p>{{message.content}}&nbsp;<button routerLink="/reply/{{message.messageId}}">Reply</button></p>
   </div>
 </div>

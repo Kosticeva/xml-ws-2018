@@ -41,6 +41,9 @@ public class SyncService {
 	TLocationRepository locationRepository;
 
 	@Autowired
+	ImageRepository imageRepository;
+
+	@Autowired
 	RestTemplate restTemplate;
 
 	public void initializeOnLogin() {
@@ -51,6 +54,7 @@ public class SyncService {
 		getPrices();
 		getCategories();
 		getLocations();
+		getImages();
 		getAccomodations();
 		getReservations();
 		getMessages();
@@ -123,6 +127,16 @@ public class SyncService {
 		for(TLocation l:locations) {
 			System.out.println(l);
 			locationRepository.save(l);
+		}
+	}
+
+	public void getImages() {
+		ResponseEntity<Image[]> responseEntity = restTemplate.getForEntity("http://localhost:8091/image/read", Image[].class);
+		Image[] images = responseEntity.getBody();
+
+		for(Image i:images) {
+			System.out.println(i);
+			imageRepository.save(i);
 		}
 	}
 
