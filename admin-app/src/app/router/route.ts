@@ -14,7 +14,7 @@ const APP_ROUTES: Routes=[
     children:[
       {path:'',component: UsersComponent},
       {path:'register-agent',component: AgentRegistrationComponent},
-      {path:'review',component: ReviewsComponent},
+      {path:'reviews',component: ReviewsComponent},
       {path:'accomodation',component: AccomodationComponent},
       {path:'add-type',component: AddTypeComponent},
       {path:'add-service',component: AddServiceComponent}

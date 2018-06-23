@@ -14,6 +14,10 @@ export class AccommodationService {
 		};*/
 		return this.http.get<Accomodation>(`http://localhost:8091/accommodation/get/${id}`/*, httpOptions*/);
 	}
+
+	getImages(id: number): Observable<any>{
+		return this.http.get('http://localhost:8091/accommodation/get/images/'+id);
+	}
   
 	getReviewByGrade(accId: number, value: number): Observable<any> {
 		return this.http.get(`http://localhost:8091/reviews/accommodation/`+accId+`/grade/`+value);

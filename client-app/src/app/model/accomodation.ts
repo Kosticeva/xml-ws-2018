@@ -11,7 +11,7 @@ export class Accomodation {
         public price: number,
         public agentUsername: string,
         public type: string,
-        public category: string,
+        public categoryName: string,
         public services: string[],
         public persons: number,
         public days: number

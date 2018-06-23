@@ -39,13 +39,24 @@ public class PriceService {
             }
 
             if(priceValidForDay.size() != 0){
+                boolean flag = false;
                 for(TPrice foundPrice: priceValidForDay){
                     for(TPrice accPrice: accomodation.getPrices()){
                         if(foundPrice.getId().equals(accPrice.getId())){
                             priceForOne += foundPrice.getValue();
+                            flag = true;
                             break;
                         }
                     }
+
+                    if(flag){
+                        break;
+                    }
+                }
+
+                if(!flag){
+                    System.out.println("Smestaj "+accomodation.getAccommodationId()+" nema cenu za datum: "+date);
+                    return null;
                 }
             }else{
                 System.out.println("Nema cene za datum: "+date);

@@ -37,7 +37,7 @@
     <ul class="list-group" *ngIf="categoriesOpen">
       <li *ngFor="let category of allCategories" class="list-group-item form-check d-flex justify-content-between container-fluid">
         <label for="{{category.idd}}" class="form-check-label">{{category.categoryName}}</label>
-        <input type="checkbox" class="form-check-input" id="category.idd}}" name="cat" [(ngModel)]="category.checked" (change)="checkFilter(category.categoryName, 1)"/>
+        <input type="checkbox" class="form-check-input" id="{{category.idd}}" name="cat" [(ngModel)]="category.checked" (change)="checkFilter(category.categoryName, 1)"/>
       </li>
     </ul>
     <hr />
