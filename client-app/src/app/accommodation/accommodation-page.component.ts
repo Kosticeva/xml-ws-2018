@@ -21,7 +21,7 @@ export class AccommodationPageComponent implements OnInit {
 	price: number;
 	persons: number;
 	images: {
-		link: string,
+		image: string,
 		id: number
 	}[];
 
@@ -43,6 +43,8 @@ export class AccommodationPageComponent implements OnInit {
 		) { }
 
 	ngOnInit() {
+		this.images = [];
+		this.currPic = -1;
 		this.filterGrade = 0;
 		const id = +this.route.snapshot.paramMap.get('id');
 		this.dateStart = this.toDate(this.route.snapshot.queryParamMap.get('datestart'));
@@ -50,7 +52,6 @@ export class AccommodationPageComponent implements OnInit {
 		this.persons = +this.route.snapshot.queryParamMap.get('persons');
 		this.price = +this.route.snapshot.queryParamMap.get('price');
 		this.getAccommodation(id);
-		this.images = [];
 		this.reviews = [];
 	}
 
@@ -59,7 +60,13 @@ export class AccommodationPageComponent implements OnInit {
 	}
 
 	getAccommodation(id) {
-		this.accommodationService.getAccommodation(id).subscribe(accommodation => this.accommodation = accommodation);
+		this.accommodationService.getAccommodation(id).subscribe(accommodation => {
+			this.accommodation = accommodation;
+			this.accommodationService.getImages(id).subscribe((data) => {
+				this.images = data;
+				this.currPic = 0;
+			})
+		});
 	}
 	
 	createReservation() {
@@ -87,19 +94,19 @@ export class AccommodationPageComponent implements OnInit {
 		}else{
 		  this.currPic += 1;
 		}
-	  }
+	}
 	
-	  prevPic(){
+	prevPic(){
 		if(this.currPic === 0){
 		  this.currPic = this.images.length -1;
 		}else{
 		  this.currPic -=1;
 		}
-	  }
+	}
 	
-	  goToImage(id: number){
-		this.currPic = id;
-	  }
+	goToImage(image: any){
+		this.currPic = this.images.indexOf(image);
+	}
 	
 	filterGrades(){
 		this.reviews = [];

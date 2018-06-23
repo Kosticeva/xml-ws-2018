@@ -48,21 +48,21 @@
         <br />
         <hr />
         <div class="card-text component">
-            <div class="row carousel slide" style="height: 500px" data-ride="carousel" id="carouselExampleSlidesOnly">
+            <div *ngIf="images.length > 0" class="row carousel slide" style="height: 500px" data-ride="carousel" id="carouselExampleSlidesOnly">
                 <ol class="carousel-indicators">
-                    <li *ngFor="let image of images" data-target="#carouselExampleSlidesOnly" (click)="goToImage(image.id)" [ngClass]="{'active': currPic === image.id}"></li>
+                    <li *ngFor="let image of images" data-target="#carouselExampleSlidesOnly" (click)="goToImage(image)" [ngClass]="{'active': images[currPic].id === image.id, 'bg-primary': images[currPic].id !== image.id}"></li>
                 </ol>
                 <div class="carousel-inner mh-100">
-                    <div *ngFor="let image of images" class="col c-3 carousel-item" [ngClass]="{'active': currPic === image.id}">
-                        <img class="d-block w-100" src="{{image.link}}"/>
+                    <div *ngFor="let image of images" class="col c-3 carousel-item" [ngClass]="{'active': images[currPic].id === image.id}">
+                        <img class="d-block w-100" src="{{image.image}}" alt="{{image.id}}"/>
                     </div>
                 </div>
-                <a class="carousel-control-prev" role="button" data-slide="prev" (click)="precPic()">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <a class="carousel-control-prev" role="button" data-slide="prev" (click)="prevPic()">
+                    <span class="carousel-control-prev-icon bg-primary" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" role="button" data-slide="next" (click)="nextPic()">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon bg-primary" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -111,11 +111,11 @@
                         <div class="card-header d-flex justify-content-between">
                             <h6>{{review.user}}</h6>
 							<span>
-								<button class='star-button' [class.active]="review.grade>=1"></button>
-								<button class='star-button' [class.active]="review.grade>=2"></button>
-								<button class='star-button' [class.active]="review.grade>=3"></button>
-								<button class='star-button' [class.active]="review.grade>=4"></button>
-								<button class='star-button' [class.active]="review.grade==5"></button>
+								<button class='star-button' [class.activee]="review.grade>=1"></button>
+								<button class='star-button' [class.activee]="review.grade>=2"></button>
+								<button class='star-button' [class.activee]="review.grade>=3"></button>
+								<button class='star-button' [class.activee]="review.grade>=4"></button>
+								<button class='star-button' [class.activee]="review.grade==5"></button>
 							</span>
                             <!-- <span><b>{{review.grade}}</b></span> -->
                         </div>

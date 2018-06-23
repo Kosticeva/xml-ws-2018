@@ -2,15 +2,17 @@ package com.xml.booking.controllers;
 
 
 import com.xml.booking.domain.Accomodation;
+import com.xml.booking.domain.Image;
 import com.xml.booking.dto.AccomodationDTO;
+import com.xml.booking.repository.ImageRepository;
 import com.xml.booking.service.AccomodationService;
 import com.xml.booking.web.rest.ReviewResource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class AccommodationController {
     @RequestMapping(
             value = "/get/{id}",
             method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE
+            produces = MediaType.APPLICATION_JSON
     )
     public ResponseEntity<AccomodationDTO> get(@PathVariable("id") int accommodationId) {
         Accomodation accomodation = accomodationService.get(accommodationId);
@@ -56,4 +58,13 @@ public class AccommodationController {
 
         return new ResponseEntity<AccomodationDTO>(accomodationDTO, HttpStatus.OK);
     }
+
+    @RequestMapping(
+        value = "/get/images/{id}",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON)
+    public List<Image> accomodationImages(@PathVariable("id") Integer accomodationId){
+        return accomodationService.get(accomodationId).getImages();
+    }
+
 }

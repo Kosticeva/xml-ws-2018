@@ -78,13 +78,13 @@ export class HomeComponent implements OnInit {
 	}
 
 	compareCategory(n1: Accomodation, n2: Accomodation): number{
-		let zv = n1.category.split(' ');
+		let zv = n1.categoryName.split(' ');
 		let v1 = Number(zv[0]);
 		if(isNaN(v1)){
 			v1 = 0;
 		}
 
-		zv = n2.category.split(' ');
+		zv = n2.categoryName.split(' ');
 		let v2 = Number(zv[0]);
 		if(isNaN(v2)){
 			v2 = 0;
