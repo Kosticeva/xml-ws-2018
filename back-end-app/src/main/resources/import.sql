@@ -10,7 +10,15 @@ insert into agent (username, password, businessid, first_name, last_name) values
 
 
 
-
+insert into tlocation values (16, null,"Novi Sad", "Srbija");
+insert into tlocation values (17, null,"London", "United Kingdom");
+insert into tlocation values (18, null,"Washington DC", "United States of America");
+insert into tlocation values (19, null,"Amsterdam", "The Netherlands");
+insert into tlocation values (20, null,"New York", "United States of America");
+insert into tlocation values (21, null,"Hollywood", "United States of America");
+insert into tlocation values (22, null,"Springfield", "United States of America");
+insert into tlocation values (23, null,"Paris", "France");
+insert into tlocation values (24, null,"Little Whinging", "United Kingdom");
 
 insert into tlocation(id, address, city, country) values (1, "Bulevar Oslobodjenja 26", "Novi Sad", "Srbija");
 insert into tlocation(id, address, city, country) values (2, "221b Baker Street", "London", "United Kingdom");
