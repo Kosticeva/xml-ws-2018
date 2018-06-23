@@ -19,4 +19,8 @@ export class LoginService {
     return this.http.post('//localhost:8092/api/logout', undefined, { withCredentials: true });
   }
   
+  checkLoginStatus(): Observable<any> {
+    return this.http.get('//localhost:8092/api/status', { withCredentials: true });
+  }
+
 }

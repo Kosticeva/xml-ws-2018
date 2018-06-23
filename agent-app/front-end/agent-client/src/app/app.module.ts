@@ -12,6 +12,11 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { ReplyComponent } from './reply/reply.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AccomodationsComponent } from './accomodations/accomodations.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -38,8 +43,12 @@ const routes: Routes = [
     component: ReplyComponent
   },
   {
-    path: 'accomodations',
+    path: 'accomodation',
     component: AccomodationComponent
+  },
+  {
+    path: 'accomodations',
+    component: AccomodationsComponent
   }
 ];
 
@@ -51,13 +60,17 @@ const routes: Routes = [
     MessageComponent,
     ReservationComponent,
     ReplyComponent,
-    AccomodationComponent
+    AccomodationComponent,
+    AccomodationsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BsDropdownModule.forRoot(),
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

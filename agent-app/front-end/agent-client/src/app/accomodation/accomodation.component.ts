@@ -11,11 +11,27 @@ export class AccomodationComponent implements OnInit {
 
   accomodationDTO: AccomodationDTO;
 
+  services: any[];
+  types: any[];
+  categories: any[];
+
   constructor(private accomodationService: AccomodationService) {
     this.accomodationDTO = new AccomodationDTO();
   }
 
   ngOnInit() {
+    this.accomodationService.getServices().subscribe(data => {
+      this.services = data;
+      console.log(this.services);
+    });
+    this.accomodationService.getTypes().subscribe(data => {
+      this.types = data;
+      console.log(this.types);
+    });
+    this.accomodationService.getCategories().subscribe(data => {
+      this.categories = data;
+      console.log(this.categories);
+    });
   }
 
   send() {

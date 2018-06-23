@@ -1,30 +1,59 @@
-<div>
-  <p>name</p>
-  <input [(ngModel)]="accomodationDTO.name">
-
-  <p>description</p>
-  <input [(ngModel)]="accomodationDTO.description">
-
-  <p>maxPersons</p>
-  <input [(ngModel)]="accomodationDTO.maxPersons">
-
-  <p>categoryId</p>
-  <input [(ngModel)]="accomodationDTO.categoryId">
-
-  <p>typeId</p>
-  <input [(ngModel)]="accomodationDTO.typeId">
-
-  <p>address</p>
-  <input [(ngModel)]="accomodationDTO.address">
-
-  <p>city</p>
-  <input [(ngModel)]="accomodationDTO.city">
-
-  <p>country</p>
-  <input [(ngModel)]="accomodationDTO.country">
-
-  <p>images</p>
-  <input type="file" multiple accept="image/*" (change)="handleFileInput($event.target.files)">
-
-  <button (click)="send()">Send</button>
+<div class="container">
+  &nbsp;
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input [(ngModel)]="accomodationDTO.name" name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+            placeholder="Enter name">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Description</label>
+          <input [(ngModel)]="accomodationDTO.description" name="description" type="text" class="form-control" id="exampleInputPassword1"
+            placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Capacity {{accomodationDTO.maxPersons}}</label>
+          <input [(ngModel)]="accomodationDTO.maxPersons" name="maxPersons" type="range" min="0" max="30" class="form-control" id="exampleInputPassword1"
+            placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">CategoryId</label>
+          <select [(ngModel)]="accomodationDTO.categoryId" name="categoryId" class="custom-select">
+            <option *ngFor="let category of categories" value="category.categoryId">{{category.categoryName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">TypeId</label>
+          <select [(ngModel)]="accomodationDTO.typeId" name="typeId" class="custom-select">
+            <option *ngFor="let type of types" value="type.typeId">{{type.typeName}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Address</label>
+          <input [(ngModel)]="accomodationDTO.address" name="address" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">City</label>
+          <input [(ngModel)]="accomodationDTO.city" name="city" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Country</label>
+          <input [(ngModel)]="accomodationDTO.country" name="country" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div *ngFor="let service of services" class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="service{{service.serviceID}}">
+          <label class="custom-control-label" for="service{{service.serviceID}}">{{service.serviceName}}</label>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Images</label>
+          <input type="file" multiple accept="image/*" (change)="handleFileInput($event.target.files)" class="form-control">
+        </div>
+        <button (click)="send()" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
 </div>

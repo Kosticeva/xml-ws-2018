@@ -1,10 +1,43 @@
-<div>
-  <button (click)="getReservations()">Get reservations</button>
-  <div *ngFor="let reservation of reservations">
-    <div>
-      <p>{{reservation.reservationId}}</p>
-      <button *ngIf="reservation.realized === false" (click)="approve(reservation.reservationId)">Approve</button>
-      <button *ngIf="reservation.realized === true" (click)="reject(reservation.reservationId)">Reject</button>
+<div style="padding: 15px">
+    <h2>
+        <span>Reservations</span>
+        <button class="btn btn-primary float-right">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Reservation
+            </span>
+        </button>
+    </h2>
+    <div class="row">
     </div>
-  </div>
+    <br/>
+    <div class="table-responsive" *ngIf="reservations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let reservation of reservations">
+                <td>{{reservation.reservationId}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit" *ngIf="reservation.realized === false" (click)="approve(reservation.reservationId)"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">Accept</span>
+                        </button>
+                        <button type="submit" *ngIf="reservation.realized === true" (click)="reject(reservation.reservationId)"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Reject</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

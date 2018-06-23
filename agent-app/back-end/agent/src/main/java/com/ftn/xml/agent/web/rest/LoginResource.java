@@ -2,6 +2,7 @@ package com.ftn.xml.agent.web.rest;
 
 import com.ftn.xml.agent.domain.Agent;
 import com.ftn.xml.agent.dto.LoginDTO;
+import com.ftn.xml.agent.dto.StatusDTO;
 import com.ftn.xml.agent.service.AuthService;
 import com.ftn.xml.agent.service.SyncService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,17 @@ public class LoginResource {
 		Agent a = new Agent();
 		session.invalidate();
 		return ResponseEntity.ok(a);
+	}
+
+	@GetMapping("/status")
+	public ResponseEntity<StatusDTO> checkStatus() {
+		StatusDTO statusDTO = new StatusDTO();
+		if(session.getAttribute("user") != null) {
+			Agent agent = (Agent) session.getAttribute("user");
+			statusDTO.setStatus(true);
+			statusDTO.setUsername(agent.getUsername());
+		}
+		return ResponseEntity.ok(statusDTO);
 	}
 
 }
