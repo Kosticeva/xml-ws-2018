@@ -61,6 +61,7 @@ export class FilterComponent implements OnInit {
     country: string
   }[];
 
+  dateOk: string;
   constructor(
     private filterService: FilterService,
 	private queryShareService :QueryShareService
@@ -68,7 +69,7 @@ export class FilterComponent implements OnInit {
 
   ngOnInit() {
 	  
-	  
+	  this.dateOk = "";
     this.allCategories = [];
     this.allServices = [];
     this.allTypes = [];
@@ -142,11 +143,16 @@ export class FilterComponent implements OnInit {
   }
 
   public doSearchh() {
+    this.dateOk = "";
+    if(this.query.dateOfArrival >= this.query.dateOfReturn){
+      this.dateOk = "Razlika izmedju dana dolaska i odlaska mora biti barem 1 dan!";
+      return;
+    }
 	  
 	  this.queryShareService.setQuery(this.query);
     this.accomodations.splice(0, this.accomodations.length);
 
-    if(this.categoriesOpen == false && this.typesOpen == false && this.servicesOpen == false){
+    if(this.filters.length == 0){
       this.filterService.doSearch(this.query).subscribe(
         (data) => {
           for(let i=0; i<data.length; i++){
@@ -165,13 +171,17 @@ export class FilterComponent implements OnInit {
       
       let types = [];
       for(let i=0; i<this.allTypes.length; i++){
-        types.push(this.allTypes[i].typeID);
+        if(this.allTypes[i].checked){
+          types.push(this.allTypes[i].typeID);
+        }
       }
       this.query.accomodationTypes = types;
   
       let services = [];
       for(let i=0; i<this.allServices.length; i++){
-        services.push(this.allServices[i].serviceID);
+        if(this.allServices[i].checked){
+          services.push(this.allServices[i].serviceID);
+        }
       }
       this.query.accomodationServices = services;
 

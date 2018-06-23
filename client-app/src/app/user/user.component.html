@@ -32,7 +32,20 @@
 						<div><span style='color:#aaa;'>(Za {{reservation.numPersons}} osobe)</span> - <span style='color:black;'>{{reservation.finalPrice}} rsd</span></div>
 					</li>
 				</ul>
-				<div *ngIf="!reservationsInactive || reservationsInactive.length==0" style='color:#bbb; text-align:center;'>(nemate otkazanih rezervacija)</div>
+				<div *ngIf="!reservationsInactive || reservationsInactive.length==0" style='color:#bbb; text-align:center; margin-bottom:20px;'>(nemate otkazanih rezervacija)</div>
+			</div>
+			<div>
+				<div style='background-color:#d4f92c; color: white; font-size: x-large; padding:5px 10px;'>Realizovane rezervacije</div>
+				<ul style='list-style:none; margin-left:0px; padding:0px; '>
+					<li *ngFor="let reservation of reservationsRealized" style='border-bottom: #d4f92c 1px solid; padding: 5px 10px;'>
+						<button style='float:right;' class='btn' routerLinkActive="active" [routerLink]="['/review', reservation.accomodationId]" >Ostavi komentar</button>
+						<div>{{reservation.accomodationName}}</div>
+						<div>{{reservation.accomodationAddress}}</div>
+						<div ><span style='color:#999'>{{reservation.startDate | date}}</span> - <span style='color:#999'>{{reservation.endDate | date}}</span></div>
+						<div><span style='color:#aaa;'>(Za {{reservation.numPersons}} osobe)</span> - <span style='color:black;'>{{reservation.finalPrice}} rsd</span></div>
+					</li>
+				</ul>
+				<div *ngIf="!reservationsRealized || reservationsRealized.length==0" style='color:#bbb; text-align:center; margin-bottom:20px;'>(nemate realizovanih rezervacija)</div>
 			</div>
 		</div>
 	</div>

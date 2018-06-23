@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-accommodation-page',
   templateUrl: './accommodation-page.component.html',
+  styleUrls: ['./accommodation-page.component.css'],
   providers: [ AccommodationService, ReservationService ]
 })
 export class AccommodationPageComponent implements OnInit {

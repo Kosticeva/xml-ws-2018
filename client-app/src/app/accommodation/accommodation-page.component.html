@@ -110,10 +110,17 @@
                     <li *ngFor="let review of reviews" class="card list-group-item">
                         <div class="card-header d-flex justify-content-between">
                             <h6>{{review.user}}</h6>
-                            <span><b>{{review.grade}}</b></span>
+							<span>
+								<button class='star-button' [class.active]="review.grade>=1"></button>
+								<button class='star-button' [class.active]="review.grade>=2"></button>
+								<button class='star-button' [class.active]="review.grade>=3"></button>
+								<button class='star-button' [class.active]="review.grade>=4"></button>
+								<button class='star-button' [class.active]="review.grade==5"></button>
+							</span>
+                            <!-- <span><b>{{review.grade}}</b></span> -->
                         </div>
                         <div class="card-body">
-                            <p *ngIf="review.approved">{{review.comment}}</p>
+                            <p *ngIf="review.approved">{{review.comment}}</p> <!--REVIEW APPROVAL (???)-->
                         </div>
                     </li>
                 </ul>

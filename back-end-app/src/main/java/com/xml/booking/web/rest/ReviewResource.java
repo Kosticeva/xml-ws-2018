@@ -2,17 +2,23 @@ package com.xml.booking.web.rest;
 
 import com.xml.booking.domain.Review;
 import com.xml.booking.dto.ReviewDTO;
+import com.xml.booking.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.ws.rs.core.MediaType;
+import java.security.Principal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/reviews")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class ReviewResource {
+
+    @Autowired
+    UserService userService;
 
     RestTemplate restTemplate;
 
@@ -45,8 +51,12 @@ public class ReviewResource {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON, consumes = MediaType.APPLICATION_JSON)
-    public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO review){
+    public ResponseEntity<ReviewDTO> createReview(@RequestBody ReviewDTO review, Principal user){
         System.out.println("Back end: create");
+
+        review.setUser(userService.findUser(user.getName()).getUsername()); //ako ga ne nadje u repo, puca
+        review.setAllowed(false);
+
         ReviewDTO dto = restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews", review, ReviewDTO.class);
 
         if(dto != null){

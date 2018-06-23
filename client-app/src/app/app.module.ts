@@ -14,6 +14,7 @@ import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { MessagesComponent } from './messages/messages.component';
 import { FilterService } from './filter/filter.service';
+import { ReviewComponent } from './review/review.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FilterService } from './filter/filter.service';
     LoginComponent,
     UserComponent,
     RegisterComponent,
-    MessagesComponent
+    MessagesComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

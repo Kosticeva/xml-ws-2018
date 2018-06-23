@@ -88,5 +88,18 @@ public class ResevationController {
         }
         return new ResponseEntity<List<ReservationDTO>>(reservationDTOS, HttpStatus.OK);
     }
+    @RequestMapping(
+            value = "getbyuserrealized/{username}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<List<ReservationDTO>> getAllByUserRealized(@PathVariable("username") String username, Principal user) {
+        List<Reservation> reservations = reservationService.getAllByUsernameRealized(user.getName());
+        List<ReservationDTO> reservationDTOS = new ArrayList<ReservationDTO>();
+        for (Reservation r : reservations) {
+            reservationDTOS.add(new ReservationDTO(r));
+        }
+        return new ResponseEntity<List<ReservationDTO>>(reservationDTOS, HttpStatus.OK);
+    }
 
 }

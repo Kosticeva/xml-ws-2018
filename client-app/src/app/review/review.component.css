@@ -1,0 +1,11 @@
+.star-button {
+	background:url(./images/but.png) no-repeat;
+    cursor:pointer;
+    border:none;
+    width:32px;
+    height:32px;
+}
+.active 
+{   
+    background:url(./images/butactive.png) no-repeat;
+}

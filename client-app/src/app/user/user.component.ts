@@ -15,6 +15,7 @@ export class UserComponent implements OnInit {
 	user : User;
 	reservationsActive : Reservation[];
 	reservationsInactive : Reservation[];
+	reservationsRealized : Reservation[];
 
 	constructor(private userService : UserService, private reservationService : ReservationService) { }
 
@@ -30,6 +31,7 @@ export class UserComponent implements OnInit {
 	getReservations() {
 		this.reservationService.getReservationsForUserActive(this.user.username).subscribe(ress => this.reservationsActive = ress);
 		this.reservationService.getReservationsForUserInActive(this.user.username).subscribe(ress => this.reservationsInactive = ress);
+		this.reservationService.getReservationsForUserRealized(this.user.username).subscribe(ress => this.reservationsRealized = ress);
 	}
 	
 	cancelReservation(reservationId : number) {

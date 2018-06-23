@@ -9,7 +9,10 @@ import com.xml.booking.web.rest.util.SearchQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -72,20 +75,20 @@ public class SearchService {
         for(TLocation tl: locations){
 
             if(types.size() > 0 && categories.size() > 0 && services.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndCategoryInAndAccomodationServicesIn(
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndAccomodationTypeInAndCategoryInAndAccomodationServicesIn(
                         tl, types, categories, services));
             }else if(types.size() > 0 && categories.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndCategoryIn(tl, types, categories));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndAccomodationTypeInAndCategoryIn(tl, types, categories));
             }else if(types.size() > 0 && services.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeInAndAccomodationServicesIn(tl, types, services));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndAccomodationTypeInAndAccomodationServicesIn(tl, types, services));
             }else if(services.size() > 0 && categories.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndCategoryInAndAccomodationServicesIn(tl, categories, services));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndCategoryInAndAccomodationServicesIn(tl, categories, services));
             }else if(types.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationTypeIn(tl, types));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndAccomodationTypeIn(tl, types));
             }else if(categories.size() > 0){
-                accomodations.addAll(accomodationRepository.findByLocationAndCategoryIn(tl, categories));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndCategoryIn(tl, categories));
             }else if(services.size() > 0) {
-                accomodations.addAll(accomodationRepository.findByLocationAndAccomodationServicesIn(tl, services));
+                accomodations.addAll(accomodationRepository.findDistinctByLocationAndAccomodationServicesIn(tl, services));
             }
         }
 
@@ -155,18 +158,48 @@ public class SearchService {
     }
 
     private boolean checkIfThereIsAPlaceAvailable(Accomodation ac, SearchQuery searchQuery){
-        List<Reservation> reservations = reservationRepository.findByAccomodationAndStartDateBeforeAndEndDateAfter(ac, searchQuery.getDateOfArrival(), searchQuery.getDateOfReturn());
+        LocalDate startLDate = LocalDate.parse(searchQuery.getDateOfArrival().toString());
+        LocalDate endLDate = LocalDate.parse(searchQuery.getDateOfReturn().toString());
 
-        int sum = 0;
-        for(Reservation res: reservations){
-            sum += res.getNumPersons();
+        System.out.println("ACC "+ac.getAccommodationId());
+        //za svaki dan pretrage
+        //treba pronaci rezervacije za taj dan
+        //sabrati ljude
+        //ako ima mesta, vraca se
+        for (LocalDate date = startLDate; date.isBefore(endLDate); date = date.plusDays(1)) {
+            System.out.println("Pretraga rezervacija aktivnih za datum "+date);
+            Date dt = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            List<Reservation> reservations = reservationRepository.findByAccomodationAndStartDateBeforeAndEndDateAfter(ac, dt, dt);
+
+            if(reservations.size() == 0){
+                dt =Date.from(date.minusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+                System.out.println("Pretraga rezervacija aktivnih za datum "+dt);
+                reservations = reservationRepository.findByAccomodationAndStartDateBeforeAndEndDateAfter(ac, dt, dt);
+            }
+
+            if(reservations.size() == 0){
+                dt = Date.from(date.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+                System.out.println("Pretraga rezervacija aktivnih za datum "+dt);
+                reservations = reservationRepository.findByAccomodationAndStartDateBeforeAndEndDateAfter(ac,dt, dt);
+            }
+
+
+            int sum = 0;
+            for(Reservation res: reservations){
+                System.out.print(res.getReservationId()+", ");
+                sum += res.getNumPersons();
+            }
+
+            System.out.println("");
+            if(sum + searchQuery.getPersons() > ac.getMaxPersons()){
+                System.out.println(sum+" + "+searchQuery.getPersons()+" > "+ac.getMaxPersons());
+                return false;
+            }else{
+                System.out.println(sum+" + "+searchQuery.getPersons()+" <= "+ac.getMaxPersons());
+            }
         }
 
-        if(sum + searchQuery.getPersons() < ac.getMaxPersons()){
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     public List<TLocation> getAllLocationsMatchingTheCriteria(String query){

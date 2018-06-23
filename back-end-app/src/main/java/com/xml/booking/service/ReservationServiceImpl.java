@@ -60,11 +60,16 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public List<Reservation> getAllByUsernameActive(String username) {
         User user = userRepository.findById(username).orElse(null);
-        return reservationRepository.findByUserAndActive(user, true);
+        return reservationRepository.findByUserAndActiveAndRealized(user, true, false);
     }
     @Override
     public List<Reservation> getAllByUsernameInActive(String username) {
         User user = userRepository.findById(username).orElse(null);
-        return reservationRepository.findByUserAndActive(user, false);
+        return reservationRepository.findByUserAndActiveAndRealized(user, false, false);
+    }
+    @Override
+    public List<Reservation> getAllByUsernameRealized(String username) {
+        User user = userRepository.findById(username).orElse(null);
+        return reservationRepository.findByUserAndRealized(user, true);
     }
 }
