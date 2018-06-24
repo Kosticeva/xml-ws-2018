@@ -47,7 +47,8 @@ public class AccomodationResource {
 
 	@GetMapping("/read")
 	public ResponseEntity<List<Accomodation>> getAccomodations() {
-		List<Accomodation> accomodations = accomodationService.findAll();
+		Agent a = (Agent) session.getAttribute("user");
+		List<Accomodation> accomodations = accomodationService.findAll(a);
 		return ResponseEntity.ok(accomodations);
 	}
 

@@ -1,5 +1,6 @@
 package com.ftn.xml.agent.web.rest;
 
+import com.ftn.xml.agent.domain.Agent;
 import com.ftn.xml.agent.domain.Reservation;
 import com.ftn.xml.agent.dto.ReservationDTO;
 import com.ftn.xml.agent.service.ReservationService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -17,6 +19,9 @@ public class ReservationResource {
 	@Autowired
 	ReservationService reservationService;
 
+	@Autowired
+	HttpSession session;
+
 	@PostMapping("/create")
 	public ResponseEntity<Reservation> createReservation(@RequestBody ReservationDTO reservationDTO) {
 		Reservation r = reservationService.createReservation(reservationDTO);
@@ -25,7 +30,8 @@ public class ReservationResource {
 
 	@GetMapping("/read")
 	public ResponseEntity<List<Reservation>> getReservations() {
-		List<Reservation> reservations = reservationService.findAll();
+		Agent a = (Agent) session.getAttribute("user");
+		List<Reservation> reservations = reservationService.findAll(a);
 		return ResponseEntity.ok(reservations);
 	}
 

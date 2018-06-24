@@ -1,5 +1,17 @@
-<div *ngIf="message !== undefined">
-  <p>{{message.content}}</p>
-  <input [(ngModel)]="replyText">
-  <button (click)="sendMessage()">Send</button>
+<div class="container">
+  &nbsp;
+  <div *ngIf="message !== undefined" class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">{{message.user.username}}:&nbsp;{{message.content}}</label>
+          <input [(ngModel)]="replyText" name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="reply"
+            placeholder="Reply to user">
+        </div>
+        <button (click)="sendMessage()" class="btn btn-primary">Reply</button>
+      </form>
+    </div>
+    <div class="col-md"></div>
+  </div>
 </div>

@@ -1,6 +1,7 @@
 package com.ftn.xml.agent.service;
 
 import com.ftn.xml.agent.domain.Accomodation;
+import com.ftn.xml.agent.domain.Agent;
 import com.ftn.xml.agent.domain.Image;
 import com.ftn.xml.agent.domain.TLocation;
 import com.ftn.xml.agent.dto.AccomodationDTO;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,9 @@ public class AccomodationService {
     TLocationRepository locationRepository;
 
     @Autowired
+    HttpSession session;
+
+    @Autowired
     RestTemplate restTemplate;
 
     public Accomodation save(AccomodationDTO accomodationDTO) {
@@ -63,8 +68,8 @@ public class AccomodationService {
         return accomodationRepository.findById(id).orElse(null);
     }
 
-    public List<Accomodation> findAll() {
-        return accomodationRepository.findAll();
+    public List<Accomodation> findAll(Agent a) {
+        return accomodationRepository.findByAgent(a);
     }
 
     public void delete(int id) {

@@ -20,4 +20,6 @@ public interface AccomodationRepository extends JpaRepository<Accomodation, Inte
     List<Accomodation> findByLocationAndCategoryIn(TLocation location, List<Category> categories);
     List<Accomodation> findByLocationAndAccomodationTypeIn(TLocation location, List<AccomodationType> accomodationTypes);
     List<Accomodation> findByLocationAndAccomodationServicesIn(TLocation location, List<AccomodationService> accomodationServices);
+
+    List<Accomodation> findByAgent(Agent agent);
 }

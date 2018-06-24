@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AccomodationDTO } from '../../accomodation/accomodationDTO.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccomodationService {
 
-  constructor(private http: HttpClient) { }
+  activePort: number;
+
+  constructor(private http: HttpClient) {
+    this.activePort = +window.location.port;
+  }
 
   getAll(): Observable<any> {
     return this.http.get('//localhost:8092/accomodation/read', { withCredentials: true });

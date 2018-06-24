@@ -1,6 +1,7 @@
 package com.ftn.xml.agent.repository;
 
 import com.ftn.xml.agent.domain.Accomodation;
+import com.ftn.xml.agent.domain.Agent;
 import com.ftn.xml.agent.domain.Reservation;
 import com.ftn.xml.agent.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
