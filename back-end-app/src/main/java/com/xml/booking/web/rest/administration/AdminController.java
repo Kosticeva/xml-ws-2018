@@ -1,42 +1,37 @@
 package com.xml.booking.web.rest.administration;
 
-
-import com.xml.booking.domain.Agent;
-import com.xml.booking.domain.Review;
-import com.xml.booking.domain.User;
-import com.xml.booking.dto.ReviewDTO;
-import com.xml.booking.service.AccomodationService;
-import com.xml.booking.service.AdminService;
-import com.xml.booking.service.UserService;
-import com.xml.booking.web.rest.ReviewResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.xml.booking.domain.Agent;
+import com.xml.booking.domain.Review;
+import com.xml.booking.domain.User;
+import com.xml.booking.service.AdminService;
+import com.xml.booking.service.ReviewService;
 
 @RestController
 @RequestMapping("/admin")
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 public class AdminController {
 
-
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private AdminService adminService;
 
-    private UserService userService;
+    private ReviewService reviewService;
 
-    private AccomodationService accomodationService;
-
-    private ReviewResource reviewResource;
-
-    public AdminController(AdminService adminService, ReviewResource reviewResource, AccomodationService accomodationService, UserService userService) {
+    public AdminController(AdminService adminService, ReviewService reviewService) {
         this.adminService = adminService;
-        this.reviewResource = reviewResource;
-        this.userService = userService;
-        this.accomodationService = accomodationService;
+        this.reviewService = reviewService;
     }
 
     @PostMapping("/create-agent")
@@ -76,36 +71,16 @@ public class AdminController {
     @PutMapping("/allow-review")
     public ResponseEntity<Review> allowReview(@RequestBody Review review) {
         logger.debug("Allow reivew endpoint!");
-        ReviewDTO r = this.reviewResource.allowReview(review);
-
-        if (r != null) {
-            Review rr = new Review();
-            rr.setReviewId(r.getReviewId());
-            rr.setGrade(r.getGrade());
-            rr.setAllowed(r.isAllowed());
-            rr.setComment(r.getComment());
-            rr.setUser(userService.findUser(r.getUser()));
-            rr.setAccomodation(accomodationService.get(r.getAccomodationId()));
-            return new ResponseEntity<>(rr, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(new Review(), HttpStatus.BAD_REQUEST);
+        Review r = this.reviewService.allowReview(review, true);
+        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
+        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/decline-review")
     public ResponseEntity<Review> declineReview(@RequestBody Review review) {
         logger.debug("Allow reivew endpoint!");
-        ReviewDTO r = this.reviewResource.declineReview(review);
-
-        if (r != null) {
-            Review rr = new Review();
-            rr.setReviewId(r.getReviewId());
-            rr.setGrade(r.getGrade());
-            rr.setAllowed(r.isAllowed());
-            rr.setComment(r.getComment());
-            rr.setUser(userService.findUser(r.getUser()));
-            rr.setAccomodation(accomodationService.get(r.getAccomodationId()));
-            return new ResponseEntity<>(rr, HttpStatus.OK);
-        }
-        return new ResponseEntity<>(new Review(), HttpStatus.BAD_REQUEST);
+        Review r = this.reviewService.allowReview(review, false);
+        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
+        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
     }
 }

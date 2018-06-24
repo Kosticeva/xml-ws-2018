@@ -8,14 +8,23 @@
 
 package com.xml.booking.domain;
 
-import javax.xml.bind.annotation.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 
 /**
  * <p>Java class for anonymous complex type.
- * 
+ *
  * <p>The following schema fragment specifies the expected content contained within this class.
- * 
+ *
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -32,27 +41,31 @@ import javax.xml.bind.annotation.*;
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
- * 
- * 
+ *
+ *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "grade",
-    "accomodation",
-    "user",
-    "comment",
-    "reviewId"
+        "grade",
+        "accomodation",
+        "user",
+        "comment",
+        "reviewId"
 })
+@Entity
 @XmlRootElement(name = "review")
 public class Review {
 
     protected int grade;
     @XmlElement(required = true)
+    @ManyToOne
     protected Accomodation accomodation;
     @XmlElement(required = true)
+    @ManyToOne
     protected User user;
     @XmlElement(required = true)
     protected String comment;
+    @Id
     @XmlElement(name = "review-id")
     protected int reviewId;
     @XmlAttribute(name = "allowed")
@@ -60,7 +73,7 @@ public class Review {
 
     /**
      * Gets the value of the grade property.
-     * 
+     *
      */
     public int getGrade() {
         return grade;
@@ -68,7 +81,7 @@ public class Review {
 
     /**
      * Sets the value of the grade property.
-     * 
+     *
      */
     public void setGrade(int value) {
         this.grade = value;
@@ -76,11 +89,11 @@ public class Review {
 
     /**
      * Gets the value of the accomodation property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Accomodation }
-     *     
+     *
      */
     public Accomodation getAccomodation() {
         return accomodation;
@@ -88,11 +101,11 @@ public class Review {
 
     /**
      * Sets the value of the accomodation property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Accomodation }
-     *     
+     *
      */
     public void setAccomodation(Accomodation value) {
         this.accomodation = value;
@@ -100,11 +113,11 @@ public class Review {
 
     /**
      * Gets the value of the user property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link User }
-     *     
+     *
      */
     public User getUser() {
         return user;
@@ -112,11 +125,11 @@ public class Review {
 
     /**
      * Sets the value of the user property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link User }
-     *     
+     *
      */
     public void setUser(User value) {
         this.user = value;
@@ -124,11 +137,11 @@ public class Review {
 
     /**
      * Gets the value of the comment property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link String }
-     *     
+     *
      */
     public String getComment() {
         return comment;
@@ -136,11 +149,11 @@ public class Review {
 
     /**
      * Sets the value of the comment property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link String }
-     *     
+     *
      */
     public void setComment(String value) {
         this.comment = value;
@@ -148,7 +161,7 @@ public class Review {
 
     /**
      * Gets the value of the reviewId property.
-     * 
+     *
      */
     public int getReviewId() {
         return reviewId;
@@ -156,7 +169,7 @@ public class Review {
 
     /**
      * Sets the value of the reviewId property.
-     * 
+     *
      */
     public void setReviewId(int value) {
         this.reviewId = value;
@@ -164,11 +177,11 @@ public class Review {
 
     /**
      * Gets the value of the allowed property.
-     * 
+     *
      * @return
      *     possible object is
      *     {@link Boolean }
-     *     
+     *
      */
     public Boolean isAllowed() {
         return allowed;
@@ -176,11 +189,11 @@ public class Review {
 
     /**
      * Sets the value of the allowed property.
-     * 
+     *
      * @param value
      *     allowed object is
      *     {@link Boolean }
-     *     
+     *
      */
     public void setAllowed(Boolean value) {
         this.allowed = value;
