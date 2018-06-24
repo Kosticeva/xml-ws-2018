@@ -2,6 +2,7 @@ package com.ftn.xml.agent.service;
 
 import com.ftn.xml.agent.domain.Accomodation;
 import com.ftn.xml.agent.domain.Image;
+import com.ftn.xml.agent.domain.TLocation;
 import com.ftn.xml.agent.dto.AccomodationDTO;
 import com.ftn.xml.agent.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,16 @@ public class AccomodationService {
     ImageRepository imageRepository;
 
     @Autowired
+    TLocationRepository locationRepository;
+
+    @Autowired
     RestTemplate restTemplate;
 
     public Accomodation save(AccomodationDTO accomodationDTO) {
+
+        System.out.println(accomodationDTO.getCategory());
+
+        accomodationDTO.setCategory(1);
 
         ResponseEntity<Accomodation> res = restTemplate.postForEntity("http://localhost:8091/accomodation/create",
                 accomodationDTO, Accomodation.class);
@@ -44,9 +52,9 @@ public class AccomodationService {
         System.out.println(a);
         List<Image> images = new ArrayList<>();
         for(String img: accomodationDTO.getImages()) {
-            Image i = new Image(img);
-            images.add(imageRepository.save(i));
+            images.add(imageRepository.save(new Image(img)));
         }
+        locationRepository.save(a.getLocation());
         a.setImages(images);
         return accomodationRepository.save(a);
     }

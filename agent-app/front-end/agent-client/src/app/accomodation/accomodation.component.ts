@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AccomodationDTO } from './accomodationDTO.model';
 import { AccomodationService } from '../shared/accomodation/accomodation.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accomodation',
@@ -15,13 +16,19 @@ export class AccomodationComponent implements OnInit {
   types: any[];
   categories: any[];
 
-  constructor(private accomodationService: AccomodationService) {
+  constructor(
+    private accomodationService: AccomodationService,
+    private router: Router
+  ) {
     this.accomodationDTO = new AccomodationDTO();
   }
 
   ngOnInit() {
     this.accomodationService.getServices().subscribe(data => {
       this.services = data;
+      this.services.forEach(service => {
+        service['checkboxValue'] = false;
+      });
       console.log(this.services);
     });
     this.accomodationService.getTypes().subscribe(data => {
@@ -35,8 +42,13 @@ export class AccomodationComponent implements OnInit {
   }
 
   send() {
+    this.services.forEach(service => {
+      if(service.checkboxValue === true) {
+        this.accomodationDTO.services.push(service.serviceID);
+      }
+    });
     this.accomodationService.send(this.accomodationDTO).subscribe(data => {
-      alert("DONE!");
+      this.router.navigate(['/accomodations']);
     });
   }
 

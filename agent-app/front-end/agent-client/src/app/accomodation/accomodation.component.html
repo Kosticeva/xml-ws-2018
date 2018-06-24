@@ -22,13 +22,13 @@
         <div class="form-group">
           <label for="exampleInputPassword1">CategoryId</label>
           <select [(ngModel)]="accomodationDTO.categoryId" name="categoryId" class="custom-select">
-            <option *ngFor="let category of categories" value="category.categoryId">{{category.categoryName}}</option>
+            <option *ngFor="let category of categories" [value]="category.categoryID">{{category.categoryName}}</option>
           </select>
         </div>
         <div class="form-group">
           <label for="exampleInputPassword1">TypeId</label>
           <select [(ngModel)]="accomodationDTO.typeId" name="typeId" class="custom-select">
-            <option *ngFor="let type of types" value="type.typeId">{{type.typeName}}</option>
+            <option *ngFor="let type of types" [value]="type.typeID">{{type.typeName}}</option>
           </select>
         </div>
         <div class="form-group">
@@ -44,7 +44,7 @@
           <input [(ngModel)]="accomodationDTO.country" name="country" type="text" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div *ngFor="let service of services" class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="service{{service.serviceID}}">
+          <input [(ngModel)]="service.checkboxValue" name="checkboxValue" type="checkbox" class="custom-control-input" id="service{{service.serviceID}}">
           <label class="custom-control-label" for="service{{service.serviceID}}">{{service.serviceName}}</label>
         </div>
         <div class="form-group">

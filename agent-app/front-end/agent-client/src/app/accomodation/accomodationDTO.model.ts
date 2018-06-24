@@ -15,6 +15,8 @@ export class AccomodationDTO {
     public city: string;
     public country: string;
 
+    public services: Array<number>;
+
     constructor(
     ) {
         this.name = 'test';
@@ -26,5 +28,6 @@ export class AccomodationDTO {
         this.address = 'test';
         this.city = 'test';
         this.country = 'test';
+        this.services = new Array();
     }
 }
