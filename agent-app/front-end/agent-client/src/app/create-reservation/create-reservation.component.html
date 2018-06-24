@@ -1,0 +1,25 @@
+<div class="container">
+  &nbsp;
+  <div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+      <form>
+        <div class="form-group">
+          <label for="exampleInputEmail1">Accomodation</label>
+          <input [(ngModel)]="reservation.id" name="id" type="text" class="form-control" id="exampleInputEmail1"
+            placeholder="Choose accomodation">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Start date</label>
+          <input [(ngModel)]="reservation.startDate" name="startDate" type="text" class="form-control" id="exampleInputPassword1" placeholder="Date in format 01/12/2000">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">End date</label>
+          <input [(ngModel)]="reservation.endDate" name="endDate" type="text" class="form-control" id="exampleInputPassword1" placeholder="Date in format 01/12/2000">
+        </div>
+        <button (click)="reserve()" class="btn btn-primary">Reserve</button>
+      </form>
+    </div>
+    <div class="col-md"></div>
+  </div>
+</div>

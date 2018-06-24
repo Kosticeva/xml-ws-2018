@@ -1,7 +1,7 @@
 <div style="padding: 15px">
     <h2>
         <span>Reservations</span>
-        <button class="btn btn-primary float-right">
+        <button routerLink="/create-reservation" class="btn btn-primary float-right">
             <span class="fa fa-plus"></span>
             <span >
             Create new Reservation
@@ -22,6 +22,8 @@
             <tbody>
             <tr *ngFor="let reservation of reservations">
                 <td>{{reservation.reservationId}}</td>
+                <td>{{reservation.startDate}}</td>
+                <td>{{reservation.endDate}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit" *ngIf="reservation.realized === false" (click)="approve(reservation.reservationId)"

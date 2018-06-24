@@ -16,6 +16,8 @@ export class AccomodationComponent implements OnInit {
   types: any[];
   categories: any[];
 
+  response: string;
+
   constructor(
     private accomodationService: AccomodationService,
     private router: Router
@@ -47,12 +49,24 @@ export class AccomodationComponent implements OnInit {
         this.accomodationDTO.services.push(service.serviceID);
       }
     });
+
+    if(this.accomodationDTO.images.length < 1) {
+      this.response = "Select atleast 1 picture";
+      return;
+    }
+
     this.accomodationService.send(this.accomodationDTO).subscribe(data => {
       this.router.navigate(['/accomodations']);
     });
   }
 
   handleFileInput(files: FileList) {
+    if(files.length > 0) {
+      this.response = '';
+    }
+    else {
+      this.response = 'Select atleast 1 picture';
+    }
     for(let i = 0; i < files.length; i++) {
       var reader = new FileReader();
       reader.onload = (event:any) => {

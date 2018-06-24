@@ -16,6 +16,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AccomodationsComponent } from './accomodations/accomodations.component';
+import { CreateReservationComponent } from './create-reservation/create-reservation.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'messages',
     component: MessageComponent
+  },
+  {
+    path: 'create-reservation',
+    component: CreateReservationComponent
   },
   {
     path: 'reservations',
@@ -61,7 +66,8 @@ const routes: Routes = [
     ReservationComponent,
     ReplyComponent,
     AccomodationComponent,
-    AccomodationsComponent
+    AccomodationsComponent,
+    CreateReservationComponent
   ],
   imports: [
     BrowserModule,

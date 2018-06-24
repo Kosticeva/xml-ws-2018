@@ -21,4 +21,7 @@ export class ReservationService {
     return this.http.get('//localhost:8092/reservation/reject/' + id, { withCredentials: true });
   }
   
+  reserve(reservation): Observable<any>{
+    return this.http.post('//localhost:8092/reservation/create', reservation, { withCredentials: true });
+  }
 }

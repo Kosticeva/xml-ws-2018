@@ -1,6 +1,7 @@
 package com.ftn.xml.agent.web.rest;
 
 import com.ftn.xml.agent.domain.Reservation;
+import com.ftn.xml.agent.dto.ReservationDTO;
 import com.ftn.xml.agent.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +18,8 @@ public class ReservationResource {
 	ReservationService reservationService;
 
 	@PostMapping("/create")
-	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
-		Reservation r = reservationService.createReservation(reservation);
+	public ResponseEntity<Reservation> createReservation(@RequestBody ReservationDTO reservationDTO) {
+		Reservation r = reservationService.createReservation(reservationDTO);
 		return ResponseEntity.ok(r);
 	}
 

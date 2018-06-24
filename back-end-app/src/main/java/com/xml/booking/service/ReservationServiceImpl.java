@@ -1,12 +1,18 @@
 package com.xml.booking.service;
 
+import com.xml.booking.agent.rest.dto.AgentReservationDTO;
 import com.xml.booking.domain.Reservation;
 import com.xml.booking.domain.User;
+import com.xml.booking.dto.ReservationDTO;
+import com.xml.booking.repository.AccomodationRepository;
 import com.xml.booking.repository.ReservationRepository;
 import com.xml.booking.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -14,8 +20,12 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Autowired
     ReservationRepository reservationRepository;
+
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    AccomodationRepository accomodationRepository;
 
     @Override
     public Reservation createReservation(Reservation reservation) {
@@ -40,6 +50,28 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation save(Reservation reservation) {
         return reservationRepository.save(reservation);
+    }
+
+    @Override
+    public Reservation saveDTO(AgentReservationDTO agentRreservationDTO) {
+        Reservation r = new Reservation();
+        r.setReservationId(0);
+        r.setActive(true);
+        r.setAccomodation(accomodationRepository.findById(agentRreservationDTO.getId()).get());
+
+        Date startDate = new Date();
+        Date endDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            startDate = simpleDateFormat.parse(agentRreservationDTO.getStartDate());
+            endDate = simpleDateFormat.parse(agentRreservationDTO.getEndDate());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        r.setStartDate(startDate);
+        r.setEndDate(endDate);
+        r.setRealized(true);
+        return reservationRepository.save(r);
     }
 
     @Override

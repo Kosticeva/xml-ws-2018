@@ -51,6 +51,7 @@
           <label for="exampleInputPassword1">Images</label>
           <input type="file" multiple accept="image/*" (change)="handleFileInput($event.target.files)" class="form-control">
         </div>
+        <p>{{response}}</p>
         <button (click)="send()" class="btn btn-primary">Send</button>
       </form>
     </div>
