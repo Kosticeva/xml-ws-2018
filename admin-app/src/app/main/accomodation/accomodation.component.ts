@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AccomodationService} from "../model/accomodationService";
 import {AccomodationType} from "../model/accomodationType";
 import {AccomService} from "./accom.service";
+import { AccomodationCategory } from '../model/accomodationCategory';
 
 @Component({
   selector: 'app-accomodation',
@@ -12,6 +13,7 @@ export class AccomodationComponent implements OnInit {
 
   services: AccomodationService[] = [];
   types: AccomodationType[] = [];
+  categories: AccomodationCategory[] = [];
 
   constructor(private accomodationService: AccomService) { }
 
@@ -27,6 +29,12 @@ export class AccomodationComponent implements OnInit {
         this.services = data;
       }
     );
+
+    this.accomodationService.getCategories().subscribe(
+      (data: any) => {
+        this.categories = data;
+      }
+    )
   }
 
   deleteService(s: AccomodationService) {
@@ -46,6 +54,17 @@ export class AccomodationComponent implements OnInit {
       this.accomodationService.deleteType(t.typeID).subscribe(
         (data) => {
           this.types.splice(this.types.indexOf(t), 1);
+        }
+      );
+    }
+  }
+
+  deleteCategory(c: AccomodationCategory){
+    var r = confirm("Are u sure?");
+    if (r == true) {
+      this.accomodationService.deleteCategory(c.categoryID).subscribe(
+        (data) => {
+          this.categories.splice(this.categories.indexOf(c), 1);
         }
       );
     }

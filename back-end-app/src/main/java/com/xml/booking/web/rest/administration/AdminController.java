@@ -1,5 +1,7 @@
 package com.xml.booking.web.rest.administration;
 
+import com.xml.booking.dto.ReviewDTO;
+import com.xml.booking.web.rest.ReviewResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -13,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xml.booking.domain.Agent;
-import com.xml.booking.domain.Review;
 import com.xml.booking.domain.User;
 import com.xml.booking.service.AdminService;
-import com.xml.booking.service.ReviewService;
 
 @RestController
 @RequestMapping("/admin")
@@ -26,12 +26,11 @@ public class AdminController {
     private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
     private AdminService adminService;
+    private ReviewResource reviewResource;
 
-    private ReviewService reviewService;
-
-    public AdminController(AdminService adminService, ReviewService reviewService) {
+    public AdminController(AdminService adminService, ReviewResource reviewResource) {
         this.adminService = adminService;
-        this.reviewService = reviewService;
+        this.reviewResource = reviewResource;
     }
 
     @PostMapping("/create-agent")
@@ -69,18 +68,25 @@ public class AdminController {
     }
 
     @PutMapping("/allow-review")
-    public ResponseEntity<Review> allowReview(@RequestBody Review review) {
+    public ResponseEntity<ReviewDTO> allowReview(@RequestBody ReviewDTO review) {
         logger.debug("Allow reivew endpoint!");
-        Review r = this.reviewService.allowReview(review, true);
-        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
-        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
+        ReviewDTO ret = reviewResource.allowReview(review);
+
+        if(ret == null){
+            return ResponseEntity.unprocessableEntity().body(null);
+        }
+
+        return ResponseEntity.ok().body(ret);
     }
 
     @PutMapping("/decline-review")
-    public ResponseEntity<Review> declineReview(@RequestBody Review review) {
+    public ResponseEntity<ReviewDTO> declineReview(@RequestBody ReviewDTO review) {
         logger.debug("Allow reivew endpoint!");
-        Review r = this.reviewService.allowReview(review, false);
-        if (r != null) return new ResponseEntity<>(r, HttpStatus.OK);
-        return new ResponseEntity<>(r, HttpStatus.BAD_REQUEST);
+        ReviewDTO ret = reviewResource.declineReview(review);
+        if(ret == null){
+            return ResponseEntity.unprocessableEntity().body(null);
+        }
+
+        return ResponseEntity.ok().body(ret);
     }
 }

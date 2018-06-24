@@ -20,7 +20,7 @@ public class ReviewResource {
     @RequestMapping(value = "/not-allowed", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)
     public List<Review> getNotAllowedReviews(){
         System.out.println("Review: not allowed");
-        return this.reviewService.getReviewsByAllowed(false);
+        return this.reviewService.getReviewsByAllowed(null);
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON)

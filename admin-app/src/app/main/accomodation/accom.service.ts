@@ -4,6 +4,7 @@ import {SERVER_API_URL} from "../../app.constants";
 import {AccomodationType} from "../model/accomodationType";
 import {HttpHeaders} from "@angular/common/http";
 import {AccomodationService} from "../model/accomodationService";
+import { AccomodationCategory } from '../model/accomodationCategory';
 
 @Injectable()
 export class AccomService {
@@ -16,6 +17,10 @@ export class AccomService {
 
   getTypes() {
     return this.http.get(SERVER_API_URL + '/accomodation-type', {withCredentials: true});
+  }
+
+  getCategories() {
+    return this.http.get(SERVER_API_URL + '/accomodation-category', {withCredentials: true})
   }
 
   addType(at: AccomodationType) {
@@ -38,6 +43,16 @@ export class AccomService {
     return this.http.post(SERVER_API_URL + '/accomodation-service', JSON.stringify(as), httpOptions);
   }
 
+  addCategory(ac: AccomodationCategory) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    return this.http.post(SERVER_API_URL + '/accomodation-category', JSON.stringify(ac), httpOptions);
+  }
+
   deleteService(id: number) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -56,5 +71,15 @@ export class AccomService {
       })
     };
     return this.http.delete(SERVER_API_URL + '/accomodation-type/'+id, httpOptions);
+  }
+
+  deleteCategory(id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'my-auth-token'
+      })
+    };
+    return this.http.delete(SERVER_API_URL + '/accomodation-category/'+id, httpOptions);
   }
 }

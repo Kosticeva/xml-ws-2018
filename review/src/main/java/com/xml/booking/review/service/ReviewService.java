@@ -81,7 +81,7 @@ public class ReviewService {
         return reviewRepository.save(r);
     }
 
-    public List<Review> getReviewsByAllowed(boolean allowed) {
+    public List<Review> getReviewsByAllowed(Boolean allowed) {
        return this.reviewRepository.findByAllowed(allowed);
     }
 

@@ -1,6 +1,5 @@
 package com.xml.booking.web.rest;
 
-import com.xml.booking.domain.Review;
 import com.xml.booking.dto.ReviewDTO;
 import com.xml.booking.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -121,27 +120,13 @@ public class ReviewResource {
         return ResponseEntity.badRequest().body(null);
     }
 
-    public ReviewDTO allowReview(Review r){
-        ReviewDTO dto = new ReviewDTO();
-        dto.setComment(r.getComment());
-        dto.setAccomodationId(r.getAccomodation().getAccommodationId());
-        dto.setAllowed(r.isAllowed());
-        dto.setGrade(r.getGrade());
-        dto.setReviewId(r.getReviewId());
-        dto.setUser(r.getUser().getUsername());
+    public ReviewDTO allowReview(ReviewDTO r){
 
-        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/allow", dto, ReviewDTO.class);
+        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/allow", r, ReviewDTO.class);
     }
 
-    public ReviewDTO declineReview(Review r){
-        ReviewDTO dto = new ReviewDTO();
-        dto.setComment(r.getComment());
-        dto.setAccomodationId(r.getAccomodation().getAccommodationId());
-        dto.setAllowed(r.isAllowed());
-        dto.setGrade(r.getGrade());
-        dto.setReviewId(r.getReviewId());
-        dto.setUser(r.getUser().getUsername());
+    public ReviewDTO declineReview(ReviewDTO r){
 
-        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/decline", dto, ReviewDTO.class);
+        return restTemplate.postForObject("https://temp-review-system.herokuapp.com/reviews/decline", r, ReviewDTO.class);
     }
 }

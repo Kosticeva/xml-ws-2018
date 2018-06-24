@@ -17,6 +17,7 @@ import { AccomodationComponent } from './accomodation/accomodation.component';
 import {AccomService} from "./accomodation/accom.service";
 import { AddTypeComponent } from './accomodation/add-type/add-type.component';
 import { AddServiceComponent } from './accomodation/add-service/add-service.component';
+import { AddCategoryComponent } from './accomodation/add-category/add-category.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { AddServiceComponent } from './accomodation/add-service/add-service.comp
     FormsModule,
     RouterModule
   ],
-  declarations: [LoginComponent, HomeComponent, NavigationComponent, AgentRegistrationComponent, UsersComponent, ReviewsComponent, AccomodationComponent, AddTypeComponent, AddServiceComponent],
+  declarations: [LoginComponent, HomeComponent, NavigationComponent, AgentRegistrationComponent, UsersComponent, ReviewsComponent, AccomodationComponent, AddTypeComponent, AddServiceComponent, AddCategoryComponent],
   providers: [LoginService, UsersService, AgentService, ReviewService, AccomService]
 })
 export class MainModule { }
